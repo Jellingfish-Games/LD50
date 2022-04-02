@@ -32,9 +32,6 @@ public class LittleGuyAI : MonoBehaviour
         currentPathCorners = currentPath.corners;
 
         StartCoroutine(FollowPath());
-
-        Debug.Log(currentPath.status);
-        Debug.Log(currentPathCorners.Length);
 	}
 
     // Update is called once per frame

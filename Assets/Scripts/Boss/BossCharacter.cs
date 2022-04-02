@@ -12,17 +12,26 @@ public class BossCharacter : MonoBehaviour
     // When the run starts and maybe on phase change, the boss's properties get modified via ApplyPropertyModifier
     private BossProperties modifiedProperties;
 
-    private BossAttack primaryAttack;
-    private BossAttack secondaryAttack;
+    public BossAttack primaryAttack;
+    public BossAttack secondaryAttack;
 
     private Vector2 movementInput;
 
     private Rigidbody rb;
 
+    private SpriteRenderer spriteRenderer;
+
+    private bool restrictControls;
+
+    private bool lockInPlace;
+
+    public Vector3 velocity; // won't get modified by engine, easier to slow down on attack gradually
+
     void Awake()
     {
         modifiedProperties = baseProperties.properties;
         rb = GetComponent<Rigidbody>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
@@ -33,11 +42,49 @@ public class BossCharacter : MonoBehaviour
     private void Update()
     {
         Move();
+        UpdateDirection();
     }
+    
+    private void UpdateDirection()
+	{
+        if (movementInput.x > 0)
+		{
+            spriteRenderer.flipX = true;
+		}
+        else if (movementInput.x < 0)
+		{
+            spriteRenderer.flipX = false;
+		}
+	}
+
+    public void RestrictControls()
+	{
+        restrictControls = true;
+	}
+
+    public void EnableControls()
+	{
+        restrictControls = false;
+        lockInPlace = false;
+	}
+
+    public void LockInPlace()
+	{
+        lockInPlace = true;
+	}
 
     private void Move()
     {
-        rb.velocity = new Vector3(movementInput.x, 0, movementInput.y) * modifiedProperties.movementSpeed;
+        if (!lockInPlace)
+        {
+            velocity = new Vector3(movementInput.x, 0, movementInput.y) * modifiedProperties.movementSpeed;
+        }
+        else
+		{
+            velocity *= 0.95f;
+		}
+
+        rb.velocity = velocity;
     }
 
     public void ApplyPropertyModifier(BossProperties addedProps)
@@ -59,14 +106,21 @@ public class BossCharacter : MonoBehaviour
 
     public void Input_Move(InputAction.CallbackContext context)
     {
-        movementInput = context.ReadValue<Vector2>();
+        if (!restrictControls)
+        {
+            movementInput = context.ReadValue<Vector2>();
+        }
     }
 
     public void Input_PrimaryAttack(InputAction.CallbackContext context)
     {
+        Debug.Log("KART");
         if (context.ReadValue<float>() > 0.5f)
         {
-            primaryAttack?.PerformAttack(this);
+            if (primaryAttack != null)
+			{
+                StartCoroutine(primaryAttack.PerformAttack(this));
+			}
         }
     }
 
@@ -74,7 +128,10 @@ public class BossCharacter : MonoBehaviour
     {
         if (context.ReadValue<float>() > 0.5f)
         {
-            secondaryAttack?.PerformAttack(this);
+            if (secondaryAttack != null)
+            {
+                StartCoroutine(secondaryAttack.PerformAttack(this));
+            }
         }
     }
 }
