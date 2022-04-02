@@ -52,6 +52,7 @@ MonoBehaviour:
   animator: {fileID: 742630371208652412}
   primaryAttack: {fileID: 0}
   secondaryAttack: {fileID: 0}
+  hp: 0
   flip: 0
   velocity: {x: 0, y: 0, z: 0}
 --- !u!54 &6973777158293974616
@@ -170,7 +171,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cf99480ee81731548a535bf0cc522137, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

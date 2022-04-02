@@ -172,8 +172,9 @@ public class LittleGuyInformation : MonoBehaviour
 
 	public void GenerateClass()
     {
-		Class = (LittleGuyClass)Random.Range(0, 3);
-    }
+		//Class = (LittleGuyClass)Random.Range(0, 3);
+		Class = (LittleGuyClass)Random.Range(0, 2);
+	}
 
 	public void GenerateMetaStats()
     {
