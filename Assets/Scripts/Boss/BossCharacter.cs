@@ -19,6 +19,8 @@ public class BossCharacter : MonoBehaviour
 
     private Rigidbody rb;
 
+    public bool flip;
+
     private SpriteRenderer spriteRenderer;
 
     private bool restrictControls;
@@ -47,13 +49,15 @@ public class BossCharacter : MonoBehaviour
     
     private void UpdateDirection()
 	{
-        if (movementInput.x > 0)
-		{
-            spriteRenderer.flipX = true;
-		}
-        else if (movementInput.x < 0)
+        if (velocity.x > 0)
 		{
             spriteRenderer.flipX = false;
+            flip = false;
+		}
+        else if (velocity.x < 0)
+		{
+            spriteRenderer.flipX = true;
+            flip = true;
 		}
 	}
 

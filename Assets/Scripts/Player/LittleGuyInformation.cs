@@ -18,8 +18,8 @@ public enum LittleGuyNameMode
 
 public class LittleGuyBattleStats
 {
-	public int MaxHP { get; set; }
-	public int HP { get; set; }
+	public float MaxHP { get; set; }
+	public float HP { get; set; }
 	public float HealingPerSecond { get; set; }
 	public float Aggressiveness { get; set; } // 0.0 - 1.0
 	public float Awareness { get; set; } // 0.0 - 1.0

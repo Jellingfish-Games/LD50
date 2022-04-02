@@ -18,5 +18,7 @@ public abstract class BossAttack : ScriptableObject
     public float windupTime;
     public float backswingTime;
 
+    public GameObject attackHitboxes;
+
     public abstract IEnumerator PerformAttack(BossCharacter self);
 }
