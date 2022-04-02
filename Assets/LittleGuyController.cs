@@ -15,6 +15,7 @@ public class LittleGuyController : MonoBehaviour
 
         SetColors();
         SetHat();
+        SetWeapon();
     }
 
     void SetColors()
@@ -29,6 +30,11 @@ public class LittleGuyController : MonoBehaviour
     void SetHat()
     {
         hat.sprite = LittleGuyManager.i.hats[information.MetaStats.hatID];
+    }
+
+    void SetWeapon()
+    {
+        weapon.sprite = LittleGuyManager.i.weapons[information.MetaStats.weaponID];
     }
 
 }

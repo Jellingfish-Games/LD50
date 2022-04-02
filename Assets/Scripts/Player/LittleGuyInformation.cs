@@ -182,9 +182,15 @@ public class LittleGuyInformation : MonoBehaviour
 		MetaStats.skinColor = Color.HSVToRGB(Random.Range(0, 360) / 360f, Random.Range(0, 90) / 100f, Random.Range(0, 50) / 100f);
 
 		var hatIDPick = new Dictionary<LittleGuyClass, List<int>>();
-		hatIDPick[LittleGuyClass.Warrior] = new List<int> { 3, 4, 8 };
-		hatIDPick[LittleGuyClass.Wizard] = new List<int> { 5, 6, 7 };
-		hatIDPick[LittleGuyClass.Rogue] = new List<int> { 1, 2, 9, 10 };
+		hatIDPick[LittleGuyClass.Warrior] = new List<int> { 3, 4, 8, 13, 15 };
+		hatIDPick[LittleGuyClass.Wizard] = new List<int> { 5, 6, 7, 12, 14 };
+		hatIDPick[LittleGuyClass.Rogue] = new List<int> { 1, 2, 9, 10, 11, 16 };
 		MetaStats.hatID = hatIDPick[Class][Random.Range(0, hatIDPick[Class].Count)] - 1;
+
+		var weaponIDPick = new Dictionary<LittleGuyClass, List<int>>();
+		weaponIDPick[LittleGuyClass.Warrior] = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
+		weaponIDPick[LittleGuyClass.Wizard] = new List<int> {0};
+		weaponIDPick[LittleGuyClass.Rogue] = new List<int> { 9 };
+		MetaStats.weaponID = weaponIDPick[Class][Random.Range(0, weaponIDPick[Class].Count)];
 	}
 }
