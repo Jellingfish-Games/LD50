@@ -20,13 +20,6 @@ public class DraggableElement : MonoBehaviour, IBeginDragHandler, IEndDragHandle
         throw new System.NotImplementedException();
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -36,7 +29,7 @@ public class DraggableElement : MonoBehaviour, IBeginDragHandler, IEndDragHandle
         } else
         {
             reparentingLerp += Time.deltaTime;
-            transform.localPosition = Mathf.Lerp(localPosition, Vector3.zero, reparentingLerp);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, reparentingLerp);
         }
     }
 }
