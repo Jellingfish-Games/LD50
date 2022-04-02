@@ -22,7 +22,9 @@ public class LittleGuyController : MonoBehaviour
     {
         foreach (var i in GetComponentsInChildren<SpriteRenderer>())
         {
-            i.material.SetColor("MainColor", information.MetaStats.mainColor);
+            i.material.SetColor("MainColor1", LittleGuyManager.i.palette[information.MetaStats.mainColorID * 5 + information.MetaStats.mainColorValue]);
+            i.material.SetColor("MainColor2", (LittleGuyManager.i.palette[information.MetaStats.mainColorID * 5 + information.MetaStats.mainColorValue + 2] + LittleGuyManager.i.palette[information.MetaStats.mainColorID * 5 + information.MetaStats.mainColorValue])/2);
+            i.material.SetColor("MainColor3", LittleGuyManager.i.palette[information.MetaStats.mainColorID * 5 + information.MetaStats.mainColorValue + 2]);
             i.material.SetColor("SkinColor", information.MetaStats.skinColor);
         }
     }
