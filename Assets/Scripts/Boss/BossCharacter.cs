@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BossCharacter : MonoBehaviour
 {
     public BossPropertyData baseProperties;
+
+    public Animator animator;
 
     // When the run starts and maybe on phase change, the boss's properties get modified via ApplyPropertyModifier
     private BossProperties modifiedProperties;
@@ -12,9 +15,24 @@ public class BossCharacter : MonoBehaviour
     private BossAttack primaryAttack;
     private BossAttack secondaryAttack;
 
+    private Vector2 movementInput;
+
+    private Rigidbody rb;
+
     void Awake()
     {
         modifiedProperties = baseProperties.properties;
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        rb.velocity = new Vector3(movementInput.x, 0, movementInput.y) * modifiedProperties.movementSpeed;
     }
 
     public void ApplyPropertyModifier(BossProperties addedProps)
@@ -31,6 +49,27 @@ public class BossCharacter : MonoBehaviour
         else
         {
             primaryAttack = attack;
+        }
+    }
+
+    public void Input_Move(InputAction.CallbackContext context)
+    {
+        movementInput = context.ReadValue<Vector2>();
+    }
+
+    public void Input_PrimaryAttack(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() > 0.5f)
+        {
+            primaryAttack?.PerformAttack(this);
+        }
+    }
+
+    public void Input_SecondaryAttack(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() > 0.5f)
+        {
+            secondaryAttack?.PerformAttack(this);
         }
     }
 }

@@ -18,10 +18,5 @@ public class LittleGuyInformationNameText : MonoBehaviour
     void Update()
     {
         text.text = source.FullName;
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            source.GenerateStats();
-        }
     }
 }
