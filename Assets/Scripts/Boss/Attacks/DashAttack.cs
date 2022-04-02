@@ -16,7 +16,11 @@ public class DashAttack : BossAttack
         // play dash anim here
         yield return new WaitForSeconds(windupTime);
 
-        Vector3 dashTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit info;
+
+        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info);
+
+        Vector3 dashTarget = info.point;
 
         dashTarget.y = 0;
 
@@ -29,7 +33,7 @@ public class DashAttack : BossAttack
 
         self.velocity = delta;
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
 
         // play stop anim here
 

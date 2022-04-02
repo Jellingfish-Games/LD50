@@ -18,5 +18,5 @@ MonoBehaviour:
   sweetspotDamage: 0
   sourspotDamage: 0
   animationClips: []
-  windupTime: 0
-  backswingTime: 0
+  windupTime: 0.2
+  backswingTime: 0.1
