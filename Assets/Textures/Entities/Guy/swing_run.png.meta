@@ -1,7 +1,28 @@
 fileFormatVersion: 2
 guid: 7b63368f1d2fe3a49887dd60768da3eb
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -3948891623781854375
+    second: swing_run_0
+  - first:
+      213: -735915795151250868
+    second: swing_run_1
+  - first:
+      213: -5019468515475719220
+    second: swing_run_2
+  - first:
+      213: 2139381085336217779
+    second: swing_run_3
+  - first:
+      213: 3753655411786772190
+    second: swing_run_4
+  - first:
+      213: -2023686469778307473
+    second: swing_run_5
+  - first:
+      213: 8045716332229624605
+    second: swing_run_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -113,11 +134,158 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: swing_run_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 30
+        height: 39
+      alignment: 9
+      pivot: {x: 0.36666667, y: 0.23076923}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95397f38df7b239c0800000000000000
+      internalID: -3948891623781854375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: swing_run_1
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 0
+        width: 30
+        height: 39
+      alignment: 9
+      pivot: {x: 0.36666667, y: 0.23076923}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4a196dbb7089c5f0800000000000000
+      internalID: -735915795151250868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: swing_run_2
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 30
+        height: 39
+      alignment: 9
+      pivot: {x: 0.36666667, y: 0.23076923}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccbffcdbaf3475ab0800000000000000
+      internalID: -5019468515475719220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: swing_run_3
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 30
+        height: 39
+      alignment: 9
+      pivot: {x: 0.36666667, y: 0.23076923}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b8a7ae13cb90bd10800000000000000
+      internalID: 2139381085336217779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: swing_run_4
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 30
+        height: 39
+      alignment: 9
+      pivot: {x: 0.36666667, y: 0.23076923}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edee5c495b9a71430800000000000000
+      internalID: 3753655411786772190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: swing_run_5
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 30
+        height: 39
+      alignment: 9
+      pivot: {x: 0.36666667, y: 0.23076923}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f668910b0eb6ae3e0800000000000000
+      internalID: -2023686469778307473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: swing_run_6
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 30
+        height: 39
+      alignment: 9
+      pivot: {x: 0.36666667, y: 0.23076923}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d130b1a406028af60800000000000000
+      internalID: 8045716332229624605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 04c7fbdbdb67ae746a5ee3725cc0e03b
     internalID: 0
     vertices: []
     indices: 
