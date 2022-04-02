@@ -827,6 +827,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1090755721359777941, guid: 365727785da3ca049b2236e26753b303, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5983212629189583267, guid: 365727785da3ca049b2236e26753b303, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -871,6 +875,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -9029355912286664612, guid: 55a565ce62e366c478843e150a75f796, type: 3}
+    - target: {fileID: 6051880564250597273, guid: 365727785da3ca049b2236e26753b303, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9199449085717301156, guid: 365727785da3ca049b2236e26753b303, type: 3}
       propertyPath: m_RotationOffset.x
       value: 0
