@@ -22,8 +22,7 @@ public class BattleManager : MonoBehaviour
         {
             if (_instance == null)
 			{
-                _instance = new BattleManager();
-                _instance.Init();
+                _instance = new GameObject().AddComponent<BattleManager>();
 			}
 
             return _instance;
