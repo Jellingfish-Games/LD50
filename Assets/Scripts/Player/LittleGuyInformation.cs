@@ -32,7 +32,8 @@ public class LittleGuyMetaStats
 	public const int MaxDeathsTilLevelSequence = 8; // These decide how many deaths the player has to have til they go off 
 	public const int MinDeathsTilLevelSequence = 2; // on an adventure and scale up stats, based on stubborness in gameplay
 
-	public Color mainColor { get; set; }
+	public int mainColorID { get; set; }
+	public int mainColorValue { get; set; }
 	public Color skinColor { get; set; }
 	public int hatID;
 	public int weaponID;
@@ -178,8 +179,10 @@ public class LittleGuyInformation : MonoBehaviour
     {
 		MetaStats = new LittleGuyMetaStats();
 
-		MetaStats.mainColor = Color.HSVToRGB(Random.Range(0, 360) / 360f, Random.Range(Random.Range(0, 80), 90) / 100f, Random.Range(45, 100) / 100f);
-		MetaStats.skinColor = Color.HSVToRGB(Random.Range(0, 360) / 360f, Random.Range(0, 90) / 100f, Random.Range(0, 50) / 100f);
+		MetaStats.mainColorID = Random.Range(0, 13);
+		//MetaStats.mainColorValue = 0;
+		MetaStats.mainColorValue = Random.Range(0, 2);
+		MetaStats.skinColor = Color.HSVToRGB(Random.Range(0, 360) / 360f, Random.Range(0, 90) / 100f, Random.Range(40, 60) / 100f);
 
 		var hatIDPick = new Dictionary<LittleGuyClass, List<int>>();
 		hatIDPick[LittleGuyClass.Warrior] = new List<int> { 3, 4, 8, 13, 15 };
@@ -189,7 +192,7 @@ public class LittleGuyInformation : MonoBehaviour
 
 		var weaponIDPick = new Dictionary<LittleGuyClass, List<int>>();
 		weaponIDPick[LittleGuyClass.Warrior] = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
-		weaponIDPick[LittleGuyClass.Wizard] = new List<int> {0};
+		weaponIDPick[LittleGuyClass.Wizard] = new List<int> {0, 10, 11, 12, 13, 14};
 		weaponIDPick[LittleGuyClass.Rogue] = new List<int> { 9 };
 		MetaStats.weaponID = weaponIDPick[Class][Random.Range(0, weaponIDPick[Class].Count)];
 	}
