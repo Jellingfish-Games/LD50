@@ -15,6 +15,8 @@ public class BossCharacter : MonoBehaviour
     public BossAttack primaryAttack;
     public BossAttack secondaryAttack;
 
+    public float hp;
+
     private Vector2 movementInput;
 
     private Rigidbody rb;
@@ -38,6 +40,7 @@ public class BossCharacter : MonoBehaviour
 
     private void Start()
     {
+        hp = modifiedProperties.maxHP;
         BattleManager.instance.player = this;
     }
 
