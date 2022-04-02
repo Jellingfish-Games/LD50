@@ -14,6 +14,28 @@ public enum LittleGuyNameMode
 	Gamertag
 }
 
+public class LittleGuyBattleStats
+{
+	public int MaxHP { get; set; }
+	public int HP { get; set; }
+	public float HealingPerSecond { get; set; }
+	public float Aggressiveness { get; set; } // 0.0 - 1.0
+	public float Awareness { get; set; } // 0.0 - 1.0
+	public float DodgeSkill { get; set; } // 0.0 - 1.0
+	public float PotionDrinkSpeedScale { get; set; } // animation speed for potion drinking scaled by this
+}
+
+public class LittleGuyMetaStats
+{
+	public const int MaxDeathsTilLevelSequence = 8; // These decide how many deaths the player has to have til they go off 
+	public const int MinDeathsTilLevelSequence = 2; // on an adventure and scale up stats, based on stubborness in gameplay
+
+	public Color mainColor = Color.HSVToRGB(Random.Range(0,360)/360f, Random.Range(0, 100) / 100f, Random.Range(45, 100) / 100f);
+	public Color skinColor = Color.HSVToRGB(Random.Range(0, 360) / 360f, Random.Range(0, 90) / 100f, Random.Range(0, 50) / 100f);
+
+	public float Stubborness { get; set; }
+}
+
 public class LittleGuyInformation : MonoBehaviour
 {
 	public LittleGuyNameMode NameMode;
@@ -45,6 +67,8 @@ public class LittleGuyInformation : MonoBehaviour
 		}
 	}
 	public LittleGuyClass Class { get; set; }
+	public LittleGuyBattleStats BattleStats { get; set; }
+	public LittleGuyMetaStats MetaStats { get; set; }
 
 	private void Start()
 	{
