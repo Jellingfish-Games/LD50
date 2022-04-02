@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 
 public class BossCharacter : MonoBehaviour
 {
+    public enum BossState { Moving, Windup, Attack, Backswing }
+
+
+    public BossState state = BossState.Moving;
     public BossPropertyData baseProperties;
 
     public Animator animator;
@@ -16,6 +20,7 @@ public class BossCharacter : MonoBehaviour
     public BossAttack secondaryAttack;
 
     public float hp;
+    public float maxHP => modifiedProperties.maxHP;
 
     private Vector2 movementInput;
 

@@ -14,10 +14,14 @@ public class DashAttack : BossAttack
         self.RestrictControls();
         self.LockInPlace();
 
+        self.state = BossCharacter.BossState.Windup;
+
         // play dash anim here
         yield return new WaitForSeconds(windupTime);
 
         RaycastHit info;
+
+        self.state = BossCharacter.BossState.Attack;
 
         Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info);
 
@@ -40,6 +44,8 @@ public class DashAttack : BossAttack
 
         // play stop anim here
 
+        self.state = BossCharacter.BossState.Backswing;
+
         float timeLeft = backswingTime;
 
         while (timeLeft > 0f)
@@ -51,6 +57,8 @@ public class DashAttack : BossAttack
 		}
 
         Destroy(attackHitboxes);
+
+        self.state = BossCharacter.BossState.Moving;
 
         self.EnableControls();
     }

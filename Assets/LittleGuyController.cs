@@ -8,6 +8,8 @@ public class LittleGuyController : MonoBehaviour
     [SerializeField] SpriteRenderer hat;
     [SerializeField] SpriteRenderer weapon;
 
+    public LittleGuyAI ai;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,12 @@ public class LittleGuyController : MonoBehaviour
         SetColors();
         SetHat();
         SetWeapon();
+        StartAI();
+    }
+
+    public void StartAI()
+    {
+        ai.StartAIRoutine();
     }
 
     void SetColors()
