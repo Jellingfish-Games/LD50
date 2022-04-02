@@ -19,3 +19,7 @@ MonoBehaviour:
     movementSpeed: 2
     attackSpeed: 2
     armor: 0
+    phaseTransitionTheresholds:
+    - 0.6
+    - 0.4
+    - 0.2

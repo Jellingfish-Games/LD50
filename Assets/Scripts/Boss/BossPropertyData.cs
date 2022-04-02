@@ -18,6 +18,9 @@ public struct BossProperties
     public float attackSpeed;
     public float armor;
 
+    [Range(0f, 1f)]
+    public List<float> phaseTransitionTheresholds;
+
     public void Merge(BossProperties other)
     {
         damage += other.damage;
