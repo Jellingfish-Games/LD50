@@ -30,6 +30,9 @@ public class LittleGuyMetaStats
 	public const int MaxDeathsTilLevelSequence = 8; // These decide how many deaths the player has to have til they go off 
 	public const int MinDeathsTilLevelSequence = 2; // on an adventure and scale up stats, based on stubborness in gameplay
 
+	public Color mainColor = Color.HSVToRGB(Random.Range(0,360)/360f, Random.Range(0, 100) / 100f, Random.Range(45, 100) / 100f);
+	public Color skinColor = Color.HSVToRGB(Random.Range(0, 360) / 360f, Random.Range(0, 90) / 100f, Random.Range(0, 50) / 100f);
+
 	public float Stubborness { get; set; }
 }
 
