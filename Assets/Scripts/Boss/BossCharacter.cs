@@ -120,8 +120,7 @@ public class BossCharacter : MonoBehaviour
 
     public void Input_PrimaryAttack(InputAction.CallbackContext context)
     {
-        Debug.Log("KART");
-        if (context.ReadValue<float>() > 0.5f)
+        if (!restrictControls && context.ReadValue<float>() > 0.5f)
         {
             if (primaryAttack != null)
 			{
@@ -132,7 +131,7 @@ public class BossCharacter : MonoBehaviour
 
     public void Input_SecondaryAttack(InputAction.CallbackContext context)
     {
-        if (context.ReadValue<float>() > 0.5f)
+        if (!restrictControls && context.ReadValue<float>() > 0.5f)
         {
             if (secondaryAttack != null)
             {
