@@ -185,6 +185,6 @@ public class LittleGuyInformation : MonoBehaviour
 		hatIDPick[LittleGuyClass.Warrior] = new List<int> { 3, 4, 8 };
 		hatIDPick[LittleGuyClass.Wizard] = new List<int> { 5, 6, 7 };
 		hatIDPick[LittleGuyClass.Rogue] = new List<int> { 1, 2, 9, 10 };
-		MetaStats.hatID = hatIDPick[Class][Random.Range(0, hatIDPick[Class].Count)];
+		MetaStats.hatID = hatIDPick[Class][Random.Range(0, hatIDPick[Class].Count)] - 1;
 	}
 }

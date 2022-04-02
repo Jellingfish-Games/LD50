@@ -5,16 +5,16 @@ using UnityEngine;
 public class LittleGuyController : MonoBehaviour
 {
     LittleGuyInformation information;
-    SpriteRenderer hat;
-    SpriteRenderer weapon;
+    [SerializeField] SpriteRenderer hat;
+    [SerializeField] SpriteRenderer weapon;
 
     // Start is called before the first frame update
     void Start()
     {
         information = GetComponent<LittleGuyInformation>();
 
-
         SetColors();
+        SetHat();
     }
 
     void SetColors()
@@ -28,7 +28,7 @@ public class LittleGuyController : MonoBehaviour
 
     void SetHat()
     {
-
+        hat.sprite = LittleGuyManager.i.hats[information.MetaStats.hatID];
     }
 
 }
