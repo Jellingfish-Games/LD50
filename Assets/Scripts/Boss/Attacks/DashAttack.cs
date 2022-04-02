@@ -8,10 +8,11 @@ public class DashAttack : BossAttack
 {
     public override IEnumerator PerformAttack(BossCharacter self)
     {
+        GameObject attackHitboxes = Instantiate(this.attackHitboxes, self.transform);
+        AttackHitboxList hitboxList = attackHitboxes.GetComponent<AttackHitboxList>();
+
         self.RestrictControls();
         self.LockInPlace();
-
-        Debug.Log("MARIO");
 
         // play dash anim here
         yield return new WaitForSeconds(windupTime);
@@ -27,13 +28,15 @@ public class DashAttack : BossAttack
         Vector3 delta = dashTarget - self.transform.position;
         delta.y = 0;
 
-        delta = delta.normalized * 50f;
+        delta = delta.normalized * 1f;
 
         self.UnlockPlace();
 
+        hitboxList.SetCurrentHitbox(0);
+
         self.velocity = delta;
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.5f);
 
         // play stop anim here
 
@@ -46,6 +49,8 @@ public class DashAttack : BossAttack
             timeLeft -= Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
 		}
+
+        Destroy(attackHitboxes);
 
         self.EnableControls();
     }

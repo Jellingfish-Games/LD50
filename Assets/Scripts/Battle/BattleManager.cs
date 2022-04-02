@@ -26,11 +26,12 @@ public class BattleManager : MonoBehaviour
     public CanvasGroup attackSelectionGroup;
     public Transform attackSelectionGridRoot;
 
-    public BossAttackUIElement attackElement;
-    public Transform draggableElementParentPrefab;
+    private List<BossAttackUIElement> targets = new List<BossAttackUIElement>();
 
-    public DropTarget primaryAttackSlot;
-    public DropTarget secondaryAttackSlot;
+    public BossAttackUIElement attackElement;
+
+    public BossAttackUIElement primaryAttackSlot;
+    public BossAttackUIElement secondaryAttackSlot;
 
     void Awake()
     {
@@ -39,7 +40,7 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
-        SwitchToNewState(BattleState.AttackSelection);
+        SwitchToNewState(BattleState.Intro);
     }
 
     public void ConfirmAttackSelection()
@@ -47,11 +48,52 @@ public class BattleManager : MonoBehaviour
         BossAttackUIElement primaryElement = primaryAttackSlot.GetComponent<BossAttackUIElement>();
         BossAttackUIElement secondaryElement = secondaryAttackSlot.GetComponent<BossAttackUIElement>();
 
-        if (primaryElement != null && secondaryElement != null)
+        if (primaryAttackSlot.attack != null && secondaryAttackSlot.attack != null)
         {
-            player.ReplaceAttackInSlot(primaryElement.attack, false);
-            player.ReplaceAttackInSlot(secondaryElement.attack, false);
+            player.ReplaceAttackInSlot(primaryAttackSlot.attack, false);
+            player.ReplaceAttackInSlot(secondaryAttackSlot.attack, false);
             SwitchToNewState(BattleState.Battle);
+        }
+    }
+
+    public static void ToggleChosenAttack(BossAttack attack)
+    {
+        if (instance.primaryAttackSlot.attack == null && instance.secondaryAttackSlot.attack != attack)
+        {
+            instance.primaryAttackSlot.SetAttack(attack);
+
+            UpdateButtonActiveStates();
+        } else if (instance.secondaryAttackSlot.attack == null && instance.primaryAttackSlot.attack != attack)
+        {
+            instance.secondaryAttackSlot.SetAttack(attack);
+
+            UpdateButtonActiveStates();
+        } else
+        {
+            RemoveChosenAttack(attack);
+        }
+    }
+
+    private static void UpdateButtonActiveStates()
+    {
+        foreach (BossAttackUIElement t in instance.targets)
+        {
+            t.SetActive((t.attack == instance.primaryAttackSlot.attack) || (t.attack == instance.secondaryAttackSlot.attack));
+        }
+    }
+
+    public static void RemoveChosenAttack(BossAttack attack)
+    {
+        if (instance.secondaryAttackSlot.attack == attack)
+        {
+            instance.secondaryAttackSlot.SetAttack(null);
+            UpdateButtonActiveStates();
+
+        } else if (instance.primaryAttackSlot.attack == attack)
+        {
+            instance.primaryAttackSlot.SetAttack(null);
+
+            UpdateButtonActiveStates();
         }
     }
 
@@ -65,13 +107,15 @@ public class BattleManager : MonoBehaviour
                 // Show elements visible during intro.
                 break;
             case BattleState.AttackSelection:
-                foreach(var attackElem in instance.attacks.attacks)
+                instance.targets.Clear();
+                foreach (var attackElem in instance.attacks.attacks)
                 {
                     if (attackElem.Unlocked())
                     {
-                        Transform parent = Instantiate(instance.draggableElementParentPrefab, instance.attackSelectionGridRoot);
-                        BossAttackUIElement uiInst = Instantiate(instance.attackElement, parent);
-                        uiInst.attack = attackElem.attack;
+                        BossAttackUIElement uiInst = Instantiate(instance.attackElement, instance.attackSelectionGridRoot);
+                        uiInst.SetAttack(attackElem.attack);
+                        uiInst.SetActive(false);
+                        instance.targets.Add(uiInst);
                     }
                 }
                 instance.attackSelectionGroup.gameObject.SetActive(true);

@@ -39,4 +39,12 @@ public class LittleGuyController : MonoBehaviour
         weapon.sprite = LittleGuyManager.i.weapons[information.MetaStats.weaponID];
     }
 
+    public void TakeDamage(float damage)
+	{
+        // do something other than log
+
+        information.BattleStats.HP -= damage;
+
+        Debug.Log($"AAAAAAH (took {damage} dmg)");
+	}
 }
