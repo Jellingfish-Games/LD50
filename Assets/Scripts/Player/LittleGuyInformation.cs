@@ -5,7 +5,9 @@ using UnityEngine;
 
 public enum LittleGuyClass
 {
-
+	Warrior,
+	Wizard,
+	Rogue
 }
 
 public enum LittleGuyNameMode
@@ -30,8 +32,10 @@ public class LittleGuyMetaStats
 	public const int MaxDeathsTilLevelSequence = 8; // These decide how many deaths the player has to have til they go off 
 	public const int MinDeathsTilLevelSequence = 2; // on an adventure and scale up stats, based on stubborness in gameplay
 
-	public Color mainColor = Color.HSVToRGB(Random.Range(0,360)/360f, Random.Range(0, 100) / 100f, Random.Range(45, 100) / 100f);
-	public Color skinColor = Color.HSVToRGB(Random.Range(0, 360) / 360f, Random.Range(0, 90) / 100f, Random.Range(0, 50) / 100f);
+	public Color mainColor { get; set; }
+	public Color skinColor { get; set; }
+	public int hatID;
+	public int weaponID;
 
 	public float Stubborness { get; set; }
 }
@@ -70,7 +74,7 @@ public class LittleGuyInformation : MonoBehaviour
 	public LittleGuyBattleStats BattleStats { get; set; }
 	public LittleGuyMetaStats MetaStats { get; set; }
 
-	private void Start()
+	private void Awake()
 	{
 		GenerateStats();
 	}
@@ -86,6 +90,8 @@ public class LittleGuyInformation : MonoBehaviour
 
 		GenerateName();
 		GenerateTitles();
+		GenerateClass();
+		GenerateMetaStats();
 	}
 
 	public void GenerateName()
@@ -161,5 +167,24 @@ public class LittleGuyInformation : MonoBehaviour
 			Titles.Add(choice);
 			titles.Remove(choice);
 		}
+	}
+
+	public void GenerateClass()
+    {
+		Class = (LittleGuyClass)Random.Range(0, 3);
+    }
+
+	public void GenerateMetaStats()
+    {
+		MetaStats = new LittleGuyMetaStats();
+
+		MetaStats.mainColor = Color.HSVToRGB(Random.Range(0, 360) / 360f, Random.Range(Random.Range(0, 80), 90) / 100f, Random.Range(45, 100) / 100f);
+		MetaStats.skinColor = Color.HSVToRGB(Random.Range(0, 360) / 360f, Random.Range(0, 90) / 100f, Random.Range(0, 50) / 100f);
+
+		var hatIDPick = new Dictionary<LittleGuyClass, List<int>>();
+		hatIDPick[LittleGuyClass.Warrior] = new List<int> { 3, 4, 8 };
+		hatIDPick[LittleGuyClass.Wizard] = new List<int> { 5, 6, 7 };
+		hatIDPick[LittleGuyClass.Rogue] = new List<int> { 1, 2, 9, 10 };
+		MetaStats.hatID = hatIDPick[Class][Random.Range(0, hatIDPick[Class].Count)];
 	}
 }
