@@ -411,4 +411,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hat: {fileID: 6051880564250597273}
   weapon: {fileID: 4351034765502864419}
-  ai: {fileID: 0}
+  ai: {fileID: 5438284386008965492}
