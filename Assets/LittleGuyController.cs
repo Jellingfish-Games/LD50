@@ -9,11 +9,13 @@ public class LittleGuyController : MonoBehaviour
     [SerializeField] SpriteRenderer weapon;
 
     public LittleGuyAI ai;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         information = GetComponent<LittleGuyInformation>();
+        animator = GetComponentInChildren<Animator>();
 
         SetColors();
         SetHat();
@@ -52,6 +54,8 @@ public class LittleGuyController : MonoBehaviour
         // do something other than log
 
         information.BattleStats.HP -= damage;
+
+        animator.Play("Guy_Hurt", -1, 0f);
 
         Debug.Log($"AAAAAAH (took {damage} dmg)");
 	}

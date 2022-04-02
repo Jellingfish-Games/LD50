@@ -56,7 +56,7 @@ public class LittleGuyAI : MonoBehaviour
         {
             opponent = BattleManager.instance.player;
         }
-        Vector3 directionToBoss = (transform.position - opponent.transform.position);
+        Vector3 directionToBoss = -(transform.position - opponent.transform.position);
         float distanceToBoss = directionToBoss.magnitude;
         float percentageHP = information.BattleStats.HP / information.BattleStats.MaxHP;
         float reactionSpeed = information.BattleStats.Awareness;
@@ -69,7 +69,7 @@ public class LittleGuyAI : MonoBehaviour
 
         float diceRoll = Random.Range(0.0f, 1.0f);
 
-        float desiredRoamDistance = 6 - 2 * aggressiveness + cautiousness;
+        float desiredRoamDistance = 3 - 2 * aggressiveness + cautiousness;
 
         if (navMeshAgent.SamplePathPosition(NavMesh.GetAreaFromName("Danger"), cautiousness, out NavMeshHit navMeshHitInfo))
         {
@@ -77,21 +77,23 @@ public class LittleGuyAI : MonoBehaviour
             dodgeDirectionFromNavMesh.y = 0;
             dodgeDirectionInfluence = 1;
         }
-
-        if (bossState == BossCharacter.BossState.Windup && dodgeDirectionInfluence * diceRoll * reactionSpeed > 0.25f)
+        else if(bossState == BossCharacter.BossState.Windup && dodgeDirectionInfluence * diceRoll * reactionSpeed > 0.25f)
         {
             yield return DodgeRoll(dodgeDirectionFromNavMesh.normalized);
-        }
-
-        bool wantsToMove = diceRoll > 0.5f;
-
-        if (wantsToMove)
+        } else
         {
-            yield return MoveToDirection((directionToBoss * (distanceToBoss - desiredRoamDistance)).normalized);
-        }
+            bool wantsToMove = diceRoll > 0.5f;
 
-        // Don't do anything.
-        yield return reactionSpeed;
+            if (wantsToMove)
+            {
+                yield return MoveToDirection((directionToBoss * (distanceToBoss - desiredRoamDistance)).normalized);
+            }
+            else
+            {
+                // Don't do anything.
+                yield return reactionSpeed;
+            }
+        }
     }
 
     private IEnumerator DodgeRoll(Vector3 dodgeDirection)
@@ -128,11 +130,8 @@ public class LittleGuyAI : MonoBehaviour
         navMeshAgent.CalculatePath(hit.position, currentPath);
         currentPathCorners = currentPath.corners;
 
-        for (int i = 0; i < currentPathCorners.Length; i++)
-		{
-            transform.position = currentPathCorners[i];
+        navMeshAgent.destination = target;
 
-            yield return new WaitForSeconds(2f);
-        }
+        yield return new WaitUntil(() => navMeshAgent.remainingDistance < 0.5f);
     }
 }
