@@ -8,6 +8,8 @@ public abstract class BossAttack : ScriptableObject
     public string attackName;
     public string description;
 
+    public Sprite icon;
+
     public float sweetspotDamage;
     public float sourspotDamage;
 
