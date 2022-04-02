@@ -23,7 +23,7 @@ public class AttackHitboxList : MonoBehaviour
 	{
 		if (enableDirectionality)
 		{
-			transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(character.velocity.z, character.velocity.x), Vector3.up);
+			transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-character.velocity.z, character.velocity.x) * Mathf.Rad2Deg, Vector3.up);
 		}
 		else
 		{

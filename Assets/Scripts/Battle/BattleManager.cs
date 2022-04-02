@@ -15,7 +15,23 @@ public class BattleManager : MonoBehaviour
         Loss
     }
 
-    public static BattleManager instance;
+    private static BattleManager _instance;
+
+    public static BattleManager instance { 
+        get
+        {
+            if (_instance == null)
+			{
+                _instance = new GameObject().AddComponent<BattleManager>();
+			}
+
+            return _instance;
+        }
+        private set
+        {
+            _instance = value;
+        }
+    }
 
     public static BattleState state = BattleState.Intro;
 
@@ -40,6 +56,11 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
+        Init();
+    }
+
+    private void Init()
+	{
         SwitchToNewState(BattleState.Intro);
     }
 
