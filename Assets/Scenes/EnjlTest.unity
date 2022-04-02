@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 1a6c8de530aa8f54290c8590132be7ee, type: 2}
 --- !u!1001 &237904388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6132,6 +6132,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1537960406 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 356935610172803182, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
+  m_PrefabInstance: {fileID: 1190758317}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1538949747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6139,6 +6144,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1538949749, guid: f8d458a9bfcace84185c6db7d9b24946, type: 3}
+      propertyPath: primaryAttack
+      value: 
+      objectReference: {fileID: 11400000, guid: 6862e6f5a93a2b149934e4067fb1d56f, type: 2}
     - target: {fileID: 1910856540512154446, guid: f8d458a9bfcace84185c6db7d9b24946, type: 3}
       propertyPath: m_Name
       value: BossCharacter
@@ -6422,6 +6431,22 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8531146442124078455, guid: 365727785da3ca049b2236e26753b303, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531146442124078455, guid: 365727785da3ca049b2236e26753b303, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531146442124078455, guid: 365727785da3ca049b2236e26753b303, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 9199449085717301156, guid: 365727785da3ca049b2236e26753b303, type: 3}
+      propertyPath: m_RotationAtRest.x
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 9199449085717301156, guid: 365727785da3ca049b2236e26753b303, type: 3}
       propertyPath: m_RotationOffset.x
       value: 0
@@ -6429,7 +6454,7 @@ PrefabInstance:
     - target: {fileID: 9199449085717301156, guid: 365727785da3ca049b2236e26753b303, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1537960406}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 365727785da3ca049b2236e26753b303, type: 3}
 --- !u!1001 &1753601283
