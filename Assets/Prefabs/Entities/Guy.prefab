@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2093099029271214757}
   - component: {fileID: 6051880564250597273}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1090755721359777941}
   - component: {fileID: 9199449085717301156}
   - component: {fileID: 8460460516435924339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 2554488905366896316}
   - component: {fileID: 5438284386008965492}
   - component: {fileID: 5386827388452218088}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Guy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
