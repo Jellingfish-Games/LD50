@@ -37,7 +37,6 @@ public class LittleGuyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     IEnumerator FollowPath()

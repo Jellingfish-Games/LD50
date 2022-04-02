@@ -93,6 +93,7 @@ public class LittleGuyInformation : MonoBehaviour
 		GenerateTitles();
 		GenerateClass();
 		GenerateMetaStats();
+		GenerateBattleStats();
 	}
 
 	public void GenerateName()
@@ -196,5 +197,20 @@ public class LittleGuyInformation : MonoBehaviour
 		weaponIDPick[LittleGuyClass.Wizard] = new List<int> {0, 10, 11, 12, 13, 14};
 		weaponIDPick[LittleGuyClass.Rogue] = new List<int> { 9 };
 		MetaStats.weaponID = weaponIDPick[Class][Random.Range(0, weaponIDPick[Class].Count)];
+	}
+
+	public void GenerateBattleStats()
+	{
+		BattleStats = new LittleGuyBattleStats()
+		{
+			MaxHP = Random.Range(600, 1001),
+			HealingPerSecond = 0,
+			Aggressiveness = Random.Range(0f, 1f),
+			Awareness = Random.Range(0f, 1f),
+			DodgeSkill = Random.Range(0f, 1f),
+			PotionDrinkSpeedScale = Random.Range(1f, 1.1f)
+		};
+
+		BattleStats.HP = BattleStats.MaxHP;
 	}
 }
