@@ -16,6 +16,6 @@ MonoBehaviour:
     maxHP: 10000
     damage: 100
     turnRate: 1
-    movementSpeed: 50
+    movementSpeed: 2
     attackSpeed: 2
     armor: 0
