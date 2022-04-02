@@ -5,23 +5,24 @@ using UnityEngine.EventSystems;
 
 public class DropTarget : MonoBehaviour, IDropHandler
 {
-    public void OnDrop(PointerEventData eventData)
-    {
-        if (eventData.selectedObject.tag == transform.tag)
-        {
+    private DraggableElement occupant;
 
-        }
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
-        
+        occupant = GetComponentInChildren<DraggableElement>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnDrop(PointerEventData eventData)
     {
-        
+        Debug.Log(gameObject);
+        if (eventData.pointerDrag.tag == transform.tag)
+        {
+            if (occupant != null)
+            {
+                occupant.ResetParent();
+            }
+            eventData.pointerDrag.transform.SetParent(transform);
+            occupant = eventData.pointerDrag.GetComponent<DraggableElement>();
+        }
     }
 }

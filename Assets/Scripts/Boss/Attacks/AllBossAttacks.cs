@@ -15,4 +15,9 @@ public class MetaAttack
     public int runsToUnlock;
     public int minimumPlayerKillsToUnlock;
     public int minimumHighScoreToUnlock;
+
+    public bool Unlocked()
+    {
+        return true;
+    }
 }

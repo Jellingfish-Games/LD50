@@ -25,6 +25,11 @@ public class BossCharacter : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        BattleManager.instance.player = this;
+    }
+
     private void Update()
     {
         Move();

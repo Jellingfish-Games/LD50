@@ -4,20 +4,51 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class DraggableElement : MonoBehaviour, IBeginDragHandler, IEndDragHandler
+public class DraggableElement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     private bool dragging = false;
 
     private float reparentingLerp;
+
+    internal Transform originalParent;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         dragging = true;
     }
 
+    public void OnDrag(PointerEventData eventData)
+    {
+    }
+
     public void OnEndDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        dragging = false;
+        reparentingLerp = 0;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (transform.parent != originalParent)
+        {
+            transform.SetParent(originalParent);
+            reparentingLerp = 0;
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+    }
+
+    public void ResetParent()
+    {
+        transform.SetParent(originalParent);
+        reparentingLerp = 0;
+    }
+
+    void Start()
+    {
+        originalParent = transform.parent;
     }
 
     // Update is called once per frame
