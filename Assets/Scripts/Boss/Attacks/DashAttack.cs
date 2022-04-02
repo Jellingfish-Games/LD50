@@ -9,6 +9,7 @@ public class DashAttack : BossAttack
     public override IEnumerator PerformAttack(BossCharacter self)
     {
         self.RestrictControls();
+        self.LockInPlace();
 
         Debug.Log("MARIO");
 
@@ -20,12 +21,15 @@ public class DashAttack : BossAttack
         dashTarget.y = 0;
 
         Vector3 delta = dashTarget - self.transform.position;
+        delta.y = 0;
 
-        delta = delta.normalized * 500f;
+        delta = delta.normalized * 50f;
+
+        self.UnlockPlace();
 
         self.velocity = delta;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
 
         // play stop anim here
 

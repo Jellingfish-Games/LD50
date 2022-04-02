@@ -73,11 +73,17 @@ public class BossCharacter : MonoBehaviour
         lockInPlace = true;
 	}
 
+    public void UnlockPlace()
+    {
+        lockInPlace = false;
+    }
+
     private void Move()
     {
         if (!lockInPlace)
         {
-            velocity = new Vector3(movementInput.x, 0, movementInput.y) * modifiedProperties.movementSpeed;
+            if (!restrictControls)
+                velocity = new Vector3(movementInput.x, 0, movementInput.y) * modifiedProperties.movementSpeed;
         }
         else
 		{
