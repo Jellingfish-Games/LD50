@@ -215,6 +215,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5983212629189583267}
   - component: {fileID: 2939428948891980996}
+  - component: {fileID: 2554488905366896316}
+  - component: {fileID: 5438284386008965492}
   m_Layer: 0
   m_Name: Guy
   m_TagString: Untagged
@@ -250,3 +252,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.5, z: 0.6}
   m_Center: {x: 0, y: 0.25, z: 0.3}
+--- !u!195 &2554488905366896316
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983212629189583277}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.4
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &5438284386008965492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983212629189583277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b56646473b70684986484c192ee0fa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
