@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3cac3f71df81349939a65e1e73ed0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   baseProperties: {fileID: 11400000, guid: 2e4d2073f26145545802e02d0df56661, type: 2}
   animator: {fileID: 742630371208652412}
   primaryAttack: {fileID: 0}
@@ -69,7 +70,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!65 &1492781192064473447
 BoxCollider:

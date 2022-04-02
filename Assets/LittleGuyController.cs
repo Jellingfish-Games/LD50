@@ -55,8 +55,6 @@ public class LittleGuyController : MonoBehaviour
 
         information.BattleStats.HP -= damage;
 
-        animator.Play("Guy_Hurt", -1, 0f);
-
-        Debug.Log($"AAAAAAH (took {damage} dmg)");
+        ai.Hurt();
 	}
 }

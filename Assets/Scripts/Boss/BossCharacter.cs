@@ -128,6 +128,10 @@ public class BossCharacter : MonoBehaviour
         {
             movementInput = context.ReadValue<Vector2>();
         }
+        else
+		{
+            movementInput = Vector2.zero;
+		}
     }
 
     public void Input_PrimaryAttack(InputAction.CallbackContext context)

@@ -13,11 +13,30 @@ public class LittleGuyAI : MonoBehaviour
         Approaching,
         Fleeing,
         Attacking,
+        Staggered,
+        Dead
+    }
+
+    private enum LittleGuyAnimationState
+	{
+        Idle,
+        Run,
+        Hurt,
+        Intro,
+        Bomb,
+        Potion,
+        SwingRun,
+        HeavySwing,
+        Death,
+        Roll
     }
 
     private LittleGuyState aiState;
+    private LittleGuyAnimationState animationState;
     private LittleGuyInformation information;
     private NavMeshAgent navMeshAgent;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     private NavMeshPath currentPath;
     private Vector3[] currentPathCorners;
@@ -33,12 +52,16 @@ public class LittleGuyAI : MonoBehaviour
         opponent = BattleManager.instance.player;
         information = GetComponent<LittleGuyInformation>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void StartAIRoutine()
     {
         InterruptAIRoutine();
-        aiRoutine = StartCoroutine(DefaultLoop());
+		navMeshAgent.isStopped = false;
+        aiState = LittleGuyState.Standing;
+		aiRoutine = StartCoroutine(DefaultLoop());
     }
 
     public void InterruptAIRoutine()
@@ -47,6 +70,8 @@ public class LittleGuyAI : MonoBehaviour
         {
             StopCoroutine(aiRoutine);
             aiRoutine = null;
+
+            navMeshAgent.isStopped = true;
         }
     }
 
@@ -134,4 +159,72 @@ public class LittleGuyAI : MonoBehaviour
 
         yield return new WaitUntil(() => navMeshAgent.remainingDistance < 0.5f);
     }
+
+    public void Hurt()
+	{
+        InterruptAIRoutine();
+
+        animationState = LittleGuyAnimationState.Hurt;
+
+        aiState = LittleGuyState.Staggered;
+
+        animator.Play("Guy_Hurt", -1, 0f);
+	}
+
+    private void Update()
+    {
+        if (aiState == LittleGuyState.Attacking || aiState == LittleGuyState.Approaching)
+        {
+            float bossXDelta = opponent.transform.position.x - transform.position.x;
+
+            if (bossXDelta > 1f)
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
+            else if (bossXDelta < 1f)
+                gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            if (navMeshAgent.velocity.x > 1f)
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
+            else if (navMeshAgent.velocity.x < 1f)
+                gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        UpdateAnimations();
+    }
+
+    // Animation transitions like hurt into other stuff
+    public void OnAnimationEnd(string name)
+    {
+        if (name == "Hurt")
+		{
+            StartAIRoutine();
+		}
+    }
+
+    public void UpdateAnimations()
+	{
+        switch (aiState)
+		{
+            case LittleGuyState.Dead:
+                break;
+            case LittleGuyState.Staggered:
+                break;
+            case LittleGuyState.Attacking:
+                break;
+            default:
+                if (animationState != LittleGuyAnimationState.Run && navMeshAgent.velocity.magnitude > 0.01f)
+                {
+                    animationState = LittleGuyAnimationState.Run;
+                    animator.Play("Guy_Run");
+                }
+                else if (animationState != LittleGuyAnimationState.Idle && navMeshAgent.velocity.magnitude < 0.01f)
+                {
+                    animationState = LittleGuyAnimationState.Idle;
+                    animator.Play("Guy_Idle");
+                }
+
+                break;
+		}
+	}
 }
