@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08bc1a03574ff98409cc70baed16ae2a, type: 3}
-  m_Name: TestAttack
+  m_Name: TestAttack 1
   m_EditorClassIdentifier: 
-  attackName: Mighty Swing
-  description: Performs a mighty swing that is awesome.
-  icon: {fileID: 7886250173734430551, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
-  sweetspotDamage: 2
-  sourspotDamage: 1
+  attackName: 
+  description: 
+  icon: {fileID: 246929164632983071, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
+  sweetspotDamage: 0
+  sourspotDamage: 0
   animationClips: []
-  windupTime: 1
-  backswingTime: 1
+  windupTime: 0
+  backswingTime: 0
