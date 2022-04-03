@@ -116,7 +116,7 @@ public class BattleManager : MonoBehaviour
         if (primaryAttackSlot.attack != null && secondaryAttackSlot.attack != null)
         {
             player.ReplaceAttackInSlot(primaryAttackSlot.attack, false);
-            player.ReplaceAttackInSlot(secondaryAttackSlot.attack, false);
+            player.ReplaceAttackInSlot(secondaryAttackSlot.attack, true);
             SwitchToNewState(BattleState.Battle);
         }
     }
@@ -184,6 +184,8 @@ public class BattleManager : MonoBehaviour
                     }
                 }
                 instance.attackSelectionGroup.gameObject.SetActive(true);
+                instance.primaryAttackSlot.SetButtonActive(true);
+                instance.secondaryAttackSlot.SetButtonActive(true);
                 break;
             case BattleState.Battle:
                 instance.StartCoroutine(instance.SpawnNewLittleGuys());
@@ -203,6 +205,8 @@ public class BattleManager : MonoBehaviour
                 break;
             case BattleState.AttackSelection:
                 instance.attackSelectionGroup.gameObject.SetActive(false);
+                instance.primaryAttackSlot.SetButtonActive(false);
+                instance.secondaryAttackSlot.SetButtonActive(false);
                 break;
                 // etc
         }
