@@ -56,6 +56,7 @@ public class BattleManager : MonoBehaviour
     public CanvasGroup attackReplacementGroup;
     public CanvasGroup victoryGroup;
     public CanvasGroup attackDisplayGroup;
+    public YouDiedMenu youDiedMenu;
 
     public UnityEngine.UI.Button attackSelectionConfirmButton;
     public UnityEngine.UI.Text attackSelectionConfirmButtonText;
@@ -97,7 +98,7 @@ public class BattleManager : MonoBehaviour
     {
         //if (Input.GetKeyDown(KeyCode.Q))
         //{
-        //    SwitchToNewState(BattleState.PhaseTransition);
+        //    SwitchToNewState(BattleState.Loss);
         //}
     }
 
@@ -263,6 +264,23 @@ public class BattleManager : MonoBehaviour
             case BattleState.Cutscene:
                 CameraManager.i.Cutscene();
                 break;
+            case BattleState.Victory:
+                instance.StartCoroutine(instance.victoryGroup.Show(0.5f));
+                instance.StartCoroutine(instance.youDiedMenu.DoSequence(false));
+                yield return new WaitForSeconds(2);
+                yield return instance.victoryGroup.Hide(0.5f);
+                yield return new WaitForSeconds(1);
+                // THIS IS HWERE CHARACTERS LEVEL UP
+                SwitchToNewState(BattleState.Cutscene);
+                break;
+            case BattleState.Loss:
+                instance.StartCoroutine(instance.victoryGroup.Show(0.5f));
+                instance.StartCoroutine(instance.youDiedMenu.DoSequence(true));
+                yield return new WaitForSeconds(2);
+                yield return instance.blackFadeGroup.Show(0.5f);
+                yield return new WaitForSeconds(1);
+                GlobalManager.instance.LoadMainMenu();
+                break;
             case BattleState.PhaseTransition:
                 Time.timeScale = 0;
                 yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
@@ -362,5 +380,15 @@ public class BattleManager : MonoBehaviour
         }
 
         ConfirmAttackSelection(true);
+    }
+
+    public void WaveEnds()
+    {
+        SwitchToNewState(BattleState.Victory);
+    }
+
+    public void PlayerDies()
+    {
+        SwitchToNewState(BattleState.Loss);
     }
 }
