@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gun_Swing_Run
+  m_Name: Guy_Swing_Run
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0

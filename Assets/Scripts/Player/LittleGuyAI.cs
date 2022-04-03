@@ -50,6 +50,7 @@ public class LittleGuyAI : MonoBehaviour
     private BossCharacter opponent;
 
     public LittleGuyAttackHitboxList heavySwingHitboxes;
+    public LittleGuyAttackHitboxList runSwingHitboxes;
 
     public bool flip => spriteRenderer.flipX;
 
@@ -131,6 +132,11 @@ public class LittleGuyAI : MonoBehaviour
                 Debug.Log("MeleeAttack");
                 yield return MeleeAttack(aggressiveness);
             }
+            else if (distanceToBoss > 1 && distanceToBoss < 3f + aggressiveness * 0.3f && diceRoll + aggressiveness * diceRoll * reactionSpeed + (aiState == LittleGuyState.Approaching ? 0.2f : 0f) > 1f)
+			{
+                Debug.Log("RunAttack");
+                yield return RunMeleeAttack(aggressiveness);
+			}
             else if (aiState == LittleGuyState.Fleeing)
             {
                 Vector3 bossDirection = opponent.transform.position - transform.position;
@@ -254,6 +260,42 @@ public class LittleGuyAI : MonoBehaviour
 		{
             aiState = LittleGuyState.Roaming;
 		}
+
+        yield return null;
+    }
+
+    private IEnumerator RunMeleeAttack(float aggressiveness)
+    {
+        float diceRoll = Random.Range(0f, 1f);
+
+        aiState = LittleGuyState.Attacking;
+
+        animator.Play("Guy_Swing_Run", -1, 0f);
+        animationState = LittleGuyAnimationState.SwingRun;
+
+        float runTime = 1f + (aggressiveness + diceRoll) * 0.5f;
+
+        Vector3 target = opponent.transform.position + (opponent.transform.position - transform.position).normalized * 2f;
+
+        navMeshAgent.destination = target;
+        navMeshAgent.speed *= 1.2f;
+
+        runSwingHitboxes.SetCurrentHitbox(0);
+
+        yield return new WaitForSeconds(runTime);
+
+        runSwingHitboxes.SetCurrentHitbox(-1);
+
+        navMeshAgent.speed /= 1.2f;
+
+        if ((opponent.transform.position - transform.position).magnitude < 1)
+        {
+            aiState = LittleGuyState.Fleeing;
+        }
+        else
+        {
+            aiState = LittleGuyState.Roaming;
+        }
 
         yield return null;
     }
@@ -385,8 +427,15 @@ public class LittleGuyAI : MonoBehaviour
 		{
             heavySwingHitboxes.SetCurrentHitbox(-1);
 		}
-
-	}
+        if (message == "SwingRunStart")
+        {
+            runSwingHitboxes.SetCurrentHitbox(0);
+        }
+        else if (message == "SwingRunEnd")
+        {
+            runSwingHitboxes.SetCurrentHitbox(-1);
+        }
+    }
     public void UpdateAnimations()
 	{
         switch (aiState)
