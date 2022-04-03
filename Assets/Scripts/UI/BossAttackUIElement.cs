@@ -11,6 +11,8 @@ public class BossAttackUIElement : MonoBehaviour, IPointerEnterHandler, IPointer
     public Button button;
     public Image image;
 
+    public Sprite defaultSprite;
+
     public bool active = false;
     public bool isSlotOnBottom = false;
 
@@ -27,17 +29,25 @@ public class BossAttackUIElement : MonoBehaviour, IPointerEnterHandler, IPointer
         SetActive(active);
     }
 
+    public void SetButtonActive(bool active)
+    {
+        button.enabled = active;
+    }
+
     public void SetAttack(BossAttack attack)
     {
         this.attack = attack;
 
-        image.gameObject.SetActive(attack != null);
         if (attack != null)
         {
             image.sprite = attack.icon;
             nameText.text = attack.name;
             descriptionText.text = attack.description;
+        } else
+        {
+            image.sprite = defaultSprite;
         }
+
         button.onClick.RemoveAllListeners();
         if (isSlotOnBottom)
         {
