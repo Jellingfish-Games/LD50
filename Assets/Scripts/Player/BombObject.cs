@@ -24,6 +24,7 @@ public class BombObject : MonoBehaviour
 
 	public void Explode()
 	{
+		CameraManager.i.Shake(1f, 2);
 		BombExplosion bomb = Instantiate(explosion, transform.position, Quaternion.identity);
 		bomb.info = info;
 		Destroy(gameObject);
