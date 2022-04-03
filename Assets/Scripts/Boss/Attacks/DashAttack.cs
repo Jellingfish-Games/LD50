@@ -9,7 +9,7 @@ public class DashAttack : BossAttack
     public override IEnumerator PerformAttack(BossCharacter self)
     {
         GameObject attackHitboxes = Instantiate(this.attackHitboxes, self.transform);
-        AttackHitboxList hitboxList = attackHitboxes.GetComponent<AttackHitboxList>();
+        BossAttackHitboxList hitboxList = attackHitboxes.GetComponent<BossAttackHitboxList>();
 
         self.RestrictControls();
         self.LockInPlace();

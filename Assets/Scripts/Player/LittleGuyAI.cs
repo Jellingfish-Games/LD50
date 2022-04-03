@@ -49,6 +49,10 @@ public class LittleGuyAI : MonoBehaviour
 
     private BossCharacter opponent;
 
+    public LittleGuyAttackHitboxList heavySwingHitboxes;
+
+    public bool flip => spriteRenderer.flipX;
+
     void Awake()
     {
         currentPath = new NavMeshPath();
@@ -371,6 +375,18 @@ public class LittleGuyAI : MonoBehaviour
 		}
     }
 
+    public void OnAnimationMilestone(string message)
+	{
+        if (message == "SwingHeavyStart")
+		{
+            heavySwingHitboxes.SetCurrentHitbox(0);
+        }
+        else if (message == "SwingHeavyEnd")
+		{
+            heavySwingHitboxes.SetCurrentHitbox(-1);
+		}
+
+	}
     public void UpdateAnimations()
 	{
         switch (aiState)

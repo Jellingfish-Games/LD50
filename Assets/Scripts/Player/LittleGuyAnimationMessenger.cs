@@ -11,6 +11,11 @@ public class LittleGuyAnimationMessenger : MonoBehaviour
 		ai = transform.parent.GetComponent<LittleGuyAI>();
 	}
 
+	void MessageMilestoneReached(string milestoneName)
+	{
+		ai.OnAnimationMilestone(milestoneName);
+	}
+
 	void MessageParentAI(string animationName)
 	{
 		ai.OnAnimationEnd(animationName);
