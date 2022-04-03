@@ -50,6 +50,8 @@ public class BattleManager : MonoBehaviour
 
     public LittleGuyController littleGuyPrefab;
     public Transform littleGuySpawnPosition;
+    public Transform littleGuySpawnPosition2;
+    public Transform littleGuySpawnPosition3;
 
     public BossAttackUIElement attackElement;
 
@@ -72,7 +74,8 @@ public class BattleManager : MonoBehaviour
 
     private void Init()
 	{
-        SwitchToNewState(BattleState.Battle);
+        //SwitchToNewState(BattleState.Battle);
+        SwitchToNewState(BattleState.Cutscene);
     }
 
     public void SpawnLittleGuyHealthBar(LittleGuyController controller)
@@ -91,21 +94,20 @@ public class BattleManager : MonoBehaviour
     }
 
     // For the "multiplayer" game mode
-    private IEnumerator SpawnNewLittleGuys()
+    public IEnumerator SpawnNewLittleGuys()
     {
         while (player.hp > 0)
         {
-            yield return new WaitForSeconds(Random.Range(1f, 5f));
             if (littleGuys.Count < Mathf.Clamp((Mathf.Pow(numLittleGuysKilled, 0.5f) * 0.1f), 1, 50)) {
                 SpawnLittleGuy();
             }
+            yield return new WaitForSeconds(Random.Range(1f, 5f));
         }
     }
 
-    private void SpawnLittleGuy()
+    public LittleGuyController SpawnLittleGuy()
     {
-        Instantiate(littleGuyPrefab, littleGuySpawnPosition.position, Quaternion.identity);
-        
+        return Instantiate(littleGuyPrefab, littleGuySpawnPosition.position, Quaternion.identity); 
     }
 
     public void ConfirmAttackSelection()
@@ -186,7 +188,7 @@ public class BattleManager : MonoBehaviour
                 instance.attackSelectionGroup.gameObject.SetActive(true);
                 break;
             case BattleState.Battle:
-                instance.StartCoroutine(instance.SpawnNewLittleGuys());
+                //instance.StartCoroutine(instance.SpawnNewLittleGuys());
                 break;
             case BattleState.Cutscene:
                 CameraManager.i.Cutscene();
