@@ -52,6 +52,9 @@ public class LittleGuyAI : MonoBehaviour
     public LittleGuyAttackHitboxList heavySwingHitboxes;
     public LittleGuyAttackHitboxList runSwingHitboxes;
 
+    public BombObject bombObject;
+    public Transform throwTransform;
+
     public bool flip => spriteRenderer.flipX;
 
     void Awake()
@@ -144,7 +147,7 @@ public class LittleGuyAI : MonoBehaviour
                 bossDirection.y = 0;
                 bossDirection = bossDirection.normalized * Random.Range(2f, 5f - aggressiveness + cautiousness);
 
-                if (Random.Range(0f, 1f) - cautiousness * 0.2f < 0.4f)
+                if (Random.Range(0f, 1f) - cautiousness * 0.2f - reactionSpeed * 0.1 < 0.4f)
 				{
                     yield return DodgeRoll(transform.position - bossDirection);
 				}
@@ -172,6 +175,10 @@ public class LittleGuyAI : MonoBehaviour
                     {
                         aiState = LittleGuyState.Approaching;
                     }
+                    else if (diceRoll + aggressiveness > 0.8f)
+					{
+                        yield return ThrowBomb();
+					}
                     else
                     {
                         aiState = LittleGuyState.Roaming;
@@ -300,6 +307,39 @@ public class LittleGuyAI : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator ThrowBomb()
+	{
+
+        aiState = LittleGuyState.Attacking;
+
+        navMeshAgent.isStopped = true;
+
+        animator.Play("Guy_Bomb", -1, 0f);
+
+        animationState = LittleGuyAnimationState.Bomb;
+
+        yield return new WaitUntil(() => animationState != LittleGuyAnimationState.Bomb);
+
+        navMeshAgent.isStopped = false;
+
+        aiState = LittleGuyState.Roaming;
+
+        yield return null;
+	}
+
+    void ThrowBombProjectile()
+    {
+        Vector3 target = opponent.transform.position;
+        Vector3 targetDelta = target - transform.position;
+
+        BombObject bomb = Instantiate(bombObject, throwTransform.position, Quaternion.identity);
+
+        float bombSpeed = targetDelta.magnitude * 2f * Random.Range(0.9f, 1.1f);
+
+        bomb.velocity = targetDelta.normalized * bombSpeed;
+        bomb.info = information;
+    }
+
     IEnumerator DefaultLoop()
     {
         yield return EnterArena();
@@ -415,6 +455,11 @@ public class LittleGuyAI : MonoBehaviour
             animationState = LittleGuyAnimationState.Idle;
             animator.Play("Guy_Idle");
 		}
+        else if (name == "Bomb")
+		{
+            animationState = LittleGuyAnimationState.Idle;
+            animator.Play("Guy_Idle");
+        }
     }
 
     public void OnAnimationMilestone(string message)
@@ -435,6 +480,10 @@ public class LittleGuyAI : MonoBehaviour
         {
             runSwingHitboxes.SetCurrentHitbox(-1);
         }
+        else if (message == "ThrowBomb")
+		{
+            ThrowBombProjectile();
+		}
     }
     public void UpdateAnimations()
 	{

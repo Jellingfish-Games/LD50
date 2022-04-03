@@ -263,7 +263,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 72, y: 0}
+  m_SizeDelta: {x: 92, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &355388348448067016
 CanvasRenderer:
@@ -306,4 +306,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MARIO MARIO
+  m_Text: 

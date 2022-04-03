@@ -5,14 +5,17 @@ using UnityEngine;
 public class LittleGuyAttackHitbox : MonoBehaviour
 {
 	public LittleGuyInformation attacker;
-
+	public float damageScale = 1f;
 	private void Start()
 	{
-		attacker = GetComponentInParent<LittleGuyInformation>();
+		var newAttacker = GetComponentInParent<LittleGuyInformation>();
+
+		if (newAttacker != null)
+			attacker = newAttacker;
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		other.gameObject.GetComponent<BossCharacter>()?.TakeDamage(attacker.BattleStats.Damage);
+		other.gameObject.GetComponent<BossCharacter>()?.TakeDamage(attacker.BattleStats.Damage * damageScale);
 	}
 }

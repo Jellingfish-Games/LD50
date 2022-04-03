@@ -110,7 +110,12 @@ public class LittleGuyInformation : MonoBehaviour
 			"Ruf",
 			"Gar",
 			"Cro",
-			"Dew"
+			"Dew",
+			"Ar",
+			"Tro",
+			"Ghum",
+			"Ker",
+			"Oro"
 		};
 
 		string[] nameEnds = {
@@ -123,7 +128,9 @@ public class LittleGuyInformation : MonoBehaviour
 			"gnard",
 			"roar",
 			"de",
-			"rup"
+			"rup",
+			"ragh",
+			"thur",
 		};
 
 		string[] postfixes =
@@ -136,7 +143,10 @@ public class LittleGuyInformation : MonoBehaviour
 			", Godslayer",
 			" the Wise",
 			" Prime",
-			" the Coward"
+			" the Coward",
+			" of the Conglomerate",
+			" of the Great Order",
+			" the Last Hero"
 		};
 
 		Name = nameStarts[Random.Range(0, nameStarts.Length)] + nameEnds[Random.Range(0, nameEnds.Length)];
@@ -161,21 +171,27 @@ public class LittleGuyInformation : MonoBehaviour
 			"Pathetic",
 			"Huge",
 			"Powerful",
-			"Victiorious",
+			"Victorious",
 			"Royal",
 			"Heroic",
 			"Blessed",
 			"Unparalleled",
 			"Godlike",
-			"Jelling"
+			"Jelling",
+			"Unbroken",
+			"Roaring",
+			"Fearseome"
 		};
 
+		float lessTitlesPlease = 0f;
 
-		while (Random.Range(0f, 1f) < 0.8f && titles.Count > 0)
+		while (Random.Range(0f, 1f) < 0.8f - lessTitlesPlease && titles.Count > 0)
 		{
 			string choice = titles[Random.Range(0, titles.Count)];
 			Titles.Add(choice);
 			titles.Remove(choice);
+
+			lessTitlesPlease += 0.1f;
 		}
 	}
 

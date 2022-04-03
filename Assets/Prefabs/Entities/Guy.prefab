@@ -164,6 +164,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2087844370283964951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4423248100114145585}
+  m_Layer: 0
+  m_Name: ThrowTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4423248100114145585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087844370283964951}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5983212629189583267}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4850024890042426087
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +366,7 @@ Transform:
   - {fileID: 8531146442124078455}
   - {fileID: 5903861431296202058}
   - {fileID: 6435498124778257243}
+  - {fileID: 4423248100114145585}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -388,6 +419,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heavySwingHitboxes: {fileID: 6852105844009665352}
   runSwingHitboxes: {fileID: 6320327318778719577}
+  bombObject: {fileID: 6528884611589898010, guid: 0687b85fb508188459dc1b84b14b55ee, type: 3}
+  throwTransform: {fileID: 4423248100114145585}
 --- !u!114 &5386827388452218088
 MonoBehaviour:
   m_ObjectHideFlags: 0
