@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
 
 public class CameraManager : MonoBehaviour
 {
@@ -44,5 +45,20 @@ public class CameraManager : MonoBehaviour
         vc.LookAt = targetGroup.transform;
         vc.Follow = targetGroup.transform;
         BattleManager.SwitchToNewState(BattleManager.BattleState.Battle);
+    }
+
+    public void Shake(float duration, float amplitude = 1)
+    {
+        StartCoroutine(ShakeCoroutine(duration, amplitude));
+    }
+
+    IEnumerator ShakeCoroutine(float duration, float amplitude = 1)
+    {
+        var perlin = vc.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        perlin.m_AmplitudeGain = amplitude;
+        //perlin.enabled = true;
+        yield return new WaitForSeconds(duration);
+        perlin.m_AmplitudeGain = 0;
+        //perlin.enabled = false;
     }
 }
