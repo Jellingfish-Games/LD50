@@ -661,10 +661,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1538949749, guid: f8d458a9bfcace84185c6db7d9b24946, type: 3}
-      propertyPath: primaryAttack
-      value: 
-      objectReference: {fileID: 11400000, guid: 6862e6f5a93a2b149934e4067fb1d56f, type: 2}
     - target: {fileID: 1910856540512154446, guid: f8d458a9bfcace84185c6db7d9b24946, type: 3}
       propertyPath: m_Name
       value: BossCharacter

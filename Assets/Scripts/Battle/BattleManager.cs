@@ -95,10 +95,10 @@ public class BattleManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            SwitchToNewState(BattleState.PhaseTransition);
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    SwitchToNewState(BattleState.PhaseTransition);
+        //}
     }
 
     private void Init()
