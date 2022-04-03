@@ -158,6 +158,10 @@ public class LittleGuyInformation : MonoBehaviour
 			"Huge",
 			"Powerful",
 			"Victiorious",
+			"Royal",
+			"Heroic",
+			"Blessed",
+			"Unparalleled",
 			"Godlike",
 			"Jelling"
 		};
