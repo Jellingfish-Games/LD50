@@ -55,7 +55,10 @@ public class LittleGuyController : MonoBehaviour
 
     public void TakeDamage(float damage)
 	{
-        // do something other than log
+        if (information.BattleStats.HP <= 0)
+        {
+            return;
+        }
 
         information.BattleStats.HP -= damage;
 
