@@ -21,7 +21,7 @@ public class LittleGuyController : MonoBehaviour
         information = GetComponent<LittleGuyInformation>();
         animator = GetComponentInChildren<Animator>();
 
-        BattleManager.instance.SpawnLittleGuyHealthBar(this);
+        //BattleManager.instance.SpawnLittleGuyHealthBar(this);
 
         SetColors();
         SetHat();
@@ -49,7 +49,7 @@ public class LittleGuyController : MonoBehaviour
         animator.Play("Guy_Intro");
         yield return new WaitForSeconds(4);
         //TITLE NAME OF GUY
-        //SPEECH BOOBLE
+        BattleManager.instance.LittleGuyQuote(this, information.enterQuotes);
         animator.Play("Guy_Run");
         yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition3.position, 3).WaitForCompletion();
        
@@ -57,6 +57,7 @@ public class LittleGuyController : MonoBehaviour
         //yield return MoveToDirection(-transform.forward * 8);
         //yield return MoveToDirection(BattleManager.instance.littleGuySpawnPosition2.position);
         StartAI();
+        BattleManager.instance.SpawnLittleGuyHealthBar(this);
     }
 
     public void StartAI()
