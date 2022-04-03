@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,10 +48,19 @@ public class BattleManager : MonoBehaviour
 
     private List<BossAttackUIElement> targets = new List<BossAttackUIElement>();
 
+    public LittleGuyController littleGuyPrefab;
+    public Transform littleGuySpawnPosition;
+
     public BossAttackUIElement attackElement;
 
     public BossAttackUIElement primaryAttackSlot;
     public BossAttackUIElement secondaryAttackSlot;
+
+    public CinemachineTargetGroup targetGroup;
+
+    private int numLittleGuysKilled;
+
+    private List<LittleGuyController> littleGuys = new List<LittleGuyController>();
 
     void Awake()
     {
@@ -64,13 +74,40 @@ public class BattleManager : MonoBehaviour
 
     private void Init()
 	{
-        SwitchToNewState(BattleState.Intro);
+        SwitchToNewState(BattleState.Battle);
     }
 
     public void SpawnLittleGuyHealthBar(LittleGuyController controller)
     {
         LittleGuyHealthBar healthbar = Instantiate(littleGuyHealthBarPrefab, littleGuyHealthBarRoot);
         healthbar.guyRef = controller;
+        littleGuys.Add(controller);
+        targetGroup.AddMember(controller.transform, 1, 1);
+    }
+
+    public void LittleGuyDie(LittleGuyController controller)
+    {
+        littleGuys.Remove(controller);
+        targetGroup.RemoveMember(controller.transform);
+        numLittleGuysKilled++;
+    }
+
+    // For the "multiplayer" game mode
+    private IEnumerator SpawnNewLittleGuys()
+    {
+        while (player.hp > 0)
+        {
+            yield return new WaitForSeconds(Random.Range(1f, 5f));
+            if (littleGuys.Count < Mathf.Clamp((Mathf.Pow(numLittleGuysKilled, 0.5f) * 0.1f), 1, 50)) {
+                SpawnLittleGuy();
+            }
+        }
+    }
+
+    private void SpawnLittleGuy()
+    {
+        Instantiate(littleGuyPrefab, littleGuySpawnPosition.position, Quaternion.identity);
+        
     }
 
     public void ConfirmAttackSelection()
@@ -149,6 +186,9 @@ public class BattleManager : MonoBehaviour
                     }
                 }
                 instance.attackSelectionGroup.gameObject.SetActive(true);
+                break;
+            case BattleState.Battle:
+                instance.StartCoroutine(instance.SpawnNewLittleGuys());
                 break;
         }
     }

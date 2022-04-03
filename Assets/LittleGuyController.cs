@@ -64,10 +64,20 @@ public class LittleGuyController : MonoBehaviour
 
     public void TakeDamage(float damage)
 	{
-        // do something other than log
+        if (information.BattleStats.HP <= 0)
+        {
+            return;
+        }
 
         information.BattleStats.HP -= damage;
 
-        ai.Hurt();
+        if (information.BattleStats.HP <= 0)
+        {
+            ai.Die();
+            BattleManager.instance.LittleGuyDie(this);
+        } else
+        {
+            ai.Hurt();
+        }
 	}
 }
