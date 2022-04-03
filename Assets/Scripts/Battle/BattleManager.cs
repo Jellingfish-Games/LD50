@@ -50,6 +50,17 @@ public class BattleManager : MonoBehaviour
     public Transform littleGuyQuoteRoot;
 
     public CanvasGroup attackSelectionGroup;
+    public CanvasGroup mainUIGroup;
+    public CanvasGroup blackFadeGroup;
+    public CanvasGroup semitransparentBlackFadeGroup;
+    public CanvasGroup attackReplacementGroup;
+    public CanvasGroup victoryGroup;
+    public CanvasGroup attackDisplayGroup;
+
+    public UnityEngine.UI.Button attackSelectionConfirmButton;
+    public UnityEngine.UI.Text attackSelectionConfirmButtonText;
+
+
     public Transform attackSelectionGridRoot;
 
     public PlayerNameDisplay nameDisplay;
@@ -83,7 +94,14 @@ public class BattleManager : MonoBehaviour
     private void Init()
 	{
         //SwitchToNewState(BattleState.Battle);
-        SwitchToNewState(BattleState.AttackSelection);
+        attackSelectionGroup.Hide(0);
+        semitransparentBlackFadeGroup.Hide(0);
+        attackReplacementGroup.Hide(0);
+        mainUIGroup.Hide(0);
+        blackFadeGroup.Show(1);
+        victoryGroup.Hide(0);
+        attackDisplayGroup.Hide(0);
+        SwitchToNewState(BattleState.Intro);
     }
 
     public void SpawnLittleGuyHealthBar(LittleGuyController controller)
@@ -120,9 +138,6 @@ public class BattleManager : MonoBehaviour
 
     public void ConfirmAttackSelection()
     {
-        BossAttackUIElement primaryElement = primaryAttackSlot.GetComponent<BossAttackUIElement>();
-        BossAttackUIElement secondaryElement = secondaryAttackSlot.GetComponent<BossAttackUIElement>();
-
         if (primaryAttackSlot.attack != null && secondaryAttackSlot.attack != null)
         {
             player.ReplaceAttackInSlot(primaryAttackSlot.attack, false);
@@ -155,6 +170,30 @@ public class BattleManager : MonoBehaviour
         {
             t.SetActive((t.attack == instance.primaryAttackSlot.attack) || (t.attack == instance.secondaryAttackSlot.attack));
         }
+
+        int numSelected = 0;
+        if (instance.secondaryAttackSlot.attack != null)
+        {
+            numSelected++;
+        }
+        if (instance.primaryAttackSlot.attack != null)
+        {
+            numSelected++;
+        }
+
+        if (numSelected == 2)
+        {
+            instance.attackSelectionConfirmButton.interactable = true;
+            instance.attackSelectionConfirmButtonText.text = "START BATTLE";
+        } else if (numSelected == 1)
+        {
+            instance.attackSelectionConfirmButton.interactable = false;
+            instance.attackSelectionConfirmButtonText.text = "SELECT ONE";
+        } else
+        {
+            instance.attackSelectionConfirmButton.interactable = false;
+            instance.attackSelectionConfirmButtonText.text = "SELECT TWO";
+        }
     }
 
     public static void RemoveChosenAttack(BossAttack attack)
@@ -174,14 +213,21 @@ public class BattleManager : MonoBehaviour
 
     public static void SwitchToNewState(BattleState newState)
     {
-        CleanupState();
+        instance.StartCoroutine(SwitchToNewStateRoutine(newState));
+    }
+
+    private static IEnumerator SwitchToNewStateRoutine(BattleState newState)
+    {
+        yield return CleanupState();
         state = newState;
         switch (state)
         {
             case BattleState.Intro:
-                // Show elements visible during intro.
+                yield return instance.blackFadeGroup.Hide(1);
+                yield return SwitchToNewStateRoutine(BattleState.AttackSelection);
                 break;
             case BattleState.AttackSelection:
+                yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
                 instance.targets.Clear();
                 foreach (var attackElem in instance.attacks.attacks)
                 {
@@ -193,20 +239,25 @@ public class BattleManager : MonoBehaviour
                         instance.targets.Add(uiInst);
                     }
                 }
-                instance.attackSelectionGroup.gameObject.SetActive(true);
+                yield return instance.attackSelectionGroup.Show(0.5f);
                 instance.primaryAttackSlot.SetButtonActive(true);
                 instance.secondaryAttackSlot.SetButtonActive(true);
                 break;
             case BattleState.Battle:
+                instance.StartCoroutine(instance.mainUIGroup.Show(0.5f));
                 //instance.StartCoroutine(instance.SpawnNewLittleGuys());
                 break;
             case BattleState.Cutscene:
                 CameraManager.i.Cutscene();
                 break;
+            case BattleState.PhaseTransition:
+                yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
+                yield return instance.attackReplacementGroup.Show(0.5f);
+                break;
         }
     }
 
-    private static void CleanupState()
+    private static IEnumerator CleanupState()
     {
         switch (state)
         {
@@ -214,11 +265,18 @@ public class BattleManager : MonoBehaviour
                 // Hide elements visible during intro.
                 break;
             case BattleState.AttackSelection:
-                instance.attackSelectionGroup.gameObject.SetActive(false);
                 instance.primaryAttackSlot.SetButtonActive(false);
                 instance.secondaryAttackSlot.SetButtonActive(false);
+                instance.StartCoroutine(instance.attackSelectionGroup.Hide(0.5f));
+                yield return instance.semitransparentBlackFadeGroup.Hide(0.5f);
                 break;
-                // etc
+            case BattleState.Battle:
+                instance.StartCoroutine(instance.mainUIGroup.Hide(0.5f));
+                break;
+            case BattleState.PhaseTransition:
+                instance.StartCoroutine(instance.attackReplacementGroup.Hide(0.5f));
+                yield return instance.semitransparentBlackFadeGroup.Hide(0.5f);
+                break;
         }
     }
 

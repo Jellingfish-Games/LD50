@@ -560,6 +560,7 @@ MonoBehaviour:
   attack: {fileID: 0}
   button: {fileID: 7228353791725961807}
   image: {fileID: 4226199976041368392}
+  defaultSprite: {fileID: -308943806295107096, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
   active: 0
   isSlotOnBottom: 0
   nameText: {fileID: 1651027541597376805}
