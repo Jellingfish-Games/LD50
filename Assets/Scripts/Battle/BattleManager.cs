@@ -223,13 +223,14 @@ public class BattleManager : MonoBehaviour
         switch (state)
         {
             case BattleState.Intro:
-                yield return instance.blackFadeGroup.Hide(1);
+                instance.StartCoroutine(instance.blackFadeGroup.Hide(0.5f));
                 yield return SwitchToNewStateRoutine(BattleState.AttackSelection);
                 break;
             case BattleState.AttackSelection:
                 BattleManager.instance.player.RestrictControls();
                 BattleManager.instance.player.LockInPlace();
                 yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
+                instance.StartCoroutine(instance.attackDisplayGroup.Show(0.5f));
                 instance.targets.Clear();
                 foreach (var attackElem in instance.attacks.attacks)
                 {

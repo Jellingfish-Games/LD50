@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5207169391089819836}
   - component: {fileID: 1538949749}
   - component: {fileID: 6973777158293974616}
-  - component: {fileID: 1492781192064473447}
+  - component: {fileID: 8084024104197116061}
+  - component: {fileID: 6125162149183236014}
   m_Layer: 7
   m_Name: BossCharacter
   m_TagString: Untagged
@@ -70,19 +71,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!65 &1492781192064473447
-BoxCollider:
+--- !u!136 &8084024104197116061
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910856540512154446}
-  m_Material: {fileID: 13400000, guid: cef03488b53869245a721ffc97459ef9, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2, y: 2, z: 0.70885235}
-  m_Center: {x: 0, y: 1, z: 0.42433378}
+  m_Radius: 0.45
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: -0.1, y: 1, z: 0.6}
+--- !u!136 &6125162149183236014
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910856540512154446}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.45
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.1, y: 1, z: 0.6}
 --- !u!1 &7171457645058809051
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +125,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7171457645058809051}
-  m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0.067}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

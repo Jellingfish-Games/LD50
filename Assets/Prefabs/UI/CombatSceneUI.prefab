@@ -1000,6 +1000,7 @@ GameObject:
   - component: {fileID: 6012191373649971505}
   - component: {fileID: 8746439515954961658}
   - component: {fileID: 3895798025026663343}
+  - component: {fileID: 1365226929990434951}
   m_Layer: 0
   m_Name: AttacksDisplay
   m_TagString: Untagged
@@ -1045,9 +1046,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4832086191449260183}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &3895798025026663343
 MonoBehaviour:
@@ -1075,6 +1076,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1365226929990434951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832086191449260183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012d8244909ff334c84d58273d3a2bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightMouseButtonImg: {fileID: 2191726450662523338}
+  leftMouseButtonImg: {fileID: 3213403554929017764}
 --- !u!1 &4983076485662983201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +2061,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9192241003223229459}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

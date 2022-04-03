@@ -9,7 +9,7 @@ public static class CanvasGroupExtensions
         group.interactable = false;
         group.blocksRaycasts = false;
 
-        if (duration > 0)
+        if (duration > 0.05f)
         {
             group.alpha = 1;
 
@@ -23,8 +23,7 @@ public static class CanvasGroupExtensions
     }
     public static IEnumerator Show(this CanvasGroup group, float duration = 1)
     {
-
-        if (duration > 0) { 
+        if (duration > 0.05f) { 
             group.alpha = 0;
 
             while (group.alpha < 1)
