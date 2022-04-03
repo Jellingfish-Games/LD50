@@ -107,18 +107,23 @@ public class BossCharacter : MonoBehaviour
     private void Move()
     {
         if (!lockInPlace)
-        {
-            if (!restrictControls)
-                velocity = new Vector3(movementInput.x, 0, movementInput.y) * modifiedProperties.movementSpeed;
+		{
+			if (!restrictControls)
+				velocity += new Vector3(movementInput.x, 0, movementInput.y) * modifiedProperties.movementSpeed * 0.15f;
+
+            if (velocity.magnitude > modifiedProperties.movementSpeed)
+                velocity = velocity.normalized * modifiedProperties.movementSpeed;
+
+            velocity *= 0.93f;
         }
         else
 		{
-            velocity *= 0.999f;
+            velocity *= 0.92f;
 		}
 
         rb.velocity = velocity;
 
-        if (velocity.magnitude < .1f)
+        if (velocity.magnitude < .5f)
         {
             state = BossState.Idle;
         } else
