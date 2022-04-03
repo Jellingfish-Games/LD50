@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class LittleGuyController : MonoBehaviour
 {
@@ -25,6 +26,14 @@ public class LittleGuyController : MonoBehaviour
         SetHat();
         SetWeapon();
         StartAI();
+
+        var RotConst = GetComponentInChildren<RotationConstraint>();
+        ConstraintSource source = new ConstraintSource();
+        source.sourceTransform = CameraManager.i.cameraBrain.transform;
+        source.weight = 1;
+        RotConst.SetSource(0, source);
+        RotConst.rotationOffset = Vector3.zero;
+        RotConst.rotationAtRest = new Vector3(45, 0, 0);
     }
 
     public void StartAI()
