@@ -21,4 +21,9 @@ public class CameraManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void Cutscene()
+    {
+
+    }
 }
