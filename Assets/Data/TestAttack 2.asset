@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08bc1a03574ff98409cc70baed16ae2a, type: 3}
+  m_Name: TestAttack 2
+  m_EditorClassIdentifier: 
+  attackName: 
+  description: 
+  icon: {fileID: 7605485908042392293, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
+  sweetspotDamage: 0
+  sourspotDamage: 0
+  animationClips: []
+  windupTime: 0
+  backswingTime: 0
+  attackHitboxes: {fileID: 0}

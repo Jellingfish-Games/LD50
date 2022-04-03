@@ -50,6 +50,17 @@ public class BattleManager : MonoBehaviour
     public Transform littleGuyQuoteRoot;
 
     public CanvasGroup attackSelectionGroup;
+    public CanvasGroup mainUIGroup;
+    public CanvasGroup blackFadeGroup;
+    public CanvasGroup semitransparentBlackFadeGroup;
+    public CanvasGroup attackReplacementGroup;
+    public CanvasGroup victoryGroup;
+    public CanvasGroup attackDisplayGroup;
+
+    public UnityEngine.UI.Button attackSelectionConfirmButton;
+    public UnityEngine.UI.Text attackSelectionConfirmButtonText;
+
+
     public Transform attackSelectionGridRoot;
 
     public PlayerNameDisplay nameDisplay;
@@ -62,6 +73,8 @@ public class BattleManager : MonoBehaviour
     public Transform littleGuySpawnPosition3;
 
     public BossAttackUIElement attackElement;
+    public AttackReplacementElement replacementElementPrefab;
+    public Transform replacementElementRoot;
 
     public BossAttackUIElement primaryAttackSlot;
     public BossAttackUIElement secondaryAttackSlot;
@@ -80,10 +93,25 @@ public class BattleManager : MonoBehaviour
         Init();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SwitchToNewState(BattleState.PhaseTransition);
+        }
+    }
+
     private void Init()
 	{
         //SwitchToNewState(BattleState.Battle);
-        SwitchToNewState(BattleState.AttackSelection);
+        attackSelectionGroup.Hide(0);
+        semitransparentBlackFadeGroup.Hide(0);
+        attackReplacementGroup.Hide(0);
+        mainUIGroup.Hide(0);
+        blackFadeGroup.Show(1);
+        victoryGroup.Hide(0);
+        attackDisplayGroup.Hide(0);
+        SwitchToNewState(BattleState.Intro);
     }
 
     public void SpawnLittleGuyHealthBar(LittleGuyController controller)
@@ -118,16 +146,13 @@ public class BattleManager : MonoBehaviour
         return Instantiate(littleGuyPrefab, littleGuySpawnPosition.position, Quaternion.identity); 
     }
 
-    public void ConfirmAttackSelection()
+    public void ConfirmAttackSelection(bool returnToBattle = false)
     {
-        BossAttackUIElement primaryElement = primaryAttackSlot.GetComponent<BossAttackUIElement>();
-        BossAttackUIElement secondaryElement = secondaryAttackSlot.GetComponent<BossAttackUIElement>();
-
         if (primaryAttackSlot.attack != null && secondaryAttackSlot.attack != null)
         {
             player.ReplaceAttackInSlot(primaryAttackSlot.attack, false);
             player.ReplaceAttackInSlot(secondaryAttackSlot.attack, true);
-            SwitchToNewState(BattleState.Cutscene);
+            SwitchToNewState(returnToBattle ? BattleState.Battle : BattleState.Cutscene);
         }
     }
 
@@ -155,6 +180,30 @@ public class BattleManager : MonoBehaviour
         {
             t.SetActive((t.attack == instance.primaryAttackSlot.attack) || (t.attack == instance.secondaryAttackSlot.attack));
         }
+
+        int numSelected = 0;
+        if (instance.secondaryAttackSlot.attack != null)
+        {
+            numSelected++;
+        }
+        if (instance.primaryAttackSlot.attack != null)
+        {
+            numSelected++;
+        }
+
+        if (numSelected == 2)
+        {
+            instance.attackSelectionConfirmButton.interactable = true;
+            instance.attackSelectionConfirmButtonText.text = "START BATTLE";
+        } else if (numSelected == 1)
+        {
+            instance.attackSelectionConfirmButton.interactable = false;
+            instance.attackSelectionConfirmButtonText.text = "SELECT ONE";
+        } else
+        {
+            instance.attackSelectionConfirmButton.interactable = false;
+            instance.attackSelectionConfirmButtonText.text = "SELECT TWO";
+        }
     }
 
     public static void RemoveChosenAttack(BossAttack attack)
@@ -174,14 +223,24 @@ public class BattleManager : MonoBehaviour
 
     public static void SwitchToNewState(BattleState newState)
     {
-        CleanupState();
+        instance.StartCoroutine(SwitchToNewStateRoutine(newState));
+    }
+
+    private static IEnumerator SwitchToNewStateRoutine(BattleState newState)
+    {
+        yield return CleanupState();
         state = newState;
         switch (state)
         {
             case BattleState.Intro:
-                // Show elements visible during intro.
+                instance.StartCoroutine(instance.blackFadeGroup.Hide(0.5f));
+                yield return SwitchToNewStateRoutine(BattleState.AttackSelection);
                 break;
             case BattleState.AttackSelection:
+                BattleManager.instance.player.RestrictControls();
+                BattleManager.instance.player.LockInPlace();
+                yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
+                instance.StartCoroutine(instance.attackDisplayGroup.Show(0.5f));
                 instance.targets.Clear();
                 foreach (var attackElem in instance.attacks.attacks)
                 {
@@ -193,20 +252,27 @@ public class BattleManager : MonoBehaviour
                         instance.targets.Add(uiInst);
                     }
                 }
-                instance.attackSelectionGroup.gameObject.SetActive(true);
+                yield return instance.attackSelectionGroup.Show(0.5f);
                 instance.primaryAttackSlot.SetButtonActive(true);
                 instance.secondaryAttackSlot.SetButtonActive(true);
                 break;
             case BattleState.Battle:
+                instance.StartCoroutine(instance.mainUIGroup.Show(0.5f));
                 //instance.StartCoroutine(instance.SpawnNewLittleGuys());
                 break;
             case BattleState.Cutscene:
                 CameraManager.i.Cutscene();
                 break;
+            case BattleState.PhaseTransition:
+                Time.timeScale = 0;
+                yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
+                instance.GenerateAttackChoices();
+                yield return instance.attackReplacementGroup.Show(0.5f);
+                break;
         }
     }
 
-    private static void CleanupState()
+    private static IEnumerator CleanupState()
     {
         switch (state)
         {
@@ -214,11 +280,19 @@ public class BattleManager : MonoBehaviour
                 // Hide elements visible during intro.
                 break;
             case BattleState.AttackSelection:
-                instance.attackSelectionGroup.gameObject.SetActive(false);
                 instance.primaryAttackSlot.SetButtonActive(false);
                 instance.secondaryAttackSlot.SetButtonActive(false);
+                instance.StartCoroutine(instance.attackSelectionGroup.Hide(0.5f));
+                yield return instance.semitransparentBlackFadeGroup.Hide(0.5f);
                 break;
-                // etc
+            case BattleState.Battle:
+                instance.StartCoroutine(instance.mainUIGroup.Hide(0.5f));
+                break;
+            case BattleState.PhaseTransition:
+                instance.StartCoroutine(instance.attackReplacementGroup.Hide(0.5f));
+                yield return instance.semitransparentBlackFadeGroup.Hide(0.5f);
+                Time.timeScale = 1;
+                break;
         }
     }
 
@@ -249,4 +323,44 @@ public class BattleManager : MonoBehaviour
 
         bubble.AttachToPlayer(controller, toPrint);
 	}
+
+
+    public void GenerateAttackChoices()
+    {
+        List<BossAttack> availableAttacks = new List<BossAttack>();
+        foreach (var attackElem in instance.attacks.attacks)
+        {
+            if (attackElem.Unlocked() && attackElem.attack != instance.primaryAttackSlot.attack && attackElem.attack != instance.secondaryAttackSlot.attack)
+            {
+                availableAttacks.Add(attackElem.attack);
+            }
+        }
+
+        foreach(Transform t in replacementElementRoot)
+        {
+            Destroy(t.gameObject);
+        }
+
+        BossAttack primaryReplacement = availableAttacks[Random.Range(0, availableAttacks.Count)];
+        availableAttacks.Remove(primaryReplacement);
+
+        AttackReplacementElement replacementElement1 = Instantiate(replacementElementPrefab, replacementElementRoot);
+        replacementElement1.Initialize(instance.primaryAttackSlot.attack, primaryReplacement);
+
+        BossAttack secondaryReplacement = availableAttacks[Random.Range(0, availableAttacks.Count)];
+        AttackReplacementElement replacementElement2 = Instantiate(replacementElementPrefab, replacementElementRoot);
+        replacementElement2.Initialize(instance.secondaryAttackSlot.attack, secondaryReplacement);
+    }
+
+    public void ReplaceAttackSlot(BossAttack oldAttack, BossAttack newAttack) { 
+        if (oldAttack == primaryAttackSlot.attack)
+        {
+            primaryAttackSlot.SetAttack(newAttack);
+        } else
+        {
+            secondaryAttackSlot.SetAttack(newAttack);
+        }
+
+        ConfirmAttackSelection(true);
+    }
 }

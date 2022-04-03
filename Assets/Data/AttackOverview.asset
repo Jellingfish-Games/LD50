@@ -25,3 +25,7 @@ MonoBehaviour:
     runsToUnlock: 0
     minimumPlayerKillsToUnlock: 0
     minimumHighScoreToUnlock: 0
+  - attack: {fileID: 11400000, guid: 6c401c880219c8f438409a5045a15d08, type: 2}
+    runsToUnlock: 0
+    minimumPlayerKillsToUnlock: 0
+    minimumHighScoreToUnlock: 0
