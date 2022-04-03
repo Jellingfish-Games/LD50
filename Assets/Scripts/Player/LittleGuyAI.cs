@@ -177,10 +177,17 @@ public class LittleGuyAI : MonoBehaviour
 
     IEnumerator DefaultLoop()
     {
+        yield return EnterArena();
+
         while (true)
         {
             yield return ThinkingFunction();
         }
+    }
+
+    private IEnumerator EnterArena()
+    {
+        yield return MoveToDirection(- transform.forward * 8);
     }
 
     public void RandomizeDestination()
@@ -222,7 +229,25 @@ public class LittleGuyAI : MonoBehaviour
         safety = (information.BattleStats.Aggressiveness + information.BattleStats.Awareness) / 2;
 
         animator.Play("Guy_Hurt", -1, 0f);
-	}
+    }
+
+    public void Die()
+    {
+        InterruptAIRoutine();
+
+        animationState = LittleGuyAnimationState.Death;
+
+        aiState = LittleGuyState.Dead;
+
+        animator.Play("Guy_Death", -1, 0f);
+        StartCoroutine(Despawn());
+    }
+
+    private IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
+    }
 
     private void Update()
     {

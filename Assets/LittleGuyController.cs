@@ -59,6 +59,13 @@ public class LittleGuyController : MonoBehaviour
 
         information.BattleStats.HP -= damage;
 
-        ai.Hurt();
+        if (information.BattleStats.HP <= 0)
+        {
+            ai.Die();
+            BattleManager.instance.LittleGuyDie(this);
+        } else
+        {
+            ai.Hurt();
+        }
 	}
 }
