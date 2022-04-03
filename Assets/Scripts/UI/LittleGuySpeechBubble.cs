@@ -76,7 +76,6 @@ public class LittleGuySpeechBubble : MonoBehaviour
 
 
 			Vector2 playerOnScreenFromCenter = playerOnScreen - new Vector2(canvas.pixelRect.width, canvas.pixelRect.height) / widthScale;
-			Debug.Log(playerOnScreenFromCenter.x);
 
 			if (overPlayer)
 			{
