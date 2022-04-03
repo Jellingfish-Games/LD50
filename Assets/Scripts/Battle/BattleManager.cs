@@ -237,6 +237,8 @@ public class BattleManager : MonoBehaviour
             sum += possibleQuotes.quotes[i].relativeChance;
 		}
 
-        bubble.AttachToPlayer(controller, possibleQuotes.quotes[quoteChoiceIndex].quote);
+        string toPrint = string.Format(possibleQuotes.quotes[quoteChoiceIndex].quote, controller.info.Name, controller.info.FullName, "Warrior", "BOSSMAN", "foul beast");
+
+        bubble.AttachToPlayer(controller, toPrint);
 	}
 }
