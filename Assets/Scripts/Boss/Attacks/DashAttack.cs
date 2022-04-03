@@ -23,7 +23,7 @@ public class DashAttack : BossAttack
 
         self.state = BossCharacter.BossState.Attack;
 
-        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info);
+        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info, 100, BattleManager.instance.groundMask);
 
         Vector3 dashTarget = info.point;
 
