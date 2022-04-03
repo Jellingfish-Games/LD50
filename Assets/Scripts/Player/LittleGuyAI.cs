@@ -41,6 +41,9 @@ public class LittleGuyAI : MonoBehaviour
     private NavMeshPath currentPath;
     private Vector3[] currentPathCorners;
 
+    private float movementDirectionMultiplier = 1;
+    float safety = 1;
+
     private Coroutine aiRoutine;
 
     private BossCharacter opponent;
@@ -92,31 +95,66 @@ public class LittleGuyAI : MonoBehaviour
         float dodgeDirectionInfluence = 0;
         BossCharacter.BossState bossState = opponent.state;
 
+        safety += Time.deltaTime * (1-aggressiveness + cautiousness) * 4;
+
+        Debug.Log(safety);
+
         float diceRoll = Random.Range(0.0f, 1.0f);
 
-        float desiredRoamDistance = 3 - 2 * aggressiveness + cautiousness;
+        float desiredRoamDistance = 5 - 2 * aggressiveness + cautiousness - safety;
 
         if (navMeshAgent.SamplePathPosition(NavMesh.GetAreaFromName("Danger"), cautiousness, out NavMeshHit navMeshHitInfo))
         {
             dodgeDirectionFromNavMesh = transform.position - navMeshHitInfo.position;
             dodgeDirectionFromNavMesh.y = 0;
             dodgeDirectionInfluence = 1;
+            safety = 0;
         }
         else if(bossState == BossCharacter.BossState.Windup && dodgeDirectionInfluence * diceRoll * reactionSpeed > 0.25f)
         {
+            safety = 0;
+            Debug.Log("Dodge roll!");
             yield return DodgeRoll(dodgeDirectionFromNavMesh.normalized);
         } else
         {
-            bool wantsToMove = diceRoll > 0.5f;
+            if (distanceToBoss < 1)
+            {
+                yield return MeleeAttack();
+            } else
+            {
+                if (aiState == LittleGuyState.Staggered || aiState == LittleGuyState.Standing)
+                {
+                    diceRoll += 0.25f;
+                }
 
-            if (wantsToMove)
-            {
-                yield return MoveToDirection((directionToBoss * (distanceToBoss - desiredRoamDistance)).normalized);
-            }
-            else
-            {
-                // Don't do anything.
-                yield return reactionSpeed;
+                bool wantsToMove = diceRoll + 0.15f * aggressiveness > 0.25f;
+
+                if (wantsToMove)
+                {
+                    aiState = LittleGuyState.Roaming;
+
+                    float newMoveDirection = (Random.Range(0, 2) - 1);
+
+                    if (diceRoll < 0.4f)
+                    {
+                        movementDirectionMultiplier = newMoveDirection;
+                    }
+
+                    Vector3 moveDirection = (directionToBoss).normalized * -desiredRoamDistance;
+                    moveDirection = Quaternion.Euler(0, movementDirectionMultiplier * Random.Range(10, 45), 0) * moveDirection;
+                    Debug.DrawRay(opponent.transform.position + Vector3.up, opponent.transform.position + moveDirection, Color.red, 2);
+
+                    yield return MoveToPosition(opponent.transform.position + moveDirection);
+                }
+                else
+                {
+                    // Don't do anything.
+                    navMeshAgent.isStopped = true;
+
+                    aiState = LittleGuyState.Standing;
+
+                    yield return new WaitForSeconds(1 + diceRoll - reactionSpeed);
+                }
             }
         }
     }
@@ -124,6 +162,11 @@ public class LittleGuyAI : MonoBehaviour
     private IEnumerator DodgeRoll(Vector3 dodgeDirection)
     {
         yield return MoveToDirection(dodgeDirection * 3);
+    }
+
+    private IEnumerator MeleeAttack()
+    {
+        yield return null;
     }
 
     IEnumerator DefaultLoop()
@@ -150,6 +193,8 @@ public class LittleGuyAI : MonoBehaviour
 
         NavMeshHit hit;
 
+        navMeshAgent.isStopped = false;
+
         NavMesh.SamplePosition(target, out hit, 10000f, NavMesh.AllAreas);
 
         navMeshAgent.CalculatePath(hit.position, currentPath);
@@ -167,6 +212,8 @@ public class LittleGuyAI : MonoBehaviour
         animationState = LittleGuyAnimationState.Hurt;
 
         aiState = LittleGuyState.Staggered;
+
+        safety = (information.BattleStats.Aggressiveness + information.BattleStats.Awareness) / 2;
 
         animator.Play("Guy_Hurt", -1, 0f);
 	}

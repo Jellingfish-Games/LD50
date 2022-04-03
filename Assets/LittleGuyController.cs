@@ -11,11 +11,15 @@ public class LittleGuyController : MonoBehaviour
     public LittleGuyAI ai;
     Animator animator;
 
+    public LittleGuyInformation info => information;
+
     // Start is called before the first frame update
     void Start()
     {
         information = GetComponent<LittleGuyInformation>();
         animator = GetComponentInChildren<Animator>();
+
+        BattleManager.instance.SpawnLittleGuyHealthBar(this);
 
         SetColors();
         SetHat();

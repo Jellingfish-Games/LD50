@@ -39,6 +39,9 @@ public class BattleManager : MonoBehaviour
 
     public BossCharacter player;
 
+    public LittleGuyHealthBar littleGuyHealthBarPrefab;
+    public Transform littleGuyHealthBarRoot;
+
     public CanvasGroup attackSelectionGroup;
     public Transform attackSelectionGridRoot;
 
@@ -62,6 +65,12 @@ public class BattleManager : MonoBehaviour
     private void Init()
 	{
         SwitchToNewState(BattleState.Intro);
+    }
+
+    public void SpawnLittleGuyHealthBar(LittleGuyController controller)
+    {
+        LittleGuyHealthBar healthbar = Instantiate(littleGuyHealthBarPrefab, littleGuyHealthBarRoot);
+        healthbar.guyRef = controller;
     }
 
     public void ConfirmAttackSelection()

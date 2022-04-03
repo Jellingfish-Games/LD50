@@ -978,7 +978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 356935610172803182, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 356935610172803182, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -994,7 +994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 854997851211562604, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1693713549776154958, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
       propertyPath: m_Targets.Array.data[0].target
@@ -1610,7 +1610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2554488905366896316, guid: 365727785da3ca049b2236e26753b303, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5438284386008965492, guid: 365727785da3ca049b2236e26753b303, type: 3}
       propertyPath: m_Enabled
