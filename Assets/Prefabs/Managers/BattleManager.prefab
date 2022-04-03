@@ -29,6 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4686779943490221280}
+  - {fileID: 8565504913514769448}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,9 +51,41 @@ MonoBehaviour:
   littleGuyHealthBarRoot: {fileID: 4877902742331052755}
   attackSelectionGroup: {fileID: 383536313429202183}
   attackSelectionGridRoot: {fileID: 1776438174343721891}
+  littleGuyPrefab: {fileID: 44991230089814171, guid: 365727785da3ca049b2236e26753b303, type: 3}
+  littleGuySpawnPosition: {fileID: 8565504913514769448}
   attackElement: {fileID: -5959111831803982787, guid: 6ad57a424bef9bc49ae4276ff969d3b9, type: 3}
   primaryAttackSlot: {fileID: 4954490911734446673}
   secondaryAttackSlot: {fileID: 5653209646161182630}
+--- !u!1 &8211749889757022641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8565504913514769448}
+  m_Layer: 0
+  m_Name: GuySpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8565504913514769448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8211749889757022641}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 6.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4608493246956954704}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3939272386788293172
 PrefabInstance:
   m_ObjectHideFlags: 0
