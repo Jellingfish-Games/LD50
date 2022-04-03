@@ -88,9 +88,9 @@ public class LittleGuyAI : MonoBehaviour
         float distanceToBoss = directionToBoss.magnitude;
         float percentageHP = information.BattleStats.HP / information.BattleStats.MaxHP;
         float reactionSpeed = information.BattleStats.Awareness;
-        float aggressiveness = information.BattleStats.Aggressiveness;
         float bossPercentageHP = opponent.hp / opponent.maxHP;
-        float cautiousness = 1;
+        float aggressiveness = information.BattleStats.Aggressiveness * 0.75f + 0.25f * (1- bossPercentageHP);
+        float cautiousness = (1-percentageHP) * 0.5f + 0.5f;
         Vector3 dodgeDirectionFromNavMesh = Vector3.zero;
         float dodgeDirectionInfluence = 0;
         BossCharacter.BossState bossState = opponent.state;
@@ -109,16 +109,21 @@ public class LittleGuyAI : MonoBehaviour
             dodgeDirectionFromNavMesh.y = 0;
             dodgeDirectionInfluence = 1;
             safety = 0;
-        }
-        else if(bossState == BossCharacter.BossState.Windup && dodgeDirectionInfluence * diceRoll * reactionSpeed > 0.25f)
+        } else if (aiState == LittleGuyState.Attacking && diceRoll < 0.1f)
         {
-            safety = 0;
+            dodgeDirectionInfluence = 0.5f * (1-aggressiveness);
+            dodgeDirectionFromNavMesh = Quaternion.Euler(0, Random.Range(0, 360), 0) * Vector3.forward;
+        }
+
+        if(dodgeDirectionInfluence > 0 && dodgeDirectionInfluence * diceRoll * reactionSpeed > 0.25f)
+        {
             Debug.Log("Dodge roll!");
             yield return DodgeRoll(dodgeDirectionFromNavMesh.normalized);
         } else
         {
-            if (distanceToBoss < 1)
+            if (distanceToBoss < 1 && diceRoll + aggressiveness * 0.5f > 1)
             {
+                Debug.Log("MeleeAttack");
                 yield return MeleeAttack();
             } else
             {
@@ -166,6 +171,7 @@ public class LittleGuyAI : MonoBehaviour
 
     private IEnumerator MeleeAttack()
     {
+        aiState = LittleGuyState.Attacking;
         yield return null;
     }
 
