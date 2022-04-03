@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Dash
   description: Evil dash attack. Great for covering ground.
-  icon: {fileID: -8457164632095605878, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
+  icon: {fileID: 7886250173734430551, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
   sweetspotDamage: 0
   sourspotDamage: 0
   animationClips: []
   windupTime: 0.2
   backswingTime: 0.1
   attackHitboxes: {fileID: 5958819487396663072, guid: b5562714217e10747b1ad3c3c16170db, type: 3}
+  warningHitboxes: {fileID: 0}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BossAttackHitboxList : MonoBehaviour
@@ -31,11 +32,11 @@ public class BossAttackHitboxList : MonoBehaviour
 		}
 	}
 
-	public void SetCurrentHitbox(int index)
+	public void SetCurrentHitbox(params int[] index)
 	{
         for (int i = 0; i < attackHitboxesInOrder.Count; i++)
 		{
-            if (i == index)
+            if (index.Contains(i))
 			{
                 attackHitboxesInOrder[i].SetActive(true);
 			}
