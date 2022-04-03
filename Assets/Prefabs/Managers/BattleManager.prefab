@@ -123,6 +123,7 @@ MonoBehaviour:
   attackReplacementGroup: {fileID: 4243034971237979014}
   victoryGroup: {fileID: 1664698234648989145}
   attackDisplayGroup: {fileID: 5749552165696448206}
+  youDiedMenu: {fileID: 4409507537019465338}
   attackSelectionConfirmButton: {fileID: 7494227674462439762}
   attackSelectionConfirmButtonText: {fileID: 6705201173714306074}
   attackSelectionGridRoot: {fileID: 1776438174343721891}
@@ -723,6 +724,17 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 2427767184382785517, guid: 8712139d12a10764297ee69b89214e89, type: 3}
   m_PrefabInstance: {fileID: 3939272386788293172}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4409507537019465338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 836170773171704910, guid: 8712139d12a10764297ee69b89214e89, type: 3}
+  m_PrefabInstance: {fileID: 3939272386788293172}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbeb691047568e440aa7adc6e1a91b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!225 &383536313429202183 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 3745169030125481779, guid: 8712139d12a10764297ee69b89214e89, type: 3}

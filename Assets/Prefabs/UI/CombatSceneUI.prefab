@@ -1565,6 +1565,7 @@ GameObject:
   - component: {fileID: 2967464119378757375}
   - component: {fileID: 2427767184382785517}
   - component: {fileID: 8352091991860300246}
+  - component: {fileID: 836170773171704910}
   m_Layer: 5
   m_Name: TheyDiedYouDied
   m_TagString: Untagged
@@ -1612,6 +1613,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8149250566515044535}
   m_CullTransparentMesh: 1
+--- !u!114 &836170773171704910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149250566515044535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbeb691047568e440aa7adc6e1a91b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  youDiedTransform: {fileID: 7647520379880259303}
+  enemyDiedTransform: {fileID: 1792762193923172268}
 --- !u!1 &8599111104228006226
 GameObject:
   m_ObjectHideFlags: 0
