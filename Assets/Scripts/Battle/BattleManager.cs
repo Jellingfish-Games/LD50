@@ -56,8 +56,6 @@ public class BattleManager : MonoBehaviour
     public BossAttackUIElement primaryAttackSlot;
     public BossAttackUIElement secondaryAttackSlot;
 
-    public CinemachineTargetGroup targetGroup;
-
     private int numLittleGuysKilled;
 
     private List<LittleGuyController> littleGuys = new List<LittleGuyController>();
@@ -82,13 +80,13 @@ public class BattleManager : MonoBehaviour
         LittleGuyHealthBar healthbar = Instantiate(littleGuyHealthBarPrefab, littleGuyHealthBarRoot);
         healthbar.guyRef = controller;
         littleGuys.Add(controller);
-        targetGroup.AddMember(controller.transform, 1, 1);
+        CameraManager.i.targetGroup.AddMember(controller.transform, .15f, 1);
     }
 
     public void LittleGuyDie(LittleGuyController controller)
     {
         littleGuys.Remove(controller);
-        targetGroup.RemoveMember(controller.transform);
+        CameraManager.i.targetGroup.RemoveMember(controller.transform);
         numLittleGuysKilled++;
     }
 
