@@ -47,6 +47,9 @@ public class LittleGuyController : MonoBehaviour
         animator.Play("Guy_Run");
         yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition2.position, 3).WaitForCompletion();
         animator.Play("Guy_Intro");
+
+        BattleManager.instance.nameDisplay.StartDisplayAnimation(info);
+
         yield return new WaitForSeconds(3f);
         //TITLE NAME OF GUY
         BattleManager.instance.LittleGuyQuote(this, information.enterQuotes);

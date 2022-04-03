@@ -50,6 +50,8 @@ public class BattleManager : MonoBehaviour
     public CanvasGroup attackSelectionGroup;
     public Transform attackSelectionGridRoot;
 
+    public PlayerNameDisplay nameDisplay;
+
     private List<BossAttackUIElement> targets = new List<BossAttackUIElement>();
 
     public LittleGuyController littleGuyPrefab;
