@@ -337,7 +337,18 @@ public class BattleManager : MonoBehaviour
             sum += possibleQuotes.quotes[i].relativeChance;
 		}
 
-        string toPrint = string.Format(possibleQuotes.quotes[quoteChoiceIndex].quote, controller.info.Name, controller.info.FullName, "Warrior", "BOSSMAN", "foul beast");
+        string[] insults =
+        {
+            "foul beast",
+            "rotten thing",
+            "lich",
+            "monster",
+            "evil creature",
+        };
+
+        string insult = insults[Random.Range(0, insults.Length)];
+
+        string toPrint = string.Format(possibleQuotes.quotes[quoteChoiceIndex].quote, controller.info.Name, controller.info.FullName, controller.info.Class.ToString(), "BOSSMAN", insult);
 
         bubble.AttachToPlayer(controller, toPrint);
 	}

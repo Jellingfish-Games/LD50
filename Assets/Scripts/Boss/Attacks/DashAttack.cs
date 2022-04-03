@@ -18,13 +18,18 @@ public class DashAttack : BossAttack
         Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info, 100, BattleManager.instance.groundMask);
         Vector3 dashTarget = info.point;
         dashTarget.y = 0;
+
+        hitboxList.setDirection = dashTarget - self.transform.position;
         hitboxList.SetCurrentHitbox(1);
 
         self.state = BossCharacter.BossState.Windup;
         yield return self.WaitForAnim("Boss_Windup");
         yield return new WaitForSeconds(windupTime);
 
+
         self.state = BossCharacter.BossState.Attack;
+
+        hitboxList.setDirection = Vector3.zero;
         hitboxList.SetCurrentHitbox(0);
         Vector3 delta = dashTarget - self.transform.position;
         delta.y = 0;

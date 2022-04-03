@@ -9,6 +9,7 @@ public class BossAttackHitboxList : MonoBehaviour
 
     // Whether to rotate the hitbox stack in the direction of movement, or just horizontal flip
     public bool enableDirectionality;
+	public Vector3 setDirection;
 
 	private BossCharacter character;
 
@@ -24,7 +25,15 @@ public class BossAttackHitboxList : MonoBehaviour
 	{
 		if (enableDirectionality)
 		{
-			transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-character.velocity.z, character.velocity.x) * Mathf.Rad2Deg, Vector3.up);
+			if (setDirection != Vector3.zero)
+			{
+				transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-setDirection.z, setDirection.x) * Mathf.Rad2Deg, Vector3.up);
+
+			}
+			else
+			{
+				transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-character.velocity.z, character.velocity.x) * Mathf.Rad2Deg, Vector3.up);
+			}
 		}
 		else
 		{

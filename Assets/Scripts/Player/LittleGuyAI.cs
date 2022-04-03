@@ -56,6 +56,8 @@ public class LittleGuyAI : MonoBehaviour
     public Transform throwTransform;
 
     public bool flip => spriteRenderer.flipX;
+    private bool danger;
+    private Vector3 dangerPoint;
 
     void Awake()
     {
@@ -110,12 +112,15 @@ public class LittleGuyAI : MonoBehaviour
 
         float desiredRoamDistance = 5 - 2 * aggressiveness + cautiousness - safety;
 
-        if (navMeshAgent.SamplePathPosition(NavMesh.GetAreaFromName("Danger"), cautiousness, out NavMeshHit navMeshHitInfo))
+        if (danger)
         {
-            dodgeDirectionFromNavMesh = transform.position - navMeshHitInfo.position;
+            dodgeDirectionFromNavMesh = transform.position - dangerPoint;
             dodgeDirectionFromNavMesh.y = 0;
             dodgeDirectionInfluence = 1;
             safety = 0;
+            danger = false;
+
+            Debug.Log("DANGER");
         }
         else if (aiState == LittleGuyState.Attacking && diceRoll < 0.05f)
         {
@@ -334,7 +339,9 @@ public class LittleGuyAI : MonoBehaviour
 
         BombObject bomb = Instantiate(bombObject, throwTransform.position, Quaternion.identity);
 
-        float bombSpeed = targetDelta.magnitude * 2f * Random.Range(0.9f, 1.1f);
+        float bombSpeed = targetDelta.magnitude * 1.5f * Random.Range(0.7f, 1.2f);
+
+        bombSpeed = Mathf.Clamp(bombSpeed, 1f, 6f);
 
         bomb.velocity = targetDelta.normalized * bombSpeed;
         bomb.info = information;
@@ -397,6 +404,19 @@ public class LittleGuyAI : MonoBehaviour
 
         animator.Play("Guy_Hurt", -1, 0f);
     }
+
+    public void Warn(Vector3 where)
+	{
+        danger = true;
+
+        dangerPoint = where;
+
+        float diceRoll = Random.Range(0f, 1f);
+        if (information.BattleStats.DodgeSkill * 0.3f + diceRoll > 0.8f)
+		{
+            StartAIRoutine();
+		}
+	}
 
     public void Die()
     {
