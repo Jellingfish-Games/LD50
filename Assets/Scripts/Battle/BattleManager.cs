@@ -188,6 +188,9 @@ public class BattleManager : MonoBehaviour
             case BattleState.Battle:
                 instance.StartCoroutine(instance.SpawnNewLittleGuys());
                 break;
+            case BattleState.Cutscene:
+                CameraManager.i.Cutscene();
+                break;
         }
     }
 
