@@ -15,8 +15,8 @@ public static class CanvasGroupExtensions
 
             while (group.alpha > 0)
             {
-                group.alpha -= Time.deltaTime / duration;
-                yield return null;
+                group.alpha -= Time.unscaledDeltaTime / duration;
+                yield return new WaitForSecondsRealtime(0.01f);
             }
         }
         group.alpha = 0;
@@ -28,8 +28,8 @@ public static class CanvasGroupExtensions
 
             while (group.alpha < 1)
             {
-                group.alpha += Time.deltaTime / duration;
-                yield return null;
+                group.alpha += Time.unscaledDeltaTime / duration;
+                yield return new WaitForSecondsRealtime(0.01f);
             }
         }
 

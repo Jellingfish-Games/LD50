@@ -48,13 +48,17 @@ public class BossAttackUIElement : MonoBehaviour, IPointerEnterHandler, IPointer
             image.sprite = defaultSprite;
         }
 
-        button.onClick.RemoveAllListeners();
-        if (isSlotOnBottom)
+        if (button != null)
         {
-            button.onClick.AddListener(() => BattleManager.RemoveChosenAttack(attack));
-        } else
-        {
-            button.onClick.AddListener(() => BattleManager.ToggleChosenAttack(attack));
+            button.onClick.RemoveAllListeners();
+            if (isSlotOnBottom)
+            {
+                button.onClick.AddListener(() => BattleManager.RemoveChosenAttack(attack));
+            }
+            else
+            {
+                button.onClick.AddListener(() => BattleManager.ToggleChosenAttack(attack));
+            }
         }
     }
 
