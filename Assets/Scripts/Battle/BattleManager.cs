@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -42,6 +43,9 @@ public class BattleManager : MonoBehaviour
 
     public LittleGuyHealthBar littleGuyHealthBarPrefab;
     public Transform littleGuyHealthBarRoot;
+
+    public LittleGuySpeechBubble speechBubblePrefab;
+    public Transform littleGuyQuoteRoot;
 
     public CanvasGroup attackSelectionGroup;
     public Transform attackSelectionGridRoot;
@@ -207,4 +211,30 @@ public class BattleManager : MonoBehaviour
                 // etc
         }
     }
+
+    public void LittleGuyQuote(LittleGuyController controller, LittleGuyQuotes possibleQuotes)
+	{
+        LittleGuySpeechBubble bubble = Instantiate(speechBubblePrefab, littleGuyQuoteRoot);
+
+        float max = possibleQuotes.quotes.Sum(q => q.relativeChance);
+
+        float rand = Random.Range(0, max);
+
+        float sum = 0f;
+
+        int quoteChoiceIndex = 0;
+
+        for (int i = 0; i < max; i++)
+		{
+            if (sum + possibleQuotes.quotes[i].relativeChance > rand)
+			{
+                quoteChoiceIndex = i;
+                break;
+			}
+
+            sum += possibleQuotes.quotes[i].relativeChance;
+		}
+
+        bubble.AttachToPlayer(controller, possibleQuotes.quotes[quoteChoiceIndex].quote);
+	}
 }

@@ -74,6 +74,9 @@ public class LittleGuyInformation : MonoBehaviour
 	public LittleGuyClass Class { get; set; }
 	public LittleGuyBattleStats BattleStats { get; set; }
 	public LittleGuyMetaStats MetaStats { get; set; }
+	public LittleGuyQuotes enterQuotes;
+	public LittleGuyQuotes hurtQuotes;
+	public LittleGuyQuotes victoryQuotes;
 
 	private void Awake()
 	{
