@@ -13,27 +13,29 @@ MonoBehaviour:
   m_Name: EnterQuotes
   m_EditorClassIdentifier: 
   quotes:
-  - quote: World record pace... let's not mess this up
+  - quote: World record pace... let's not mess this up.
     relativeChance: 0.2
-  - quote: I have come to avenge my father, you {4}
+  - quote: I have come to avenge my father, you {4}.
     relativeChance: 1
   - quote: I have come to slay {3}.
     relativeChance: 1
   - quote: You are dead meat.
     relativeChance: 1
-  - quote: Your reign of terror is over, {4}
+  - quote: Your reign of terror is over, {4}.
     relativeChance: 1
-  - quote: Die, {4}
+  - quote: Die, {4}.
     relativeChance: 1
-  - quote: What's up guys, I'm {0}, welcome to the tutorial for beating {3}
+  - quote: What's up guys, I'm {0}, welcome to the tutorial for beating {3}.
     relativeChance: 0.2
-  - quote: I'm just a silly little guy
+  - quote: I'm just a silly little guy.
     relativeChance: 1
-  - quote: I am {1}, and I have come to slay you, {4}
+  - quote: I am {1}, and I have come to slay you, {4}.
     relativeChance: 1
   - quote: This is the one.
     relativeChance: 0.5
   - quote: Your days are numbered.
     relativeChance: 1
-  - quote: AAAAAAAAAAAAARGH
+  - quote: AAAAAAAAAAAAARGH.
     relativeChance: 0.5
+  - quote: Man your boss theme song is freaking awesome.
+    relativeChance: 0.2

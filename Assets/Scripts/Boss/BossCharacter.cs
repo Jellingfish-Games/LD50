@@ -6,10 +6,10 @@ using UnityEngine.Animations;
 
 public class BossCharacter : MonoBehaviour
 {
-    public enum BossState { Moving, Windup, Attack, Backswing }
+    public enum BossState { Idle,Moving, Windup, Attack, Backswing }
 
 
-    public BossState state = BossState.Moving;
+    public BossState state = BossState.Idle;
     public BossPropertyData baseProperties;
 
     public Animator animator;
@@ -58,12 +58,17 @@ public class BossCharacter : MonoBehaviour
         RotConst.rotationAtRest = new Vector3(45, 0, 0);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
-        UpdateDirection();
     }
-    
+
+    private void Update()
+    {
+        UpdateDirection();
+        UpdateAnimations();
+    }
+
     private void UpdateDirection()
 	{
         if (velocity.x > 0)
@@ -108,10 +113,18 @@ public class BossCharacter : MonoBehaviour
         }
         else
 		{
-            velocity *= 0.95f;
+            velocity *= 0.999f;
 		}
 
         rb.velocity = velocity;
+
+        if (velocity.magnitude < .1f)
+        {
+            state = BossState.Idle;
+        } else
+        {
+            state = BossState.Moving;
+        }
     }
 
     public void ApplyPropertyModifier(BossProperties addedProps)
@@ -162,6 +175,25 @@ public class BossCharacter : MonoBehaviour
             {
                 StartCoroutine(secondaryAttack.PerformAttack(this));
             }
+        }
+    }
+
+    public void UpdateAnimations()
+    {
+        switch (state)
+        {
+            case BossState.Moving:
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Boss_Run"))
+                {
+                    animator.Play("Boss_Run");
+                }
+                break;
+            default:
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Boss_Idle"))
+                {
+                    animator.Play("Boss_Idle");
+                }
+                break;
         }
     }
 }

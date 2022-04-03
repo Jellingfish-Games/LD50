@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1538949749}
   - component: {fileID: 6973777158293974616}
   - component: {fileID: 1492781192064473447}
-  - component: {fileID: 742630371208652412}
   m_Layer: 7
   m_Name: BossCharacter
   m_TagString: Untagged
@@ -49,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   baseProperties: {fileID: 11400000, guid: 2e4d2073f26145545802e02d0df56661, type: 2}
-  animator: {fileID: 742630371208652412}
+  animator: {fileID: 100649518882997909}
   primaryAttack: {fileID: 0}
   secondaryAttack: {fileID: 0}
   hp: 0
@@ -84,25 +83,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 2, z: 0.70885235}
   m_Center: {x: 0, y: 1, z: 0.42433378}
---- !u!95 &742630371208652412
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910856540512154446}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7171457645058809051
 GameObject:
   m_ObjectHideFlags: 0

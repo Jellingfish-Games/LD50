@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CombatSceneUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8620403003579702981, guid: 8712139d12a10764297ee69b89214e89, type: 3}
+      propertyPath: m_PixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8712139d12a10764297ee69b89214e89, type: 3}
 --- !u!4 &4686779943490221280 stripped
