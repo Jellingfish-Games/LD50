@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class LittleGuyAI : MonoBehaviour
 {
@@ -185,7 +186,14 @@ public class LittleGuyAI : MonoBehaviour
 
     private IEnumerator EnterArena()
     {
-        yield return MoveToDirection(- transform.forward * 8);
+        //navMeshAgent.enabled = false;
+        //transform.DOMove(BattleManager.instance.littleGuySpawnPosition2, 3);
+        //yield return new WaitForSeconds(4f);
+        //yield return MoveToDirection(-transform.forward * 8);
+        //yield return MoveToDirection(BattleManager.instance.littleGuySpawnPosition2.position);
+        navMeshAgent.enabled = true;
+        yield return null;
+        //yield return MoveToDirection(- transform.forward * 8);
     }
 
     public void RandomizeDestination()

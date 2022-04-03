@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using DG.Tweening;
 
 public class LittleGuyController : MonoBehaviour
 {
@@ -20,12 +21,12 @@ public class LittleGuyController : MonoBehaviour
         information = GetComponent<LittleGuyInformation>();
         animator = GetComponentInChildren<Animator>();
 
-        BattleManager.instance.SpawnLittleGuyHealthBar(this);
+        //BattleManager.instance.SpawnLittleGuyHealthBar(this);
 
         SetColors();
         SetHat();
         SetWeapon();
-        StartAI();
+        //StartAI();
 
         var RotConst = GetComponentInChildren<RotationConstraint>();
         ConstraintSource source = new ConstraintSource();
@@ -34,6 +35,29 @@ public class LittleGuyController : MonoBehaviour
         RotConst.SetSource(0, source);
         RotConst.rotationOffset = Vector3.zero;
         RotConst.rotationAtRest = new Vector3(45, 0, 0);
+
+        //StartCoroutine(EnterCoroutine());
+
+    }
+
+    public IEnumerator EnterCoroutine()
+    {
+        //navMeshAgent.enabled = false;
+        var animator = GetComponentInChildren<Animator>();
+        animator.Play("Guy_Run");
+        yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition2.position, 3).WaitForCompletion();
+        animator.Play("Guy_Intro");
+        yield return new WaitForSeconds(4);
+        //TITLE NAME OF GUY
+        BattleManager.instance.LittleGuyQuote(this, information.enterQuotes);
+        animator.Play("Guy_Run");
+        yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition3.position, 3).WaitForCompletion();
+       
+        //yield return new WaitForSeconds(4f);
+        //yield return MoveToDirection(-transform.forward * 8);
+        //yield return MoveToDirection(BattleManager.instance.littleGuySpawnPosition2.position);
+        StartAI();
+        BattleManager.instance.SpawnLittleGuyHealthBar(this);
     }
 
     public void StartAI()

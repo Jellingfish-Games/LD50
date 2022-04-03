@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2bee01c8af8c84bbf1dfaaef7fda28, type: 3}
+  m_Name: HurtQuotes
+  m_EditorClassIdentifier: 
+  quotes:
+  - quote: This really is the dark souls of boss fights
+    relativeChance: 1
+  - quote: How did that hit?
+    relativeChance: 1
+  - quote: Argh!
+    relativeChance: 1
+  - quote: WHO MADE THESE HITBOXES
+    relativeChance: 0.5
+  - quote: That was not in the wiki...
+    relativeChance: 1
+  - quote: This class needs a buff.
+    relativeChance: 1
+  - quote: The scaling in this game makes NO sense
+    relativeChance: 1

@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -43,6 +44,9 @@ public class BattleManager : MonoBehaviour
     public LittleGuyHealthBar littleGuyHealthBarPrefab;
     public Transform littleGuyHealthBarRoot;
 
+    public LittleGuySpeechBubble speechBubblePrefab;
+    public Transform littleGuyQuoteRoot;
+
     public CanvasGroup attackSelectionGroup;
     public Transform attackSelectionGridRoot;
 
@@ -50,6 +54,8 @@ public class BattleManager : MonoBehaviour
 
     public LittleGuyController littleGuyPrefab;
     public Transform littleGuySpawnPosition;
+    public Transform littleGuySpawnPosition2;
+    public Transform littleGuySpawnPosition3;
 
     public BossAttackUIElement attackElement;
 
@@ -72,7 +78,8 @@ public class BattleManager : MonoBehaviour
 
     private void Init()
 	{
-        SwitchToNewState(BattleState.Battle);
+        //SwitchToNewState(BattleState.Battle);
+        SwitchToNewState(BattleState.Cutscene);
     }
 
     public void SpawnLittleGuyHealthBar(LittleGuyController controller)
@@ -91,21 +98,20 @@ public class BattleManager : MonoBehaviour
     }
 
     // For the "multiplayer" game mode
-    private IEnumerator SpawnNewLittleGuys()
+    public IEnumerator SpawnNewLittleGuys()
     {
         while (player.hp > 0)
         {
-            yield return new WaitForSeconds(Random.Range(1f, 5f));
             if (littleGuys.Count < Mathf.Clamp((Mathf.Pow(numLittleGuysKilled, 0.5f) * 0.1f), 1, 50)) {
                 SpawnLittleGuy();
             }
+            yield return new WaitForSeconds(Random.Range(1f, 5f));
         }
     }
 
-    private void SpawnLittleGuy()
+    public LittleGuyController SpawnLittleGuy()
     {
-        Instantiate(littleGuyPrefab, littleGuySpawnPosition.position, Quaternion.identity);
-        
+        return Instantiate(littleGuyPrefab, littleGuySpawnPosition.position, Quaternion.identity); 
     }
 
     public void ConfirmAttackSelection()
@@ -188,7 +194,7 @@ public class BattleManager : MonoBehaviour
                 instance.secondaryAttackSlot.SetButtonActive(true);
                 break;
             case BattleState.Battle:
-                instance.StartCoroutine(instance.SpawnNewLittleGuys());
+                //instance.StartCoroutine(instance.SpawnNewLittleGuys());
                 break;
             case BattleState.Cutscene:
                 CameraManager.i.Cutscene();
@@ -211,4 +217,30 @@ public class BattleManager : MonoBehaviour
                 // etc
         }
     }
+
+    public void LittleGuyQuote(LittleGuyController controller, LittleGuyQuotes possibleQuotes)
+	{
+        LittleGuySpeechBubble bubble = Instantiate(speechBubblePrefab, littleGuyQuoteRoot);
+
+        float max = possibleQuotes.quotes.Sum(q => q.relativeChance);
+
+        float rand = Random.Range(0, max);
+
+        float sum = 0f;
+
+        int quoteChoiceIndex = 0;
+
+        for (int i = 0; i < max; i++)
+		{
+            if (sum + possibleQuotes.quotes[i].relativeChance > rand)
+			{
+                quoteChoiceIndex = i;
+                break;
+			}
+
+            sum += possibleQuotes.quotes[i].relativeChance;
+		}
+
+        bubble.AttachToPlayer(controller, possibleQuotes.quotes[quoteChoiceIndex].quote);
+	}
 }

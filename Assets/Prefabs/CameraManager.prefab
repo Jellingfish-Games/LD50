@@ -224,7 +224,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraObj: {fileID: 1650537943898140162}
   cameraBrain: {fileID: 6678798016745584484}
+  vc: {fileID: 2880361143854241215}
   targetGroup: {fileID: 1693713549776154958}
+  doorLookAt: {fileID: 6769678886675291139}
+  doorFollow: {fileID: 4910361599199959384}
 --- !u!1 &6678798016745584484
 GameObject:
   m_ObjectHideFlags: 0
