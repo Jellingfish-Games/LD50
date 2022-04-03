@@ -227,6 +227,8 @@ public class BattleManager : MonoBehaviour
                 yield return SwitchToNewStateRoutine(BattleState.AttackSelection);
                 break;
             case BattleState.AttackSelection:
+                BattleManager.instance.player.RestrictControls();
+                BattleManager.instance.player.LockInPlace();
                 yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
                 instance.targets.Clear();
                 foreach (var attackElem in instance.attacks.attacks)

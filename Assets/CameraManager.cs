@@ -43,5 +43,6 @@ public class CameraManager : MonoBehaviour
         BattleManager.instance.player.UnlockPlace();
         vc.LookAt = targetGroup.transform;
         vc.Follow = targetGroup.transform;
+        BattleManager.SwitchToNewState(BattleManager.BattleState.Battle);
     }
 }
