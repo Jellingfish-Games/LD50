@@ -83,7 +83,7 @@ public class BattleManager : MonoBehaviour
     private void Init()
 	{
         //SwitchToNewState(BattleState.Battle);
-        SwitchToNewState(BattleState.Cutscene);
+        SwitchToNewState(BattleState.AttackSelection);
     }
 
     public void SpawnLittleGuyHealthBar(LittleGuyController controller)
@@ -127,7 +127,7 @@ public class BattleManager : MonoBehaviour
         {
             player.ReplaceAttackInSlot(primaryAttackSlot.attack, false);
             player.ReplaceAttackInSlot(secondaryAttackSlot.attack, true);
-            SwitchToNewState(BattleState.Battle);
+            SwitchToNewState(BattleState.Cutscene);
         }
     }
 
