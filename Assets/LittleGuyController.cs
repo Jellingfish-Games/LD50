@@ -45,7 +45,7 @@ public class LittleGuyController : MonoBehaviour
         //navMeshAgent.enabled = false;
         var animator = GetComponentInChildren<Animator>();
         animator.Play("Guy_Run");
-        yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition2.position, 3).WaitForCompletion();
+        yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition2.position, 3).SetEase(Ease.Linear).WaitForCompletion();
         animator.Play("Guy_Intro");
 
         BattleManager.instance.nameDisplay.StartDisplayAnimation(info);
@@ -53,9 +53,11 @@ public class LittleGuyController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         //TITLE NAME OF GUY
         BattleManager.instance.LittleGuyQuote(this, information.enterQuotes);
+        yield return new WaitForSeconds(3f);
         animator.Play("Guy_Run");
-        yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition3.position, 3).WaitForCompletion();
-       
+        yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition3.position, 2).SetEase(Ease.Linear).WaitForCompletion();
+        animator.Play("Guy_Idle");
+        yield return new WaitForSeconds(.5f);
         //yield return new WaitForSeconds(4f);
         //yield return MoveToDirection(-transform.forward * 8);
         //yield return MoveToDirection(BattleManager.instance.littleGuySpawnPosition2.position);

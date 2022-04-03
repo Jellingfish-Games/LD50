@@ -48,10 +48,10 @@ public class LittleGuySpeechBubble : MonoBehaviour
 		{
 			speechText.text += chars[i];
 
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSeconds(0.035f);
 		}
 
-		yield return new WaitForSeconds(5f);
+		yield return new WaitForSeconds(3f);
 
 		rect.DOScale(0f, 0.3f);
 
