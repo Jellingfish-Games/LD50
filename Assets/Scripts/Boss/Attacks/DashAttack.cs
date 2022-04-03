@@ -9,7 +9,7 @@ public class DashAttack : BossAttack
     public override IEnumerator PerformAttack(BossCharacter self)
     {
         GameObject attackHitboxes = Instantiate(this.attackHitboxes, self.transform);
-        AttackHitboxList hitboxList = attackHitboxes.GetComponent<AttackHitboxList>();
+        BossAttackHitboxList hitboxList = attackHitboxes.GetComponent<BossAttackHitboxList>();
 
         self.RestrictControls();
         self.LockInPlace();
@@ -23,7 +23,7 @@ public class DashAttack : BossAttack
 
         self.state = BossCharacter.BossState.Attack;
 
-        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info);
+        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info, 100, BattleManager.instance.groundMask);
 
         Vector3 dashTarget = info.point;
 

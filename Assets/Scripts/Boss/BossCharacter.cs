@@ -196,4 +196,13 @@ public class BossCharacter : MonoBehaviour
                 break;
         }
     }
+
+    public void TakeDamage(float damage)
+	{
+        // TODO: Animation
+
+        hp -= damage;
+
+        // TODO: check for death
+	}
 }

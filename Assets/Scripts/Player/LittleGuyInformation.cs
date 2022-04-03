@@ -20,6 +20,7 @@ public class LittleGuyBattleStats
 {
 	public float MaxHP { get; set; }
 	public float HP { get; set; }
+	public float Damage { get; set; }
 	public float HealingPerSecond { get; set; }
 	public float Aggressiveness { get; set; } // 0.0 - 1.0
 	public float Awareness { get; set; } // 0.0 - 1.0
@@ -215,7 +216,8 @@ public class LittleGuyInformation : MonoBehaviour
 			Aggressiveness = Random.Range(0f, 1f),
 			Awareness = Random.Range(0f, 1f),
 			DodgeSkill = Random.Range(0f, 1f),
-			PotionDrinkSpeedScale = Random.Range(1f, 1.1f)
+			PotionDrinkSpeedScale = Random.Range(1f, 1.1f),
+			Damage = Random.Range(50f, 80f)
 		};
 
 		BattleStats.HP = BattleStats.MaxHP;

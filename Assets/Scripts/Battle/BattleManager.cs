@@ -39,6 +39,8 @@ public class BattleManager : MonoBehaviour
 
     public AllBossAttacks attacks;
 
+    public LayerMask groundMask;
+
     public BossCharacter player;
 
     public LittleGuyHealthBar littleGuyHealthBarPrefab;
