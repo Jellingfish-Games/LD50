@@ -97,8 +97,6 @@ public class LittleGuyAI : MonoBehaviour
 
         safety += Time.deltaTime * (1-aggressiveness + cautiousness) * 4;
 
-        Debug.Log(safety);
-
         float diceRoll = Random.Range(0.0f, 1.0f);
 
         float desiredRoamDistance = 5 - 2 * aggressiveness + cautiousness - safety;
