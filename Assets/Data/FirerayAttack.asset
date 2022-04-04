@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5ba43e4eb5cebf40beba54f83e7900e, type: 3}
   m_Name: FirerayAttack
   m_EditorClassIdentifier: 
-  attackName: Cascade of despair
-  description: Shoots multiple pillars of flames in front of you.
-  icon: {fileID: -3901238620508100055, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
+  attackName: Pillars of despair
+  description: Summon multiple pillars of flames in front of you.
+  icon: {fileID: -1103268236482425516, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
   sweetspotDamage: 0
   sourspotDamage: 0
   animationClips: []

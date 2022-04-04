@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireballAttack2
   m_EditorClassIdentifier: 
   attackName: Demonic Barrage
-  description: oui
+  description: Shoots a slash of fire.
   icon: {fileID: 246929164632983071, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
   sweetspotDamage: 0
   sourspotDamage: 0

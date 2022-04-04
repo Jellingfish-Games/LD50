@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86100eb751053834a8a95c7ff7d74079, type: 3}
   m_Name: FireballAttack
   m_EditorClassIdentifier: 
-  attackName: Great Fireball
-  description: Big.
+  attackName: Great Flameball
+  description: Shoot a powerful ball of flames in front of you.
   icon: {fileID: 6274800513853546846, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
   sweetspotDamage: 0
   sourspotDamage: 0
