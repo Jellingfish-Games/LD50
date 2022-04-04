@@ -231,7 +231,7 @@ public class BossCharacter : MonoBehaviour
         //        break;
         //}
 
-        if (state == BossState.Idle)
+        if (state == BossState.Idle && !animator.GetCurrentAnimatorStateInfo(0).IsName("Boss_Hurt"))
         {
             if (velocity.magnitude < .5f)
             {
@@ -254,6 +254,8 @@ public class BossCharacter : MonoBehaviour
     public void TakeDamage(float damage, LittleGuyInformation damageDealer)
     {
         // TODO: Animation
+
+        animator.Play("Boss_Hurt");
 
         if (hp - damage <= 0 && hp > 0)
         {
