@@ -384,10 +384,10 @@ public class LittleGuyAI : MonoBehaviour
 
         var projectile = Instantiate(wizardProjectile, throwTransform.position, Quaternion.identity);
 
-        float projectileSpeed = 6f * Random.Range(0.7f, 1.2f);
+        float projectileSpeed = 4f * Random.Range(0.7f, 1.2f);
 
         projectile.GetComponent<WizardProjectile>().velocity = targetDelta.normalized * projectileSpeed;
-        projectile.transform.localScale = Vector3.one * 4f;
+        projectile.transform.localScale = Vector3.one * 3f;
         projectile.attacker = information;
 
         projectile.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-targetDelta.z, targetDelta.x) * Mathf.Rad2Deg, Vector3.up);
