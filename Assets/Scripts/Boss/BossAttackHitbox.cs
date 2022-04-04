@@ -6,13 +6,24 @@ public class BossAttackHitbox : MonoBehaviour
 {
 	public float damageMultiplier = 1;
 	public float knockBackStrength = 0f;
+
+	public bool playOnHit = false;
+	public SFX soundOnHit;
 	private void OnTriggerEnter(Collider other)
 	{
-		other.gameObject.GetComponent<LittleGuyController>()?.TakeDamage(BattleManager.instance.player.baseProperties.properties.damage * damageMultiplier);
-
-		if (knockBackStrength != 0f)
+		var guy = other.gameObject.GetComponent<LittleGuyController>();
+		
+		if (guy != null)
 		{
-			other.gameObject.GetComponent<LittleGuyController>()?.ai.ApplyKnockback((other.gameObject.transform.position - transform.position).normalized * knockBackStrength);
+			guy.TakeDamage(BattleManager.instance.player.baseProperties.properties.damage * damageMultiplier);
+
+			if (playOnHit)
+				soundOnHit.Play();
+
+			if (knockBackStrength != 0f)
+			{
+				guy.ai.ApplyKnockback((other.gameObject.transform.position - transform.position).normalized * knockBackStrength);
+			}
 		}
 	}
 }

@@ -27,6 +27,7 @@ public class SwirlAttack : BossAttack
         self.UpdateDirection(target.x < self.transform.position.x);
 
         self.state = BossCharacter.BossState.Windup;
+
         yield return self.WaitForAnim("Boss_Cast");
         yield return new WaitForSeconds(windupTime);
 
@@ -46,6 +47,7 @@ public class SwirlAttack : BossAttack
 
         fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = 3.5f;
 
+        SFX.BossFire.Play();
 
 
         yield return self.WaitForAnim("Boss_Roar");

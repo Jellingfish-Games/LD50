@@ -23,6 +23,7 @@ public class DashAttack : BossAttack
         hitboxList.SetCurrentHitbox(1);
 
         self.state = BossCharacter.BossState.Windup;
+
         yield return self.WaitForAnim("Boss_Windup");
         yield return new WaitForSeconds(windupTime);
 

@@ -152,6 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageMultiplier: 1
   knockBackStrength: 0
+  playOnHit: 1
+  soundOnHit: 38
 --- !u!54 &5157583292529938930
 Rigidbody:
   m_ObjectHideFlags: 0

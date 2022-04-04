@@ -164,6 +164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageMultiplier: 1
   knockBackStrength: 0
+  playOnHit: 1
+  soundOnHit: 38
 --- !u!54 &940524070168643517
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -194,4 +196,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killAfter: 3
   killOnPillarContact: 1
-  limbit: 0.019

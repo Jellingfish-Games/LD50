@@ -265,14 +265,24 @@ public class BossCharacter : MonoBehaviour
         {
             hp -= damage;
             Die(damageDealer);
+
+            SFX.BossDie.Play();
+
             return;
         }
+        else
+		{
+            SFX.BossGetHit.Play();
+		}
 
         hp -= damage;
 
         if (hp < (maxHP / phaseCount * (phaseCount - currentPhase)))
 		{
             PhaseTransition();
+
+            SFX.BossBarrage.Play();
+
             currentPhase += 1;
 		}
     }
