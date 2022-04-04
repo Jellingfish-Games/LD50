@@ -106,6 +106,7 @@ public class LittleGuyController : MonoBehaviour
             BattleManager.instance.LittleGuyDie(this);
         } else
         {
+            if (Random.Range(0f, 1f) < 0.1f) BattleManager.instance.LittleGuyQuote(this, information.hurtQuotes);
             ai.Hurt();
         }
 	}

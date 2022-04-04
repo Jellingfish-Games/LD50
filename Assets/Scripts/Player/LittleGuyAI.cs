@@ -403,6 +403,7 @@ public class LittleGuyAI : MonoBehaviour
         safety = (information.BattleStats.Aggressiveness + information.BattleStats.Awareness) / 2;
 
         animator.Play("Guy_Hurt", -1, 0f);
+
     }
 
     public void Warn(Vector3 where)
@@ -434,6 +435,8 @@ public class LittleGuyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         Destroy(gameObject);
+
+        BattleManager.SwitchToNewState(BattleManager.BattleState.Cutscene);
     }
 
     private void Update()

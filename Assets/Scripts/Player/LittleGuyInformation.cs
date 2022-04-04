@@ -26,6 +26,7 @@ public class LittleGuyBattleStats
 	public float Awareness { get; set; } // 0.0 - 1.0
 	public float DodgeSkill { get; set; } // 0.0 - 1.0
 	public float PotionDrinkSpeedScale { get; set; } // animation speed for potion drinking scaled by this
+	public int Levelups { get; set; }
 }
 
 public class LittleGuyMetaStats
@@ -44,7 +45,31 @@ public class LittleGuyMetaStats
 
 public class LittleGuyInformation : MonoBehaviour
 {
-	public LittleGuyNameMode NameMode;
+	private static List<string> titles = new List<string> {
+			"Dashing",
+			"Vicious",
+			"Vigorous",
+			"Brave",
+			"Invincible",
+			"Fearless",
+			"Boring",
+			"Weak",
+			"Pathetic",
+			"Huge",
+			"Powerful",
+			"Victorious",
+			"Royal",
+			"Heroic",
+			"Blessed",
+			"Unparalleled",
+			"Godlike",
+			"Jelling",
+			"Unbroken",
+			"Roaring",
+			"Fearseome"
+		};
+
+public LittleGuyNameMode NameMode;
 	public string Name { get; set; }
 	public List<string> Titles { get; set; }
 	public string FullName
@@ -158,30 +183,7 @@ public class LittleGuyInformation : MonoBehaviour
 	{
 		Titles = new List<string>();
 
-		List<string> titles =
-		new List<string> {
-			"Dashing",
-			"Vicious",
-			"Vigorous",
-			"Brave",
-			"Invincible",
-			"Fearless",
-			"Boring",
-			"Weak",
-			"Pathetic",
-			"Huge",
-			"Powerful",
-			"Victorious",
-			"Royal",
-			"Heroic",
-			"Blessed",
-			"Unparalleled",
-			"Godlike",
-			"Jelling",
-			"Unbroken",
-			"Roaring",
-			"Fearseome"
-		};
+		List<string> titles = LittleGuyInformation.titles.ToList();
 
 		float lessTitlesPlease = 0f;
 
@@ -237,5 +239,73 @@ public class LittleGuyInformation : MonoBehaviour
 		};
 
 		BattleStats.HP = BattleStats.MaxHP;
+	}
+
+	public void LevelUp()
+	{
+		int statsToIncreaseCount = Random.Range(3, 6);
+
+		List<string> statNames = new List<string>
+		{
+			"MaxHP",
+			"HealingPerSecond",
+			"Awareness",
+			"DodgeSkill",
+			"PotionDrinkSpeedScale",
+			"Damage"
+		};
+
+		for (int i = 0; i < statsToIncreaseCount; i++)
+		{
+			string statName = statNames[Random.Range(0, statNames.Count)];
+			statNames.Remove(statName);
+
+			switch (statName)
+			{
+				case "MaxHP":
+					BattleStats.MaxHP += 50;
+					BattleStats.MaxHP *= Random.Range(1.1f, 1.2f);
+
+					break;
+				case "HealingPerSecond":
+					BattleStats.HealingPerSecond += 1;
+					BattleStats.HealingPerSecond *= Random.Range(1.1f, 1.2f);
+
+					break;
+				case "Awareness":
+					BattleStats.Awareness *= Random.Range(1.1f, 1.2f);
+
+					break;
+				case "DodgeSkill":
+					BattleStats.DodgeSkill *= Random.Range(1.1f, 1.2f);
+
+					break;
+				case "PotionDrinkSpeedScale":
+					BattleStats.PotionDrinkSpeedScale *= Random.Range(1.1f, 1.2f);
+
+					break;
+				case "Damage":
+					BattleStats.Damage *= Random.Range(1.1f, 1.2f);
+					break;
+			}
+		}
+
+		BattleStats.HP = BattleStats.MaxHP;
+		BattleStats.Levelups += 1;
+
+		if (Titles.Count < 8 && Random.Range(0f, 1f) < 0.2f)
+		{
+			while (true)
+			{
+				var title = titles[Random.Range(0, titles.Count)];
+
+				if (Titles.Contains(title))
+				{
+					continue;
+				}
+
+				Titles.Add(title);
+			}
+		}
 	}
 }
