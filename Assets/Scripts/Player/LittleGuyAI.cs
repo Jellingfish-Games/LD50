@@ -339,6 +339,12 @@ public class LittleGuyAI : MonoBehaviour
         yield return null;
     }
 
+    public void Celebrate()
+    {
+        InterruptAIRoutine();
+        animator.Play("Guy_Intro", -1, 0f);
+    }
+
     private IEnumerator WizardAttack(float aggressiveness)
     {
         float diceRoll = Random.Range(0f, 1f);

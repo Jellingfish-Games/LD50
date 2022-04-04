@@ -146,6 +146,9 @@ public class BattleManager : MonoBehaviour
     public void BossDie(LittleGuyInformation killer)
     {
         this.killer = killer;
+        AudioManager.ChangeMusic(null);
+        SFX.BossDie.Play();
+        littleGuys.ForEach(guy => guy.ai.Celebrate());
         SwitchToNewState(BattleState.Loss);
     }
 
@@ -404,6 +407,7 @@ public class BattleManager : MonoBehaviour
                 CameraManager.i.Cutscene();
                 break;
             case BattleState.Victory:
+                SFX.GuyDie.Play();
                 instance.StartCoroutine(instance.victoryGroup.Show(0.5f));
                 yield return new WaitForSeconds(2);
                 yield return instance.victoryGroup.Hide(0.5f);
