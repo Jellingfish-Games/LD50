@@ -34,7 +34,7 @@ public class DashAttack : BossAttack
         Vector3 delta = dashTarget - self.transform.position;
         delta.y = 0;
         delta = delta.normalized * 12f;
-        self.UnlockPlace();
+        if (BattleManager.state == BattleManager.BattleState.Battle) self.UnlockPlace();
         self.velocity = delta;
 
         CameraManager.i.Shake(1, 1);
@@ -45,6 +45,6 @@ public class DashAttack : BossAttack
         Destroy(attackHitboxes);
 
         self.state = BossCharacter.BossState.Idle;
-        self.EnableControls();
+        if (BattleManager.state == BattleManager.BattleState.Battle) self.EnableControls();
     }
 }

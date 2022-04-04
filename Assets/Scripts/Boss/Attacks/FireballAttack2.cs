@@ -55,11 +55,11 @@ public class FireballAttack2 : BossAttack
         yield return self.WaitForAnim("Boss_Shoot_Backswing");
 
         //yield return new WaitForSeconds(backswingTime);
-        self.UnlockPlace();
+        if (BattleManager.state == BattleManager.BattleState.Battle) self.UnlockPlace();
 
         Destroy(attackHitboxes);
 
         self.state = BossCharacter.BossState.Idle;
-        self.EnableControls();
+        if (BattleManager.state == BattleManager.BattleState.Battle) self.EnableControls();
     }
 }
