@@ -54,6 +54,9 @@ public class LittleGuyController : MonoBehaviour
         animator.Play("Guy_Run");
         yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition2.position, 3).SetEase(Ease.Linear).WaitForCompletion();
         animator.Play("Guy_Intro");
+
+        SFX.GuySwordSwing.Play();
+
         yield return new WaitForSeconds(1f);
         BattleManager.instance.nameDisplay.StartDisplayAnimation(info);
 
@@ -84,6 +87,9 @@ public class LittleGuyController : MonoBehaviour
         animator.Play("Guy_Run");
         yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition2.position, 2).SetEase(Ease.Linear).WaitForCompletion();
         animator.Play("Guy_Intro");
+
+        SFX.GuySwordSwing.Play();
+
         yield return new WaitForSeconds(0.8f);
         BattleManager.instance.nameDisplay.StartDisplayAnimation(info);
 
