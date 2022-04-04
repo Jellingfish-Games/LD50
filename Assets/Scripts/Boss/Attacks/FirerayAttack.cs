@@ -26,6 +26,7 @@ public class FirerayAttack : BossAttack
         self.UpdateDirection(target.x < self.transform.position.x);
 
         self.state = BossCharacter.BossState.Windup;
+
         yield return self.WaitForAnim("Boss_Cast");
         yield return new WaitForSeconds(windupTime);
 
@@ -36,6 +37,8 @@ public class FirerayAttack : BossAttack
 
         CameraManager.i.Shake(.5f, 1);
 
+        SFX.BossFireballThrow.Play();
+
         for (int i = 1; i<= 5; i++)
         {
             var fireball = Instantiate(fireBall).GetComponent<Rigidbody>();
@@ -45,6 +48,7 @@ public class FirerayAttack : BossAttack
             fireball.transform.position = self.transform.position + setDirection.normalized * i;
 
             fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .75f;
+
 
             yield return new WaitForSeconds(.02f);
         }
