@@ -89,10 +89,6 @@ public class GlobalManager : MonoBehaviour
 
     private IEnumerator LoadGame()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            SFX.UIStartGame.Play();
-        }
         yield return FadeOut(1);
     }
 
