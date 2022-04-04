@@ -341,6 +341,8 @@ public class LittleGuyAI : MonoBehaviour
 
         float bombSpeed = targetDelta.magnitude * 1.5f * Random.Range(0.7f, 1.2f);
 
+        bomb.transform.DOMoveY(0, 1f);
+
         bombSpeed = Mathf.Clamp(bombSpeed, 1f, 6f);
 
         bomb.velocity = targetDelta.normalized * bombSpeed;
