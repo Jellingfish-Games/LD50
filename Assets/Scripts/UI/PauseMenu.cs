@@ -12,12 +12,12 @@ public class PauseMenu : MonoBehaviour
     public Slider musicVolSlider;
     public Slider soundVolSlider;
 
-    private void OnEnable()
+    private void Start()
     {
         masterMixer.GetFloat("musicVol", out float m);
         masterMixer.GetFloat("soundVol", out float s);
-        musicVolSlider.SetValueWithoutNotify(m);
-        soundVolSlider.SetValueWithoutNotify(s);
+        musicVolSlider.SetValueWithoutNotify(Mathf.Pow(10, m / 20));
+        soundVolSlider.SetValueWithoutNotify(Mathf.Pow(10, s / 20));
     }
 
     public void Pause()

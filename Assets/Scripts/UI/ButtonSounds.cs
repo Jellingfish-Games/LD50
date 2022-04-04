@@ -20,6 +20,7 @@ public class ButtonSounds : MonoBehaviour, IPointerEnterHandler, IPointerClickHa
         {
             if (special)
             {
+                AudioManager.ChangeMusic(BGM.BossIntro, BGM.BossLoop);
                 SFX.UIStartGame.Play();
             } else
             {
