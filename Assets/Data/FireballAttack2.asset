@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a74997bb79d1a4f960000378aade2b, type: 3}
   m_Name: FireballAttack2
   m_EditorClassIdentifier: 
-  attackName: Fireswirl
+  attackName: Demonic Barrage
   description: oui
-  icon: {fileID: -348212611006670517, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
+  icon: {fileID: 246929164632983071, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
   sweetspotDamage: 0
   sourspotDamage: 0
   animationClips: []
-  windupTime: 0
-  backswingTime: 0
-  attackHitboxes: {fileID: 0}
+  windupTime: 0.1
+  backswingTime: 0.1
+  attackHitboxes: {fileID: 5958819487396663072, guid: 96270b6daa9c3bc4da7069df1c933939, type: 3}
   fireBall: {fileID: 7604497453766607442, guid: 5f2989b3cf63cf244a32a4519e163b6b, type: 3}

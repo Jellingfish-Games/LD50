@@ -9,6 +9,9 @@ public class FireballAttack : BossAttack
     public GameObject fireBall;
     public override IEnumerator PerformAttack(BossCharacter self)
     {
+        GameObject attackHitboxes = Instantiate(this.attackHitboxes, self.transform);
+        BossAttackHitboxList hitboxList = attackHitboxes.GetComponent<BossAttackHitboxList>();
+
         self.RestrictControls();
         self.LockInPlace();
 
@@ -17,10 +20,13 @@ public class FireballAttack : BossAttack
         Vector3 target = info.point;
         target.y = 0;
 
+        hitboxList.setDirection = target - self.transform.position;
+        hitboxList.SetCurrentHitbox(0);
+
         self.UpdateDirection(target.x < self.transform.position.x);
 
         self.state = BossCharacter.BossState.Windup;
-        yield return self.WaitForAnim("Boss_Windup");
+        yield return self.WaitForAnim("Boss_Cast");
         yield return new WaitForSeconds(windupTime);
 
         self.state = BossCharacter.BossState.Attack;
@@ -44,7 +50,9 @@ public class FireballAttack : BossAttack
 
         //yield return new WaitForSeconds(backswingTime);
         self.UnlockPlace();
-        //Destroy(attackHitboxes);
+
+        Destroy(attackHitboxes);
+
         self.state = BossCharacter.BossState.Idle;
         self.EnableControls();
     }

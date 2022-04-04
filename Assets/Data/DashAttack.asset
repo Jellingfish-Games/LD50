@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053754e0266b30f49a91002faa2aba79, type: 3}
   m_Name: DashAttack
   m_EditorClassIdentifier: 
-  attackName: Dash
+  attackName: Evil Dash
   description: Evil dash attack. Great for covering ground.
   icon: {fileID: 7886250173734430551, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
   sweetspotDamage: 0
@@ -21,4 +21,3 @@ MonoBehaviour:
   windupTime: 0.3
   backswingTime: 0.1
   attackHitboxes: {fileID: 5958819487396663072, guid: b5562714217e10747b1ad3c3c16170db, type: 3}
-  warningHitboxes: {fileID: 0}

@@ -177,7 +177,7 @@ public class BossCharacter : MonoBehaviour
 
     public void Input_Move(InputAction.CallbackContext context)
     {
-        if (!restrictControls)
+        if (context.performed)
         {
             movementInput = context.ReadValue<Vector2>();
         }
