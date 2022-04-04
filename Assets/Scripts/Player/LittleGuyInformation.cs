@@ -165,7 +165,8 @@ public class LittleGuyInformation : MonoBehaviour
 			"No",
 			"Du",
 			"Shi",
-			"Ja"
+			"Ja",
+			"Amo"
 		};
 
 		string[] nameEnds = {
