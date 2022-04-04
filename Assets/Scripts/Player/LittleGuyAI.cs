@@ -61,6 +61,9 @@ public class LittleGuyAI : MonoBehaviour
 
     private bool canThrowBomb = true;
 
+    private Vector3 knockBack;
+
+
     void Awake()
     {
         currentPath = new NavMeshPath();
@@ -369,6 +372,8 @@ public class LittleGuyAI : MonoBehaviour
         yield return null;
 	}
 
+
+
     IEnumerator DefaultLoop()
     {
         yield return EnterArena();
@@ -494,6 +499,10 @@ public class LittleGuyAI : MonoBehaviour
                 gameObject.transform.localScale = new Vector3(-1, 1, 1);
         }
 
+        transform.position += knockBack * Time.deltaTime;
+
+        knockBack *= 0.96f;
+
         UpdateAnimations();
     }
 
@@ -573,4 +582,11 @@ public class LittleGuyAI : MonoBehaviour
                 break;
 		}
 	}
+
+    public void ApplyKnockback(Vector3 direction)
+    {
+        direction.y = 0;
+
+        knockBack += direction;
+    }
 }

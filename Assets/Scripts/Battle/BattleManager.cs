@@ -89,7 +89,7 @@ public class BattleManager : MonoBehaviour
     public LittleGuyDeathBanner littleGuyDeathBanner;
     public BossDeathBanner bossDeathBanner;
 
-    public int timeWhenMultipleGuysComeIn = 1;
+    public int timeWhenMultipleGuysComeIn = 5;
     public int timeWhenChanceIncreases = 10;
 
     void Awake()
