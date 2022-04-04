@@ -15,10 +15,14 @@ public class LittleGuyController : MonoBehaviour
 
     public LittleGuyInformation info => information;
 
+	private void Awake()
+	{
+        information = GetComponent<LittleGuyInformation>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        information = GetComponent<LittleGuyInformation>();
         animator = GetComponentInChildren<Animator>();
 
         //BattleManager.instance.SpawnLittleGuyHealthBar(this);

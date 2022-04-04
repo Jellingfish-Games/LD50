@@ -73,7 +73,10 @@ public class LittleGuyAI : MonoBehaviour
     public void StartAIRoutine()
     {
         InterruptAIRoutine();
-		navMeshAgent.isStopped = false;
+
+        if (navMeshAgent.hasPath && navMeshAgent.isStopped)
+		    navMeshAgent.isStopped = false;
+
         aiState = LittleGuyState.Standing;
 		aiRoutine = StartCoroutine(DefaultLoop());
     }
@@ -430,6 +433,7 @@ public class LittleGuyAI : MonoBehaviour
         aiState = LittleGuyState.Dead;
 
         animator.Play("Guy_Death", -1, 0f);
+
         StartCoroutine(Despawn());
     }
 
@@ -437,6 +441,8 @@ public class LittleGuyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         Destroy(gameObject);
+        BattleManager.instance.encounteredLittleGuyStatPackages.Add(information.StatPackage);
+        information.StatPackage.BattleStats.HP = information.StatPackage.BattleStats.MaxHP;
 
         BattleManager.SwitchToNewState(BattleManager.BattleState.Cutscene);
     }

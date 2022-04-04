@@ -84,6 +84,8 @@ public class BattleManager : MonoBehaviour
 
     private List<LittleGuyController> littleGuys = new List<LittleGuyController>();
 
+    public List<LittleGuyStatPackage> encounteredLittleGuyStatPackages = new List<LittleGuyStatPackage>();
+
     void Awake()
     {
         instance = this;
@@ -144,7 +146,41 @@ public class BattleManager : MonoBehaviour
 
     public LittleGuyController SpawnLittleGuy()
     {
-        return Instantiate(littleGuyPrefab, littleGuySpawnPosition.position, Quaternion.identity); 
+        var littleGuy = Instantiate(littleGuyPrefab, littleGuySpawnPosition.position, Quaternion.identity);
+
+        if (encounteredLittleGuyStatPackages.Count > 0)
+		{
+            if (Random.Range(0f, 1f) < 0.5f)
+			{
+                littleGuy.info.StatPackage = encounteredLittleGuyStatPackages[Random.Range(0, encounteredLittleGuyStatPackages.Count)];
+
+                float diceRoll = Random.Range(0f, 1f);
+
+                if (diceRoll - littleGuy.info.MetaStats.Stubborness * 0.2f > 0.4f)
+				{
+                    int levelUps = Random.Range(1, 4);
+
+                    for (int i = 0; i < levelUps; i++)
+					{
+                        littleGuy.info.LevelUp();
+					}
+				}
+			}
+            else
+			{
+                if (Random.Range(0f, 1f) < 0.8f)
+				{
+                    int level = encounteredLittleGuyStatPackages.Max(s => s.BattleStats.Levelups) / 2;
+
+                    for (int i = 0; i < level; i++)
+                        littleGuy.info.LevelUp();
+				}
+			}
+		}
+
+        littleGuy.info.StatPackage.BattleStats.HP = littleGuy.info.StatPackage.BattleStats.MaxHP;
+
+        return littleGuy;
     }
 
     public void ConfirmAttackSelection(bool returnToBattle = false)
@@ -234,6 +270,7 @@ public class BattleManager : MonoBehaviour
         switch (state)
         {
             case BattleState.Intro:
+                instance.encounteredLittleGuyStatPackages = new List<LittleGuyStatPackage>();
                 instance.StartCoroutine(instance.blackFadeGroup.Hide(0.5f));
                 yield return SwitchToNewStateRoutine(BattleState.AttackSelection);
                 break;

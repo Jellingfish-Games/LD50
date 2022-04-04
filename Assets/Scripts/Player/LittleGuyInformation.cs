@@ -43,6 +43,17 @@ public class LittleGuyMetaStats
 	public float Stubborness { get; set; }
 }
 
+public class LittleGuyStatPackage
+{
+	public LittleGuyNameMode NameMode;
+	public string Name { get; set; }
+	public List<string> Titles { get; set; }
+
+	public LittleGuyClass Class { get; set; }
+	public LittleGuyBattleStats BattleStats { get; set; }
+	public LittleGuyMetaStats MetaStats { get; set; }
+}
+
 public class LittleGuyInformation : MonoBehaviour
 {
 	private static List<string> titles = new List<string> {
@@ -69,9 +80,11 @@ public class LittleGuyInformation : MonoBehaviour
 			"Fearseome"
 		};
 
-public LittleGuyNameMode NameMode;
-	public string Name { get; set; }
-	public List<string> Titles { get; set; }
+	public LittleGuyStatPackage StatPackage { get; set; }
+
+	public LittleGuyNameMode NameMode => StatPackage.NameMode;
+	public string Name => StatPackage.Name;
+	public List<string> Titles => StatPackage.Titles;
 	public string FullName
 	{
 		get
@@ -97,25 +110,27 @@ public LittleGuyNameMode NameMode;
 			return full;
 		}
 	}
-	public LittleGuyClass Class { get; set; }
-	public LittleGuyBattleStats BattleStats { get; set; }
-	public LittleGuyMetaStats MetaStats { get; set; }
+	public LittleGuyClass Class => StatPackage.Class;
+	public LittleGuyBattleStats BattleStats => StatPackage.BattleStats;
+	public LittleGuyMetaStats MetaStats => StatPackage.MetaStats;
 	public LittleGuyQuotes enterQuotes;
 	public LittleGuyQuotes hurtQuotes;
 	public LittleGuyQuotes victoryQuotes;
 
 	private void Awake()
 	{
-		GenerateStats();
+		if (StatPackage == null)
+			GenerateStats();
 	}
 
 	public void GenerateStats()
 	{
-		NameMode = LittleGuyNameMode.ClassicHero;
+		StatPackage = new LittleGuyStatPackage();
+		StatPackage.NameMode = LittleGuyNameMode.ClassicHero;
 
 		if (Random.Range(0, 10) == 0)
 		{
-			NameMode = LittleGuyNameMode.Gamertag;
+			StatPackage.NameMode = LittleGuyNameMode.Gamertag;
 		}
 
 		GenerateName();
@@ -123,6 +138,7 @@ public LittleGuyNameMode NameMode;
 		GenerateClass();
 		GenerateMetaStats();
 		GenerateBattleStats();
+
 	}
 
 	public void GenerateName()
@@ -174,14 +190,14 @@ public LittleGuyNameMode NameMode;
 			" the Last Hero"
 		};
 
-		Name = nameStarts[Random.Range(0, nameStarts.Length)] + nameEnds[Random.Range(0, nameEnds.Length)];
+		StatPackage.Name = nameStarts[Random.Range(0, nameStarts.Length)] + nameEnds[Random.Range(0, nameEnds.Length)];
 
-		if (Random.Range(0, 10) < 2) Name += postfixes[Random.Range(0, postfixes.Length)];
+		if (Random.Range(0, 10) < 2) StatPackage.Name += postfixes[Random.Range(0, postfixes.Length)];
 	}
 
 	public void GenerateTitles()
 	{
-		Titles = new List<string>();
+		StatPackage.Titles = new List<string>();
 
 		List<string> titles = LittleGuyInformation.titles.ToList();
 
@@ -200,12 +216,12 @@ public LittleGuyNameMode NameMode;
 	public void GenerateClass()
     {
 		//Class = (LittleGuyClass)Random.Range(0, 3);
-		Class = (LittleGuyClass)Random.Range(0, 2);
+		StatPackage.Class = (LittleGuyClass)Random.Range(0, 2);
 	}
 
 	public void GenerateMetaStats()
     {
-		MetaStats = new LittleGuyMetaStats();
+		StatPackage.MetaStats = new LittleGuyMetaStats();
 
 		MetaStats.mainColorID = Random.Range(0, 13);
 		//MetaStats.mainColorValue = 0;
@@ -227,7 +243,7 @@ public LittleGuyNameMode NameMode;
 
 	public void GenerateBattleStats()
 	{
-		BattleStats = new LittleGuyBattleStats()
+		StatPackage.BattleStats = new LittleGuyBattleStats()
 		{
 			MaxHP = Random.Range(600, 1001),
 			HealingPerSecond = 0,
@@ -305,6 +321,7 @@ public LittleGuyNameMode NameMode;
 				}
 
 				Titles.Add(title);
+				break;
 			}
 		}
 	}
