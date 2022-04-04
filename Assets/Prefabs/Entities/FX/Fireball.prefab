@@ -164,6 +164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageMultiplier: 1
   knockBackStrength: 0
+  playOnHit: 1
+  soundOnHit: 38
 --- !u!54 &940524070168643517
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -192,6 +194,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3d66d70d9b01d4ab99f2a7e5638f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killAfter: 3
+  killAfter: 0.85
   killOnPillarContact: 1
-  limbit: 0.019

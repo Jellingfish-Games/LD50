@@ -24,9 +24,13 @@ public class AttackBI02 : BossAttack
         target.y = 0;
 
         self.state = BossCharacter.BossState.Windup;
+
+
         yield return self.WaitForAnim("Boss_Cast");
 
         self.state = BossCharacter.BossState.Attack;
+
+        SFX.BossFireballHit.Play();
 
         CameraManager.i.Shake(.75f, .5f);
 

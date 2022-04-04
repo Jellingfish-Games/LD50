@@ -145,6 +145,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5315977971058869231}
     m_Modifications:
     - target: {fileID: 119791134578927661, guid: dfd467a755d7690449e169d6308865f5, type: 3}
+      propertyPath: playOnHit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 119791134578927661, guid: dfd467a755d7690449e169d6308865f5, type: 3}
       propertyPath: knockBackStrength
       value: 10
       objectReference: {fileID: 0}

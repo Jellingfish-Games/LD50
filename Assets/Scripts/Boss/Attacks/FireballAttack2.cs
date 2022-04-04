@@ -26,9 +26,12 @@ public class FireballAttack2 : BossAttack
         self.UpdateDirection(target.x < self.transform.position.x);
 
         self.state = BossCharacter.BossState.Windup;
+
+
         yield return self.WaitForAnim("Boss_Cast");
         yield return new WaitForSeconds(windupTime);
 
+        SFX.BossFireballThrow.Play();
         self.state = BossCharacter.BossState.Attack;
         Vector3 delta = target - self.transform.position;
         delta.y = 0;
