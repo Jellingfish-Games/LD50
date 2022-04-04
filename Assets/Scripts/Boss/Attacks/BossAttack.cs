@@ -20,5 +20,9 @@ public abstract class BossAttack : ScriptableObject
 
     public GameObject attackHitboxes;
 
+    public int Range;
+    public int Power;
+    public int Speed;
+
     public abstract IEnumerator PerformAttack(BossCharacter self);
 }

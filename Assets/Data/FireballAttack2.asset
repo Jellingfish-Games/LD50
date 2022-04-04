@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireballAttack2
   m_EditorClassIdentifier: 
   attackName: Demonic Barrage
-  description: Shoots a slash of fire.
+  description: Shoot a wide slash of fire towards the targeted area.
   icon: {fileID: 246929164632983071, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
   sweetspotDamage: 0
   sourspotDamage: 0
@@ -21,4 +21,7 @@ MonoBehaviour:
   windupTime: 0.1
   backswingTime: 0.1
   attackHitboxes: {fileID: 5958819487396663072, guid: 96270b6daa9c3bc4da7069df1c933939, type: 3}
+  Range: 5
+  Power: 1
+  Speed: 3
   fireBall: {fileID: 7604497453766607442, guid: 5f2989b3cf63cf244a32a4519e163b6b, type: 3}

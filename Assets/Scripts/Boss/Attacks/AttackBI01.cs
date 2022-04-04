@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Data/Boss/FireballAttack2", fileName = "FireballAttack2")]
-public class FireballAttack2 : BossAttack
+[CreateAssetMenu(menuName = "Data/Boss/AttackBI01", fileName = "AttackBI01")]
+public class AttackBI01 : BossAttack
 {
     public GameObject fireBall;
     public override IEnumerator PerformAttack(BossCharacter self)
@@ -34,22 +34,17 @@ public class FireballAttack2 : BossAttack
         delta.y = 0;
         delta = delta.normalized * 10f;
 
-        for (int i = -2; i<= 2; i++)
-        {
-            var fireball = Instantiate(fireBall).GetComponent<Rigidbody>();
-            var setDirection = target - self.transform.position;
-            //fireball.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-setDirection.z, setDirection.x) * Mathf.Rad2Deg + i * 10, Vector3.up);
-            fireball.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-setDirection.z, setDirection.x) * Mathf.Rad2Deg + 90 + i * 10, Vector3.up);
-
-            fireball.transform.localScale = new Vector3(5, 5, 1);
-            fireball.transform.position = self.transform.position + Vector3.up * .5f;
-            fireball.velocity = fireball.transform.forward * 8f;
-
-            fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .35f;
-        }
-
-
         CameraManager.i.Shake(.5f, 1);
+
+        var fireball = Instantiate(fireBall).GetComponent<Rigidbody>();
+        var setDirection = target - self.transform.position;
+        //fireball.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-setDirection.z, setDirection.x) * Mathf.Rad2Deg + 90 + i * 10, Vector3.up);
+
+        fireball.transform.position = target;
+
+        fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = 1f;
+
+        yield return new WaitForSeconds(.02f);
 
 
         yield return self.WaitForAnim("Boss_Shoot_Backswing");

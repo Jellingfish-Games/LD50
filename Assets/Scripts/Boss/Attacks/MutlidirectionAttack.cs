@@ -50,7 +50,7 @@ public class MutlidirectionAttack : BossAttack
 
             //fireball.velocity = (new Vector3(Mathf.Sin(Mathf.Deg2Rad * i * 45), 0, Mathf.Cos(Mathf.Deg2Rad * i * 45))).normalized * 4f;
 
-            fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .25f;
+            fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .3f;
 
             fireball.GetComponentInChildren<Autokill>().killOnPillarContact = false;
 
