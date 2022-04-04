@@ -82,12 +82,15 @@ public class BattleManager : MonoBehaviour
 
     private int numLittleGuysKilled;
 
-    private List<LittleGuyController> littleGuys = new List<LittleGuyController>();
+    public List<LittleGuyController> littleGuys = new List<LittleGuyController>();
 
     public List<LittleGuyStatPackage> encounteredLittleGuyStatPackages = new List<LittleGuyStatPackage>();
 
     public LittleGuyDeathBanner littleGuyDeathBanner;
     public BossDeathBanner bossDeathBanner;
+
+    public int timeWhenMultipleGuysComeIn = 1;
+    public int timeWhenChanceIncreases = 10;
 
     void Awake()
     {
@@ -118,6 +121,8 @@ public class BattleManager : MonoBehaviour
         victoryGroup.Hide(0);
         attackDisplayGroup.Hide(0);
         SwitchToNewState(BattleState.Intro);
+
+        StartCoroutine(PeriodicallySpawnLittleGuys());
     }
 
     public void SpawnLittleGuyHealthBar(LittleGuyController controller)
@@ -147,13 +152,39 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    public IEnumerator PeriodicallySpawnLittleGuys()
+	{
+        while (true)
+		{
+            if (state == BattleState.Battle && numLittleGuysKilled >= timeWhenMultipleGuysComeIn)
+            {
+                float chanceToSpawn = 0.05f;
+                if (numLittleGuysKilled > timeWhenChanceIncreases)
+                    chanceToSpawn += 1.0f - (5.0f / numLittleGuysKilled);
+
+                if (true)//Random.Range(0f, 1f) < chanceToSpawn)
+                {
+                    var guy = TrySpawnPreviouslyEncounteredLittleGuy();
+
+                    if (guy != null)
+                    {
+                        yield return guy.ShortEnterCoroutine();
+                    }
+                }
+            }
+
+            yield return new WaitForSeconds(5f);
+		}
+	}
+
     public LittleGuyController SpawnLittleGuy()
     {
+
         var littleGuy = Instantiate(littleGuyPrefab, littleGuySpawnPosition.position, Quaternion.identity);
 
         if (encounteredLittleGuyStatPackages.Count > 0)
 		{
-            if (Random.Range(0f, 1f) < 0.8f)
+            if (Random.Range(0f, 1f) < 0.5f)
 			{
                 littleGuy.info.StatPackage = encounteredLittleGuyStatPackages[Random.Range(0, encounteredLittleGuyStatPackages.Count)];
 
@@ -180,6 +211,43 @@ public class BattleManager : MonoBehaviour
 				}
 			}
 		}
+
+        littleGuy.info.StatPackage.BattleStats.HP = littleGuy.info.StatPackage.BattleStats.MaxHP;
+
+        return littleGuy;
+    }
+
+    public LittleGuyController TrySpawnPreviouslyEncounteredLittleGuy()
+	{
+        if (encounteredLittleGuyStatPackages.Count == 0)
+            return null;
+
+        if (encounteredLittleGuyStatPackages.All(lgsp => littleGuys.Any(lg => lg.info.StatPackage == lgsp)))
+            return null;
+
+
+        var lgsps = encounteredLittleGuyStatPackages.ToList().Where(l => !littleGuys.Any(lg => lg.info.StatPackage == l)).OrderBy(_ => Random.Range(0f, 1f));
+        LittleGuyStatPackage lgsp = lgsps.FirstOrDefault();
+
+        if (lgsps.FirstOrDefault() == null)
+		{
+            return null;
+		}
+
+        var littleGuy = Instantiate(littleGuyPrefab, littleGuySpawnPosition.position, Quaternion.identity);
+        littleGuy.info.StatPackage = lgsp;
+
+        float diceRoll = Random.Range(0f, 1f);
+
+        if (diceRoll - littleGuy.info.MetaStats.Stubborness * 0.2f > 0.3f)
+        {
+            int levelUps = Random.Range(2, 5);
+
+            for (int i = 0; i < levelUps; i++)
+            {
+                littleGuy.info.LevelUp();
+            }
+        }
 
         littleGuy.info.StatPackage.BattleStats.HP = littleGuy.info.StatPackage.BattleStats.MaxHP;
 
@@ -298,6 +366,9 @@ public class BattleManager : MonoBehaviour
                 instance.secondaryAttackSlot.SetButtonActive(true);
                 break;
             case BattleState.Battle:
+                instance.player.UnlockPlace();
+                instance.player.EnableControls();
+
                 instance.StartCoroutine(instance.mainUIGroup.Show(0.5f));
                 //instance.StartCoroutine(instance.SpawnNewLittleGuys());
                 break;

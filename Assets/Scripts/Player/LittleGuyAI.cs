@@ -387,7 +387,7 @@ public class LittleGuyAI : MonoBehaviour
         //yield return MoveToDirection(-transform.forward * 8);
         //yield return MoveToDirection(BattleManager.instance.littleGuySpawnPosition2.position);
         navMeshAgent.enabled = true;
-        yield return null;
+        yield return new WaitUntil(() => BattleManager.state == BattleManager.BattleState.Battle);
         //yield return MoveToDirection(- transform.forward * 8);
     }
 
@@ -416,16 +416,18 @@ public class LittleGuyAI : MonoBehaviour
 
     public void Hurt()
 	{
-        InterruptAIRoutine();
+        if (aiState != LittleGuyState.Dead)
+        {
+            InterruptAIRoutine();
 
-        animationState = LittleGuyAnimationState.Hurt;
+            animationState = LittleGuyAnimationState.Hurt;
 
-        aiState = LittleGuyState.Staggered;
+            aiState = LittleGuyState.Staggered;
 
-        safety = (information.BattleStats.Aggressiveness + information.BattleStats.Awareness) / 2;
+            safety = (information.BattleStats.Aggressiveness + information.BattleStats.Awareness) / 2;
 
-        animator.Play("Guy_Hurt", -1, 0f);
-
+            animator.Play("Guy_Hurt", -1, 0f);
+        }
     }
 
     public void Warn(Vector3 where)
@@ -451,9 +453,9 @@ public class LittleGuyAI : MonoBehaviour
 
         animator.Play("Guy_Death", -1, 0f);
 
-        BattleManager.instance.encounteredLittleGuyStatPackages.Add(information.StatPackage);
+        if (!BattleManager.instance.encounteredLittleGuyStatPackages.Contains(information.StatPackage))
+            BattleManager.instance.encounteredLittleGuyStatPackages.Add(information.StatPackage);
 
-        BattleManager.instance.littleGuyDeathBanner.Show();
 
         StartCoroutine(Despawn());
     }
@@ -462,12 +464,15 @@ public class LittleGuyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         
-        BattleManager.instance.littleGuyDeathBanner.Hide();
 
         Destroy(gameObject);
         
+        if (BattleManager.instance.littleGuys.Count == 0)
+		{
+            BattleManager.instance.littleGuyDeathBanner.Hide();
 
-        BattleManager.SwitchToNewState(BattleManager.BattleState.Cutscene);
+            BattleManager.SwitchToNewState(BattleManager.BattleState.Cutscene);
+        }
     }
 
     private void Update()

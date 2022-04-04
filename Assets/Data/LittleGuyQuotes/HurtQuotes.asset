@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HurtQuotes
   m_EditorClassIdentifier: 
   quotes:
-  - quote: This really is the dark souls of boss fights
+  - quote: This really is the dark souls of video games
     relativeChance: 1
   - quote: How did that hit?
     relativeChance: 1
