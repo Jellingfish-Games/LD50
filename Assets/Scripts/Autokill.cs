@@ -5,7 +5,7 @@ using UnityEngine;
 public class Autokill : MonoBehaviour
 {
     public float killAfter = 3f;
-
+    public bool killOnPillarContact = true;
     private void FixedUpdate()
     {
         killAfter -= Time.fixedDeltaTime;
@@ -18,7 +18,7 @@ public class Autokill : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Pillar"))
+        if (killOnPillarContact && other.gameObject.CompareTag("Pillar"))
         {
             Destroy(gameObject);
         }
