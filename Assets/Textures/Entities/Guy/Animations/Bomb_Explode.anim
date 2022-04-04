@@ -33,9 +33,17 @@ AnimationClip:
       value: {fileID: 328198133855872455, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
     - time: 1.1
       value: {fileID: 6815901371188878513, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
-    - time: 1.1666666
+    - time: 1.1833333
       value: {fileID: 328198133855872455, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
-    - time: 1.2333333
+    - time: 1.2666667
+      value: {fileID: 6815901371188878513, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
+    - time: 1.3666667
+      value: {fileID: 328198133855872455, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
+    - time: 1.45
+      value: {fileID: 6815901371188878513, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
+    - time: 1.5166667
+      value: {fileID: 328198133855872455, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
+    - time: 1.5833334
       value: {fileID: -1212651437720808194, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
     attribute: m_Sprite
     path: Sprite
@@ -64,13 +72,17 @@ AnimationClip:
     - {fileID: 328198133855872455, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
     - {fileID: 6815901371188878513, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
     - {fileID: 328198133855872455, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
+    - {fileID: 6815901371188878513, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
+    - {fileID: 328198133855872455, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
+    - {fileID: 6815901371188878513, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
+    - {fileID: 328198133855872455, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
     - {fileID: -1212651437720808194, guid: 896c7560f8c98484fb9742246b98658f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.2666667
+    m_StopTime: 1.6333333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -90,7 +102,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.2666667
+  - time: 1.6333333
     functionName: Explode
     data: 
     objectReferenceParameter: {fileID: 0}

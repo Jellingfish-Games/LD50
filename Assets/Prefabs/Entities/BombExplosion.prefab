@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacker: {fileID: 0}
-  damageScale: 10
+  damageScale: 0.5
+  flatDamage: 600
 --- !u!65 &8333846722557551329
 BoxCollider:
   m_ObjectHideFlags: 0

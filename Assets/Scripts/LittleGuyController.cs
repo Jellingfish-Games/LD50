@@ -43,6 +43,7 @@ public class LittleGuyController : MonoBehaviour
         RotConst.rotationAtRest = new Vector3(45, 0, 0);
 
         //StartCoroutine(EnterCoroutine());
+        entering = true;
 
     }
 
@@ -71,11 +72,13 @@ public class LittleGuyController : MonoBehaviour
         //yield return MoveToDirection(-transform.forward * 8);
         //yield return MoveToDirection(BattleManager.instance.littleGuySpawnPosition2.position);
         StartAI();
+        entering = false;
         BattleManager.instance.SpawnLittleGuyHealthBar(this);
     }
 
     public IEnumerator ShortEnterCoroutine()
     {
+        entering = true;
         //navMeshAgent.enabled = false;
         var animator = GetComponentInChildren<Animator>();
         animator.Play("Guy_Run");
@@ -100,6 +103,7 @@ public class LittleGuyController : MonoBehaviour
         //yield return MoveToDirection(BattleManager.instance.littleGuySpawnPosition2.position);
         StartAI();
         BattleManager.instance.SpawnLittleGuyHealthBar(this);
+        entering = false;
     }
 
     public void StartAI()

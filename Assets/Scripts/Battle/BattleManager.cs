@@ -363,8 +363,10 @@ public class BattleManager : MonoBehaviour
                 yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
                 instance.StartCoroutine(instance.attackDisplayGroup.Show(0.5f));
                 instance.targets.Clear();
-                foreach (var attackElem in instance.attacks.attacks)
+                var shuffledSpells = instance.attacks.attacks.OrderBy(i => Random.Range(0f, 1f)).ToList();
+                for (int i = 0; i< 4;i++)
                 {
+                    var attackElem = shuffledSpells[i];
                     if (attackElem.Unlocked())
                     {
                         BossAttackUIElement uiInst = Instantiate(instance.attackElement, instance.attackSelectionGridRoot);
@@ -373,6 +375,16 @@ public class BattleManager : MonoBehaviour
                         instance.targets.Add(uiInst);
                     }
                 }
+                //foreach (var attackElem in instance.attacks.attacks)
+                //{
+                //    if (attackElem.Unlocked())
+                //    {
+                //        BossAttackUIElement uiInst = Instantiate(instance.attackElement, instance.attackSelectionGridRoot);
+                //        uiInst.SetAttack(attackElem.attack);
+                //        uiInst.SetActive(false);
+                //        instance.targets.Add(uiInst);
+                //    }
+                //}
                 yield return instance.attackSelectionGroup.Show(0.5f);
                 instance.primaryAttackSlot.SetButtonActive(true);
                 instance.secondaryAttackSlot.SetButtonActive(true);

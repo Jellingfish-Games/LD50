@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,7 +42,38 @@ public class BossAttackUIElement : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             image.sprite = attack.icon;
             nameText.text = attack.attackName;
-            descriptionText.text = attack.description;
+            var rangeStars = "";
+            for (int i = 0; i< attack.Range; i++)
+            {
+                rangeStars += '★';
+            }
+            for (int i = 0; i < 5 - attack.Range; i++)
+            {
+                rangeStars += '☆';
+            }
+
+            var damageStars = "";
+            for (int i = 0; i < attack.Power; i++)
+            {
+                damageStars += '★';
+            }
+            for (int i = 0; i < 5 - attack.Power; i++)
+            {
+                damageStars += '☆';
+            }
+
+            var speedStars = "";
+            for (int i = 0; i < attack.Speed; i++)
+            {
+                speedStars += '★';
+            }
+            for (int i = 0; i < 5 - attack.Speed; i++)
+            {
+                speedStars += '☆';
+            }
+
+
+            descriptionText.text = attack.description + "\r\n\r\n • Power " + damageStars + "\r\n • Range " + rangeStars + "\r\n • Speed " + speedStars;
         } else
         {
             image.sprite = defaultSprite;

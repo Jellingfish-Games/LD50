@@ -29,16 +29,10 @@ public class LittleGuyDeathBanner : MonoBehaviour
         fg.DOColor(Color.white, 0.7f);
         bg.DOColor(Color.white, 0.4f);
 
-        yield return new WaitForSeconds(0.7f);
-	}
+		yield return new WaitForSeconds(0.7f);
 
-    public void Hide()
-	{
-        StartCoroutine(HideCoroutine());
-	}
+		yield return new WaitForSeconds(5f);
 
-    private IEnumerator HideCoroutine()
-	{
         fg.DOColor(transparent, 0.7f);
         bg.DOColor(transparent, 0.4f);
 

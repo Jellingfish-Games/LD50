@@ -29,7 +29,8 @@ public class LittleGuyAI : MonoBehaviour
         SwingRun,
         HeavySwing,
         Death,
-        Roll
+        Roll,
+        CastSpell
     }
 
     private LittleGuyState aiState;
@@ -64,6 +65,8 @@ public class LittleGuyAI : MonoBehaviour
     private Vector3 knockBack;
 
     private bool canDrinkPotion = true;
+
+    public LittleGuyAttackHitbox wizardProjectile;
 
     void Awake()
     {
@@ -152,7 +155,11 @@ public class LittleGuyAI : MonoBehaviour
             else if (distanceToBoss > 1 && distanceToBoss < 3f + aggressiveness * 0.3f && diceRoll + aggressiveness * diceRoll * reactionSpeed + (aiState == LittleGuyState.Approaching ? 0.2f : 0f) > 1f)
 			{
                 Debug.Log("RunAttack");
-                yield return RunMeleeAttack(aggressiveness);
+
+                if (information.Class == LittleGuyClass.Warrior)
+                    yield return RunMeleeAttack(aggressiveness);
+                else if (information.Class == LittleGuyClass.Wizard)
+                    yield return WizardAttack(aggressiveness);
 			}
             else if (aiState == LittleGuyState.Fleeing)
             {
@@ -328,6 +335,53 @@ public class LittleGuyAI : MonoBehaviour
         yield return null;
     }
 
+    private IEnumerator WizardAttack(float aggressiveness)
+    {
+        float diceRoll = Random.Range(0f, 1f);
+
+        aiState = LittleGuyState.Attacking;
+
+        animator.Play("Guy_Swing_Heavy", -1, 0f);
+        animationState = LittleGuyAnimationState.CastSpell;
+
+        yield return new WaitUntil(() => animationState != LittleGuyAnimationState.CastSpell);
+
+        if ((opponent.transform.position - transform.position).magnitude < 1)
+        {
+            if (aggressiveness + diceRoll > 1.3f)
+            {
+                yield return MeleeAttack(aggressiveness - 0.25f);
+            }
+            else
+            {
+                aiState = LittleGuyState.Fleeing;
+            }
+        }
+        else
+        {
+            aiState = LittleGuyState.Roaming;
+        }
+
+        yield return null;
+    }
+
+    void ShootProjectile()
+	{
+
+        Vector3 target = opponent.transform.position;
+        Vector3 targetDelta = target - transform.position;
+
+        var projectile = Instantiate(wizardProjectile, throwTransform.position, Quaternion.identity);
+
+        float projectileSpeed = 6f * Random.Range(0.7f, 1.2f);
+
+        projectile.GetComponent<WizardProjectile>().velocity = targetDelta.normalized * projectileSpeed;
+        projectile.transform.localScale = Vector3.one * 4f;
+        projectile.attacker = information;
+
+        projectile.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-targetDelta.z, targetDelta.x) * Mathf.Rad2Deg, Vector3.up);
+    }
+
     IEnumerator ThrowBomb()
 	{
 
@@ -480,6 +534,10 @@ public class LittleGuyAI : MonoBehaviour
             BattleManager.instance.encounteredLittleGuyStatPackages.Add(information.StatPackage);
 
 
+        runSwingHitboxes.SetCurrentHitbox(-1);
+        heavySwingHitboxes.SetCurrentHitbox(-1);
+
+
         StartCoroutine(Despawn());
     }
 
@@ -492,8 +550,6 @@ public class LittleGuyAI : MonoBehaviour
         
         if (BattleManager.instance.littleGuys.Count == 0)
 		{
-            BattleManager.instance.littleGuyDeathBanner.Hide();
-
             BattleManager.SwitchToNewState(BattleManager.BattleState.Cutscene);
         }
     }
@@ -563,12 +619,18 @@ public class LittleGuyAI : MonoBehaviour
 	{
         if (message == "SwingHeavyStart")
 		{
-            heavySwingHitboxes.SetCurrentHitbox(0);
+            if (animationState == LittleGuyAnimationState.HeavySwing)
+                heavySwingHitboxes.SetCurrentHitbox(0);
+            else if (animationState == LittleGuyAnimationState.CastSpell)
+			{
+                ShootProjectile();
+			}
         }
         else if (message == "SwingHeavyEnd")
 		{
-            heavySwingHitboxes.SetCurrentHitbox(-1);
-		}
+            if (animationState == LittleGuyAnimationState.HeavySwing)
+                heavySwingHitboxes.SetCurrentHitbox(-1);
+        }
         if (message == "SwingRunStart")
         {
             runSwingHitboxes.SetCurrentHitbox(0);

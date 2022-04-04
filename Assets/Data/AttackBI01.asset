@@ -9,19 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86100eb751053834a8a95c7ff7d74079, type: 3}
-  m_Name: FireballAttack
+  m_Script: {fileID: 11500000, guid: 0e421daa8feb5d3489724cc3bf16a61a, type: 3}
+  m_Name: AttackBI01
   m_EditorClassIdentifier: 
-  attackName: Great Flameball
-  description: Shoot a powerful ball of flames at the targeted area.
-  icon: {fileID: 6274800513853546846, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
+  attackName: Pillar of flames
+  description: Create a pillar of flame at the targeted area.
+  icon: {fileID: -3901238620508100055, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
   sweetspotDamage: 0
   sourspotDamage: 0
   animationClips: []
-  windupTime: 0.1
-  backswingTime: 0.1
+  windupTime: 0.2
+  backswingTime: 0
   attackHitboxes: {fileID: 5958819487396663072, guid: 96270b6daa9c3bc4da7069df1c933939, type: 3}
-  Range: 4
-  Power: 4
-  Speed: 3
-  fireBall: {fileID: 7604497453766607442, guid: 5f2989b3cf63cf244a32a4519e163b6b, type: 3}
+  Range: 5
+  Power: 2
+  Speed: 2
+  fireBall: {fileID: 2528376611061421085, guid: e2999870ec394044cbe008d8ab74bc28, type: 3}
