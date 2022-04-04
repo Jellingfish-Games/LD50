@@ -302,3 +302,5 @@ MonoBehaviour:
   SFXSource: {fileID: 4498139612941643425}
   MusicSource: {fileID: 2818573391715999047}
   data: {fileID: 11400000, guid: 9125814a0cda9574986627fbe1aa2794, type: 2}
+  musicGroup: {fileID: -81837599023733792, guid: 05109ca1685939a4b81bbe7b4ebb8027, type: 2}
+  filteredMusicGroup: {fileID: -958960273983709440, guid: 05109ca1685939a4b81bbe7b4ebb8027, type: 2}
