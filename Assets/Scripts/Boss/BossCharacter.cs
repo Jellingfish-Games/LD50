@@ -98,6 +98,11 @@ public class BossCharacter : MonoBehaviour
         }
     }
 
+    public void PlayAnim(string animName)
+    {
+        animator.Play(animName);
+    }
+
     public void EnableControls()
 	{
         restrictControls = false;
