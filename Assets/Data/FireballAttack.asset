@@ -18,7 +18,7 @@ MonoBehaviour:
   sweetspotDamage: 0
   sourspotDamage: 0
   animationClips: []
-  windupTime: 0.1
+  windupTime: 0.2
   backswingTime: 0.1
   attackHitboxes: {fileID: 5958819487396663072, guid: 96270b6daa9c3bc4da7069df1c933939, type: 3}
   Range: 4

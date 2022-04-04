@@ -51,6 +51,7 @@ public class AttackBI02 : BossAttack
 
         yield return new WaitForSeconds(.5f);
 
+        SFX.BossSlashSwing.Play();
         spinnerObj.spinSpeed = 17f;
 
         CameraManager.i.Shake(.5f, 1);
