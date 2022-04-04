@@ -34,7 +34,7 @@ public class LittleGuyUIController : MonoBehaviour
 
     void SetColors()
     {
-        foreach (var i in GetComponentsInChildren<SpriteRenderer>())
+        foreach (var i in GetComponentsInChildren<Image>())
         {
             i.material.SetColor("MainColor1", LittleGuyManager.i.palette[information.MetaStats.mainColorID * 5 + information.MetaStats.mainColorValue]);
             i.material.SetColor("MainColor2", (LittleGuyManager.i.palette[information.MetaStats.mainColorID * 5 + information.MetaStats.mainColorValue + 2] + LittleGuyManager.i.palette[information.MetaStats.mainColorID * 5 + information.MetaStats.mainColorValue]) / 2);
