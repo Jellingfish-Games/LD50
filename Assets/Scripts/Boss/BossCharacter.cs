@@ -251,19 +251,19 @@ public class BossCharacter : MonoBehaviour
 
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, LittleGuyInformation damageDealer)
     {
         // TODO: Animation
 
+        if (hp - damage <= 0 && hp > 0)
+		{
+			Die(damageDealer);
+            return;
+        }
+
         hp -= damage;
 
-        if (hp < 0)
-		{
-			Die();
-            return;
-		}
-
-		if (hp < (maxHP / phaseCount * (phaseCount - currentPhase)))
+        if (hp < (maxHP / phaseCount * (phaseCount - currentPhase)))
 		{
             PhaseTransition();
             currentPhase += 1;
@@ -275,13 +275,13 @@ public class BossCharacter : MonoBehaviour
         BattleManager.SwitchToNewState(BattleManager.BattleState.PhaseTransition);
 	}
 
-    public void Die()
+    public void Die(LittleGuyInformation damageDealer)
 	{
         // TODO: Play animation
 
         LockInPlace();
         RestrictControls();
 
-        BattleManager.instance.bossDeathBanner.Show();
+        BattleManager.instance.BossDie(damageDealer);
 	}
 }

@@ -58,6 +58,17 @@ public class GlobalManager : MonoBehaviour
         StartCoroutine(LoadGame());
     }
 
+    public void GiveUp()
+    {
+        StartCoroutine(LoadMain());
+    }
+
+    private IEnumerator LoadMain()
+    {
+        SceneManager.LoadScene(0);
+        yield return null;
+    }
+
     private IEnumerator LoadGame()
     {
         SFX.UIStartGame.Play();
