@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ButtonSounds : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
     private Button btn;
+    public bool special = false;
 
     void Start()
     {
@@ -17,7 +18,13 @@ public class ButtonSounds : MonoBehaviour, IPointerEnterHandler, IPointerClickHa
     {
         if (btn.enabled && btn.interactable)
         {
-            SFX.UIConfirm.Play();
+            if (special)
+            {
+                SFX.UIStartGame.Play();
+            } else
+            {
+                SFX.UIConfirm.Play();
+            }
         }
     }
 
