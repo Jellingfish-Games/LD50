@@ -253,6 +253,10 @@ public class BossCharacter : MonoBehaviour
 
     public void TakeDamage(float damage, LittleGuyInformation damageDealer)
     {
+        if (hp <= 0)
+        {
+            return;
+        }
         // TODO: Animation
 
         animator.Play("Boss_Hurt");
