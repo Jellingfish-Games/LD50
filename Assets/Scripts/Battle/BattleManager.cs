@@ -401,7 +401,6 @@ public class BattleManager : MonoBehaviour
                 //instance.StartCoroutine(instance.SpawnNewLittleGuys());
                 break;
             case BattleState.Cutscene:
-                AudioManager.ChangeMusic(BGM.BossIntro, BGM.BossLoop);
                 CameraManager.i.Cutscene();
                 break;
             case BattleState.Victory:
