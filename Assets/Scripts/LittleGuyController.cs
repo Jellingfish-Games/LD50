@@ -15,8 +15,9 @@ public class LittleGuyController : MonoBehaviour
     private bool entering;
 
     public LittleGuyInformation info => information;
+    private bool canSpeak = true;
 
-	private void Awake()
+    private void Awake()
 	{
         information = GetComponent<LittleGuyInformation>();
     }
@@ -58,6 +59,9 @@ public class LittleGuyController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         //TITLE NAME OF GUY
         BattleManager.instance.LittleGuyQuote(this, information.enterQuotes);
+
+        StartCoroutine(SpeechCooldown());
+
         yield return new WaitForSeconds(3f);
         animator.Play("Guy_Run");
         yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition3.position, 1).SetEase(Ease.Linear).WaitForCompletion();
@@ -83,6 +87,9 @@ public class LittleGuyController : MonoBehaviour
         //yield return new WaitForSeconds(2f);
         //TITLE NAME OF GUY
         BattleManager.instance.LittleGuyQuote(this, information.comeBackQuotes);
+
+        StartCoroutine(SpeechCooldown());
+
         yield return new WaitForSeconds(1f);
         animator.Play("Guy_Run");
         yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition3.position, 1).SetEase(Ease.Linear).WaitForCompletion();
@@ -145,8 +152,25 @@ public class LittleGuyController : MonoBehaviour
         }
         else
         {
-            if (Random.Range(0f, 1f) < 0.1f) BattleManager.instance.LittleGuyQuote(this, information.hurtQuotes);
-            ai.Hurt();
+            if (Random.Range(0f, 1f) < 0.1f && canSpeak)
+			{
+				BattleManager.instance.LittleGuyQuote(this, information.hurtQuotes);
+                StartCoroutine(SpeechCooldown());
+			}
+			ai.Hurt();
         }
 	}
+
+    IEnumerator SpeechCooldown()
+    {
+        canSpeak = false;
+
+        float time = 5f;
+
+        yield return new WaitForSeconds(time);
+
+        canSpeak = true;
+
+        yield return null;
+    }
 }

@@ -64,6 +64,11 @@ public class LittleGuySpeechBubble : MonoBehaviour
 	{
 		if (started)
 		{
+			if (controller == null || controller.info.BattleStats.HP < 0)
+			{
+				Destroy(gameObject);
+			}
+
 			Vector2 playerOnScreen = Camera.main.WorldToScreenPoint(controller.transform.position);
 			Vector2 target = Vector2.zero;
 
