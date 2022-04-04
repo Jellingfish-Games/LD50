@@ -49,12 +49,19 @@ public class GlobalManager : MonoBehaviour
     public void StartSingleplayer()
     {
         gameMode = GameMode.Singleplayer;
-        SceneManager.LoadScene(1);
+        StartCoroutine(LoadGame());
     }
 
     public void StartMultiplayer()
     {
         gameMode = GameMode.Multiplayer;
+        StartCoroutine(LoadGame());
+    }
+
+    private IEnumerator LoadGame()
+    {
+        SFX.UIStartGame.Play();
+        yield return new WaitForSeconds(4);
         SceneManager.LoadScene(1);
     }
 }
