@@ -14,4 +14,13 @@ public class Autokill : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pillar"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

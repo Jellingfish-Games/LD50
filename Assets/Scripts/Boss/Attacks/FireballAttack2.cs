@@ -9,6 +9,9 @@ public class FireballAttack2 : BossAttack
     public GameObject fireBall;
     public override IEnumerator PerformAttack(BossCharacter self)
     {
+        GameObject attackHitboxes = Instantiate(this.attackHitboxes, self.transform);
+        BossAttackHitboxList hitboxList = attackHitboxes.GetComponent<BossAttackHitboxList>();
+
         self.RestrictControls();
         self.LockInPlace();
 
@@ -17,38 +20,45 @@ public class FireballAttack2 : BossAttack
         Vector3 target = info.point;
         target.y = 0;
 
-        Vector3 delta = target - self.transform.position;
+        hitboxList.setDirection = target - self.transform.position;
+        hitboxList.SetCurrentHitbox(0);
+
+        self.UpdateDirection(target.x < self.transform.position.x);
 
         self.state = BossCharacter.BossState.Windup;
-        yield return self.WaitForAnim("Boss_Windup");
+        yield return self.WaitForAnim("Boss_Cast");
         yield return new WaitForSeconds(windupTime);
 
         self.state = BossCharacter.BossState.Attack;
-        self.UnlockPlace();
+        Vector3 delta = target - self.transform.position;
+        delta.y = 0;
+        delta = delta.normalized * 10f;
 
-        CameraManager.i.Shake(1f, 1);
-
-        for (int i = 0; i < 9; i++)
+        for (int i = -2; i<= 2; i++)
         {
-            var lDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (i - 4.5f) * 20), 0,  Mathf.Cos(Mathf.Deg2Rad * (i - 4.5f) * 20));
-            var setDirection = lDirection - self.transform.position;
-
             var fireball = Instantiate(fireBall).GetComponent<Rigidbody>();
+            var setDirection = target - self.transform.position;
+            //fireball.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-setDirection.z, setDirection.x) * Mathf.Rad2Deg + i * 10, Vector3.up);
+            fireball.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-setDirection.z, setDirection.x) * Mathf.Rad2Deg + 90 + i * 10, Vector3.up);
 
-            fireball.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-setDirection.z, setDirection.x) * Mathf.Rad2Deg, Vector3.up);
-
-            fireball.transform.localScale = new Vector3(1, 1, 1);
+            fireball.transform.localScale = new Vector3(5, 5, 1);
             fireball.transform.position = self.transform.position + Vector3.up * .5f;
+            fireball.velocity = fireball.transform.forward * 8f;
 
-            fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .5f;
-
-            fireball.velocity = (lDirection + delta).normalized * 4f;
-
-            yield return new WaitForSeconds(.02f);
+            fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .25f;
         }
 
-        yield return new WaitForSeconds(backswingTime);
-        //Destroy(attackHitboxes);
+
+        CameraManager.i.Shake(.5f, 1);
+
+
+        yield return self.WaitForAnim("Boss_Shoot_Backswing");
+
+        //yield return new WaitForSeconds(backswingTime);
+        self.UnlockPlace();
+
+        Destroy(attackHitboxes);
+
         self.state = BossCharacter.BossState.Idle;
         self.EnableControls();
     }
