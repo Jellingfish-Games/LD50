@@ -41,7 +41,7 @@ public class BossAttackUIElement : MonoBehaviour, IPointerEnterHandler, IPointer
         if (attack != null)
         {
             image.sprite = attack.icon;
-            nameText.text = attack.name;
+            nameText.text = attack.attackName;
             descriptionText.text = attack.description;
         } else
         {
