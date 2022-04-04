@@ -6,7 +6,7 @@ using UnityEngine.Animations;
 
 public class BossCharacter : MonoBehaviour
 {
-    public enum BossState { Idle, Windup, Attack, Backswing }
+    public enum BossState { Idle, Windup, Attack, Backswing, Dead }
 
 
     public BossState state = BossState.Idle;
@@ -103,11 +103,14 @@ public class BossCharacter : MonoBehaviour
 
     public IEnumerator WaitForAnim(string animName)
     {
-        animator.Play(animName);
-        yield return null;
-        while (animator.GetCurrentAnimatorStateInfo(0).IsName(animName) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Boss_Dead"))
         {
+            animator.Play(animName);
             yield return null;
+            while (animator.GetCurrentAnimatorStateInfo(0).IsName(animName) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            {
+                yield return null;
+            }
         }
     }
 
@@ -231,7 +234,7 @@ public class BossCharacter : MonoBehaviour
         //        break;
         //}
 
-        if (state == BossState.Idle && !animator.GetCurrentAnimatorStateInfo(0).IsName("Boss_Hurt"))
+        if (state == BossState.Idle && !animator.GetCurrentAnimatorStateInfo(0).IsName("Boss_Hurt") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Boss_Dead"))
         {
             if (velocity.magnitude < .5f)
             {
@@ -286,9 +289,31 @@ public class BossCharacter : MonoBehaviour
 	{
         // TODO: Play animation
 
+        //state = BossState.Dead;
+
+        //animator.Play("Boss_Death");
+
+        //LockInPlace();
+        //RestrictControls();
+
+        //BattleManager.instance.BossDie(damageDealer);
+        StartCoroutine(DieCoroutine(damageDealer));
+	}
+
+    IEnumerator DieCoroutine(LittleGuyInformation damageDealer)
+    {
         LockInPlace();
         RestrictControls();
 
+        state = BossState.Dead;
+
+        animator.Play("Boss_Death");
+
+        CameraManager.i.Shake(2, 3);
+
+        yield return new WaitForSeconds(3f);
+
         BattleManager.instance.BossDie(damageDealer);
-	}
+
+    }
 }
