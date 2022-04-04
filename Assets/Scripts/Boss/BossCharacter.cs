@@ -37,6 +37,10 @@ public class BossCharacter : MonoBehaviour
 
     public Vector3 velocity; // won't get modified by engine, easier to slow down on attack gradually
 
+    public int phaseCount = 3;
+
+    public int currentPhase = 1;
+
     void Awake()
     {
         modifiedProperties = baseProperties.properties;
@@ -254,8 +258,22 @@ public class BossCharacter : MonoBehaviour
         hp -= damage;
 
         if (hp < 0)
-            Die();
+		{
+			Die();
+            return;
+		}
+
+		if (hp < (maxHP / phaseCount * (phaseCount - currentPhase)))
+		{
+            PhaseTransition();
+            currentPhase += 1;
+		}
     }
+
+    public void PhaseTransition()
+	{
+        BattleManager.SwitchToNewState(BattleManager.BattleState.PhaseTransition);
+	}
 
     public void Die()
 	{
