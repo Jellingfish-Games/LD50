@@ -2392,11 +2392,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5819021694835937050, guid: 5da2c1f9c2d04eb44afbdce78fa23dfa, type: 3}
       propertyPath: m_ActionEvents.Array.data[14].m_ActionId
-      value: 3b2eb7b2-40c7-4f01-83d4-e4dbe8475586
+      value: 33d26453-a413-400f-8ebf-a114f68387e7
       objectReference: {fileID: 0}
     - target: {fileID: 5819021694835937050, guid: 5da2c1f9c2d04eb44afbdce78fa23dfa, type: 3}
       propertyPath: m_ActionEvents.Array.data[14].m_ActionName
-      value: UI/Pause[/Keyboard/escape,/Keyboard/p]
+      value: Player/Pause[/Keyboard/escape,/Keyboard/p]
       objectReference: {fileID: 0}
     - target: {fileID: 5819021694835937050, guid: 5da2c1f9c2d04eb44afbdce78fa23dfa, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
@@ -3078,11 +3078,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 356935610172803182, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1.5356195e-15
+      value: 0.000000027782873
       objectReference: {fileID: 0}
     - target: {fileID: 356935610172803182, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 3.9735152e-16
+      value: -0.000000010783808
       objectReference: {fileID: 0}
     - target: {fileID: 854997851211562604, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3106,11 +3106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 854997851211562604, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1.5356195e-15
+      value: 0.000000027782873
       objectReference: {fileID: 0}
     - target: {fileID: 854997851211562604, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 3.9735152e-16
+      value: -0.000000010783808
       objectReference: {fileID: 0}
     - target: {fileID: 1693713549776154958, guid: eefe206919e9fbe4bb7abc2f0bc24bdd, type: 3}
       propertyPath: m_Targets.Array.data[0].target
