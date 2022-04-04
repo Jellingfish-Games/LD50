@@ -1032,8 +1032,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 691494604516871858}
   - {fileID: 1644920477021148504}
+  - {fileID: 691494604516871858}
   - {fileID: 3617021905604771699}
   - {fileID: 3617021905887406461}
   - {fileID: 1644920476994596273}
@@ -2237,7 +2237,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6134851110973556315, guid: 8c939c3feef1dff4c9fb63347281f932, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6134851110973556315, guid: 8c939c3feef1dff4c9fb63347281f932, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4544,6 +4544,10 @@ PrefabInstance:
       value: banner1_hanging (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5361568668352601350, guid: 6d16914ba9086824a8f38cdfcf745c86, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361568668352601350, guid: 6d16914ba9086824a8f38cdfcf745c86, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.91
       objectReference: {fileID: 0}
@@ -5813,6 +5817,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3777568392978169044}
     m_Modifications:
+    - target: {fileID: 892162159782909281, guid: f5addd22d4604fd4cb8733877403707d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2977981768884665668, guid: febce1b6ebc1e8c4c8b57bad1341a461, type: 3}
     - target: {fileID: 3797429992517559459, guid: f5addd22d4604fd4cb8733877403707d, type: 3}
       propertyPath: m_RootOrder
       value: 27

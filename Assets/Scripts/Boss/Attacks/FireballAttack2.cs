@@ -12,6 +12,13 @@ public class FireballAttack2 : BossAttack
         self.RestrictControls();
         self.LockInPlace();
 
+        RaycastHit info;
+        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info, 100, BattleManager.instance.groundMask);
+        Vector3 target = info.point;
+        target.y = 0;
+
+        Vector3 delta = target - self.transform.position;
+
         self.state = BossCharacter.BossState.Windup;
         yield return self.WaitForAnim("Boss_Windup");
         yield return new WaitForSeconds(windupTime);
@@ -23,7 +30,7 @@ public class FireballAttack2 : BossAttack
 
         for (int i = 0; i < 9; i++)
         {
-            var lDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * i * 40), 0,  Mathf.Cos(Mathf.Deg2Rad * i * 40));
+            var lDirection = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (i - 4.5f) * 20), 0,  Mathf.Cos(Mathf.Deg2Rad * (i - 4.5f) * 20));
             var setDirection = lDirection - self.transform.position;
 
             var fireball = Instantiate(fireBall).GetComponent<Rigidbody>();
@@ -35,7 +42,7 @@ public class FireballAttack2 : BossAttack
 
             fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .5f;
 
-            fireball.velocity = lDirection.normalized * 4f;
+            fireball.velocity = (lDirection + delta).normalized * 4f;
 
             yield return new WaitForSeconds(.02f);
         }
