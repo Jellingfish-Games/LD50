@@ -47,6 +47,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -5016419044487646277}
+  - {fileID: 962706086716736822}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -67,7 +68,6 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 1192279792473579535}
-  - {fileID: 2466333835967995350}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -143,8 +143,27 @@ AudioMixerSnapshotController:
   m_SnapshotID: d2d67b87194c4964eb7e76a73d824f94
   m_FloatValues:
     89cb62f1f0de72d46b9b632c4274c63b: -9.833286
+    c92c3bb665882c9458092ff30eaccbe8: -4.9356413
     3fcaaa278e145c24fbdac34c87070407: -10.345207
   m_TransitionOverrides: {}
+--- !u!244 &962706086716736822
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: ebf2f58d098c33f40b757ee68fb19249
+  m_EffectName: Lowpass
+  m_MixLevel: 67ee67a246c7f5648a2eb14450b71260
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: e03e4dce2b98b124fb4bb9fbde1d557f
+  - m_ParameterName: Resonance
+    m_GUID: d003fbdf5dee2d44881aa5973199a96e
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &1192279792473579535
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -159,24 +178,6 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!244 &2466333835967995350
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: 0d5d35b0d51af0941a7d8d72259aa3c6
-  m_EffectName: Lowpass
-  m_MixLevel: 74774acafde694b44a464aafadfd8734
-  m_Parameters:
-  - m_ParameterName: Cutoff freq
-    m_GUID: 6e3b08e8a0b35f94cb3cf7f30864f8d9
-  - m_ParameterName: Resonance
-    m_GUID: 32824a3447f04bd45856946a81af585a
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 1
 --- !u!244 &3053729423140765321
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
