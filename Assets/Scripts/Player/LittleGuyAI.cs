@@ -369,6 +369,7 @@ public class LittleGuyAI : MonoBehaviour
 
     void ShootProjectile()
 	{
+        SFX.GuySpellCast.Play();
 
         Vector3 target = opponent.transform.position;
         Vector3 targetDelta = target - transform.position;
@@ -406,6 +407,8 @@ public class LittleGuyAI : MonoBehaviour
 
     void ThrowBombProjectile()
     {
+        SFX.GuyBombThrow.Play();
+
         Vector3 target = opponent.transform.position;
         Vector3 targetDelta = target - transform.position;
 
@@ -506,6 +509,8 @@ public class LittleGuyAI : MonoBehaviour
             safety = (information.BattleStats.Aggressiveness + information.BattleStats.Awareness) / 2;
 
             animator.Play("Guy_Hurt", -1, 0f);
+
+            SFX.GuyGetHit.Play();
         }
     }
 
@@ -526,6 +531,8 @@ public class LittleGuyAI : MonoBehaviour
 
     public void Die()
     {
+        SFX.GuyDie.Play();
+
         aiState = LittleGuyState.Dead;
         InterruptAIRoutine();
 
@@ -623,7 +630,10 @@ public class LittleGuyAI : MonoBehaviour
         if (message == "SwingHeavyStart")
 		{
             if (animationState == LittleGuyAnimationState.HeavySwing)
+			{
+                SFX.GuyHammerSwing.Play();
                 heavySwingHitboxes.SetCurrentHitbox(0);
+            }
             else if (animationState == LittleGuyAnimationState.CastSpell)
 			{
                 ShootProjectile();
@@ -636,6 +646,7 @@ public class LittleGuyAI : MonoBehaviour
         }
         if (message == "SwingRunStart")
         {
+            SFX.GuySwordSwing.Play();
             runSwingHitboxes.SetCurrentHitbox(0);
         }
         else if (message == "SwingRunEnd")
@@ -648,6 +659,7 @@ public class LittleGuyAI : MonoBehaviour
 		}
         else if (message == "DrinkPotion")
 		{
+            SFX.GuyPotionDrink.Play();
             information.BattleStats.HP = Mathf.Min(information.BattleStats.MaxHP, information.BattleStats.HP + information.BattleStats.MaxHP / 2);
 		}
     }

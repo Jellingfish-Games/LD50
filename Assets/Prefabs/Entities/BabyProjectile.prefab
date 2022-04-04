@@ -51,6 +51,8 @@ MonoBehaviour:
   attacker: {fileID: 0}
   damageScale: 2.5
   flatDamage: 0
+  playOnHit: 1
+  soundOnHit: 27
 --- !u!65 &1280324318910355073
 BoxCollider:
   m_ObjectHideFlags: 0
