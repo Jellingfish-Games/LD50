@@ -137,8 +137,11 @@ MonoBehaviour:
   replacementElementRoot: {fileID: 2770111319290364049}
   primaryAttackSlot: {fileID: 4954490911734446673}
   secondaryAttackSlot: {fileID: 5653209646161182630}
+  littleGuys: []
   littleGuyDeathBanner: {fileID: 8817373403737662834}
   bossDeathBanner: {fileID: 3699832214998812143}
+  timeWhenMultipleGuysComeIn: 1
+  timeWhenChanceIncreases: 10
 --- !u!1 &8211749889757022641
 GameObject:
   m_ObjectHideFlags: 0

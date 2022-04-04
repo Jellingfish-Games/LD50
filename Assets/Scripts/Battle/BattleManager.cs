@@ -129,7 +129,6 @@ public class BattleManager : MonoBehaviour
     {
         LittleGuyHealthBar healthbar = Instantiate(littleGuyHealthBarPrefab, littleGuyHealthBarRoot);
         healthbar.guyRef = controller;
-        littleGuys.Add(controller);
         CameraManager.i.targetGroup.AddMember(controller.transform, .15f, 1);
     }
 
@@ -158,11 +157,11 @@ public class BattleManager : MonoBehaviour
 		{
             if (state == BattleState.Battle && numLittleGuysKilled >= timeWhenMultipleGuysComeIn)
             {
-                float chanceToSpawn = 0.05f;
+                float chanceToSpawn = 0.1f;
                 if (numLittleGuysKilled > timeWhenChanceIncreases)
                     chanceToSpawn += 1.0f - (5.0f / numLittleGuysKilled);
 
-                if (true)//Random.Range(0f, 1f) < chanceToSpawn)
+                if (Random.Range(0f, 1f) < chanceToSpawn)
                 {
                     var guy = TrySpawnPreviouslyEncounteredLittleGuy();
 
@@ -190,7 +189,7 @@ public class BattleManager : MonoBehaviour
 
                 float diceRoll = Random.Range(0f, 1f);
 
-                if (diceRoll - littleGuy.info.MetaStats.Stubborness * 0.2f > 0.3f)
+                if (true)//diceRoll - littleGuy.info.MetaStats.Stubborness * 0.2f > 0.3f)
 				{
                     int levelUps = Random.Range(2, 5);
 
@@ -213,6 +212,7 @@ public class BattleManager : MonoBehaviour
 		}
 
         littleGuy.info.StatPackage.BattleStats.HP = littleGuy.info.StatPackage.BattleStats.MaxHP;
+        littleGuys.Add(littleGuy);
 
         return littleGuy;
     }
@@ -248,6 +248,7 @@ public class BattleManager : MonoBehaviour
                 littleGuy.info.LevelUp();
             }
         }
+        littleGuys.Add(littleGuy);
 
         littleGuy.info.StatPackage.BattleStats.HP = littleGuy.info.StatPackage.BattleStats.MaxHP;
 
@@ -321,7 +322,8 @@ public class BattleManager : MonoBehaviour
             instance.secondaryAttackSlot.SetAttack(null);
             UpdateButtonActiveStates();
 
-        } else if (instance.primaryAttackSlot.attack == attack)
+        } 
+        else if (instance.primaryAttackSlot.attack == attack)
         {
             instance.primaryAttackSlot.SetAttack(null);
 
@@ -396,6 +398,7 @@ public class BattleManager : MonoBehaviour
                 break;
             case BattleState.PhaseTransition:
                 Time.timeScale = 0;
+                instance.player.RestrictControls();
                 yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
                 instance.GenerateAttackChoices();
                 yield return instance.attackReplacementGroup.Show(0.5f);
@@ -423,6 +426,7 @@ public class BattleManager : MonoBehaviour
                 instance.StartCoroutine(instance.attackReplacementGroup.Hide(0.5f));
                 yield return instance.semitransparentBlackFadeGroup.Hide(0.5f);
                 Time.timeScale = 1;
+                instance.player.EnableControls();
                 break;
         }
     }
@@ -457,11 +461,12 @@ public class BattleManager : MonoBehaviour
             "lich",
             "monster",
             "evil creature",
+            "beast",
         };
 
         string insult = insults[Random.Range(0, insults.Length)];
 
-        string toPrint = string.Format(possibleQuotes.quotes[quoteChoiceIndex].quote, controller.info.Name, controller.info.FullName, controller.info.Class.ToString(), "BOSSMAN", insult);
+        string toPrint = string.Format(possibleQuotes.quotes[quoteChoiceIndex].quote, controller.info.Name, controller.info.FullName, controller.info.Class.ToString(), "Ignatius", insult);
 
         bubble.AttachToPlayer(controller, toPrint);
 	}
