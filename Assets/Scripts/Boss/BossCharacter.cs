@@ -70,18 +70,27 @@ public class BossCharacter : MonoBehaviour
     }
 
     private void UpdateDirection()
-	{
-        if (velocity.x > 0)
-		{
-            spriteRenderer.flipX = false;
-            flip = false;
-		}
-        else if (velocity.x < 0)
-		{
-            spriteRenderer.flipX = true;
-            flip = true;
-		}
-	}
+    {
+        if (!lockInPlace)
+        {
+            if (velocity.x > 0)
+            {
+                spriteRenderer.flipX = false;
+                flip = false;
+            }
+            else if (velocity.x < 0)
+            {
+                spriteRenderer.flipX = true;
+                flip = true;
+            }
+        }
+    }
+
+    public void UpdateDirection(bool dir)
+    {
+        spriteRenderer.flipX = dir;
+        flip = dir;
+    }
 
     public void RestrictControls()
 	{

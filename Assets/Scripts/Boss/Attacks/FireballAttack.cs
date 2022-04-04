@@ -17,6 +17,8 @@ public class FireballAttack : BossAttack
         Vector3 target = info.point;
         target.y = 0;
 
+        self.UpdateDirection(target.x < self.transform.position.x);
+
         self.state = BossCharacter.BossState.Windup;
         yield return self.WaitForAnim("Boss_Windup");
         yield return new WaitForSeconds(windupTime);
@@ -25,7 +27,6 @@ public class FireballAttack : BossAttack
         Vector3 delta = target - self.transform.position;
         delta.y = 0;
         delta = delta.normalized * 10f;
-        self.UnlockPlace();
         var fireball = Instantiate(fireBall).GetComponent<Rigidbody>();
         var setDirection = target - self.transform.position;
         fireball.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-setDirection.z, setDirection.x) * Mathf.Rad2Deg, Vector3.up);
@@ -38,7 +39,11 @@ public class FireballAttack : BossAttack
 
         CameraManager.i.Shake(.5f, 1);
 
-        yield return new WaitForSeconds(backswingTime);
+
+        yield return self.WaitForAnim("Boss_Shoot_Backswing");
+
+        //yield return new WaitForSeconds(backswingTime);
+        self.UnlockPlace();
         //Destroy(attackHitboxes);
         self.state = BossCharacter.BossState.Idle;
         self.EnableControls();

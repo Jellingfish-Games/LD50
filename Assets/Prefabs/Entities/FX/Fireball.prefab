@@ -31,7 +31,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7604497453766607441}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
 --- !u!212 &7604497452994767127
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -191,3 +191,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3d66d70d9b01d4ab99f2a7e5638f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killAfter: 3
