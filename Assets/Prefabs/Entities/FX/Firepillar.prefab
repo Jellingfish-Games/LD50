@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killAfter: 1.15
+  killOnPillarContact: 1
 --- !u!136 &2528376611061421084
 CapsuleCollider:
   m_ObjectHideFlags: 0
