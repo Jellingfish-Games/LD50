@@ -40,5 +40,5 @@ Material:
     - MainColor1: {r: 0.043137256, g: 0.36862746, b: 0.39607844, a: 0}
     - MainColor2: {r: 0.04901961, g: 0.527451, b: 0.5019608, a: 0.5}
     - MainColor3: {r: 0.05490196, g: 0.6862745, b: 0.60784316, a: 1}
-    - SkinColor: {r: 0.39529997, g: 0.59, b: 0.42126, a: 1}
+    - SkinColor: {r: 0.3233, g: 0.52311, b: 0.53, a: 1}
   m_BuildTextureStacks: []
