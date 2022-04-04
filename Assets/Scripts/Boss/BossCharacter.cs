@@ -256,8 +256,9 @@ public class BossCharacter : MonoBehaviour
         // TODO: Animation
 
         if (hp - damage <= 0 && hp > 0)
-		{
-			Die(damageDealer);
+        {
+            hp -= damage;
+            Die(damageDealer);
             return;
         }
 
