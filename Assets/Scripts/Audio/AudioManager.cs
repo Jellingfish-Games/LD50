@@ -37,7 +37,16 @@ public enum SFX
     GuySpellCast,
     GuySpellShot,
     GuySpellMiss,
-    GuyGetHit
+    GuyGetHit,
+    BossLoses,
+    BossWins,
+    GuyTalking,
+    GuyDie,
+    BossFireballThrow,
+    BossFireballHit,
+    BossFire,
+    BossBarrage,
+    BossDie,
 }
 
 public enum BGM
