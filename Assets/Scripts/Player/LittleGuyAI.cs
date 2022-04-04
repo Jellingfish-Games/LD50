@@ -59,6 +59,8 @@ public class LittleGuyAI : MonoBehaviour
     private bool danger;
     private Vector3 dangerPoint;
 
+    private bool canThrowBomb = true;
+
     void Awake()
     {
         currentPath = new NavMeshPath();
@@ -183,7 +185,7 @@ public class LittleGuyAI : MonoBehaviour
                     {
                         aiState = LittleGuyState.Approaching;
                     }
-                    else if (diceRoll + aggressiveness > 0.8f)
+                    else if (canThrowBomb && Random.Range(0f, 1f) + aggressiveness * 0.5f > 0.8f)
 					{
                         yield return ThrowBomb();
 					}
@@ -350,7 +352,22 @@ public class LittleGuyAI : MonoBehaviour
 
         bomb.velocity = targetDelta.normalized * bombSpeed;
         bomb.info = information;
+
+        StartCoroutine(BombCooldown());
     }
+
+    IEnumerator BombCooldown()
+	{
+        canThrowBomb = false;
+
+        float time = 2f * information.BattleStats.BombCooldownScale;
+
+        yield return new WaitForSeconds(time);
+
+        canThrowBomb = true;
+
+        yield return null;
+	}
 
     IEnumerator DefaultLoop()
     {
@@ -434,15 +451,21 @@ public class LittleGuyAI : MonoBehaviour
 
         animator.Play("Guy_Death", -1, 0f);
 
+        BattleManager.instance.encounteredLittleGuyStatPackages.Add(information.StatPackage);
+
+        BattleManager.instance.littleGuyDeathBanner.Show();
+
         StartCoroutine(Despawn());
     }
 
     private IEnumerator Despawn()
     {
         yield return new WaitForSeconds(5);
+        
+        BattleManager.instance.littleGuyDeathBanner.Hide();
+
         Destroy(gameObject);
-        BattleManager.instance.encounteredLittleGuyStatPackages.Add(information.StatPackage);
-        information.StatPackage.BattleStats.HP = information.StatPackage.BattleStats.MaxHP;
+        
 
         BattleManager.SwitchToNewState(BattleManager.BattleState.Cutscene);
     }

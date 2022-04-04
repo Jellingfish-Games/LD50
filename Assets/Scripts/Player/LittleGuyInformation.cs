@@ -26,6 +26,7 @@ public class LittleGuyBattleStats
 	public float Awareness { get; set; } // 0.0 - 1.0
 	public float DodgeSkill { get; set; } // 0.0 - 1.0
 	public float PotionDrinkSpeedScale { get; set; } // animation speed for potion drinking scaled by this
+	public float BombCooldownScale { get; set; }
 	public int Levelups { get; set; }
 }
 
@@ -251,7 +252,8 @@ public class LittleGuyInformation : MonoBehaviour
 			Awareness = Random.Range(0f, 1f),
 			DodgeSkill = Random.Range(0f, 1f),
 			PotionDrinkSpeedScale = Random.Range(1f, 1.1f),
-			Damage = Random.Range(50f, 80f)
+			Damage = Random.Range(50f, 80f),
+			BombCooldownScale = Random.Range(0.9f, 1f)
 		};
 
 		BattleStats.HP = BattleStats.MaxHP;
@@ -268,7 +270,8 @@ public class LittleGuyInformation : MonoBehaviour
 			"Awareness",
 			"DodgeSkill",
 			"PotionDrinkSpeedScale",
-			"Damage"
+			"Damage",
+			"BombCooldown"
 		};
 
 		for (int i = 0; i < statsToIncreaseCount; i++)
@@ -302,6 +305,9 @@ public class LittleGuyInformation : MonoBehaviour
 					break;
 				case "Damage":
 					BattleStats.Damage *= Random.Range(1.1f, 1.2f);
+					break;
+				case "BombCooldown":
+					BattleStats.BombCooldownScale *= Random.Range(0.9f, 0.98f);
 					break;
 			}
 		}

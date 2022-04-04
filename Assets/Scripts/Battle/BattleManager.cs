@@ -86,6 +86,9 @@ public class BattleManager : MonoBehaviour
 
     public List<LittleGuyStatPackage> encounteredLittleGuyStatPackages = new List<LittleGuyStatPackage>();
 
+    public LittleGuyDeathBanner littleGuyDeathBanner;
+    public BossDeathBanner bossDeathBanner;
+
     void Awake()
     {
         instance = this;
@@ -150,15 +153,15 @@ public class BattleManager : MonoBehaviour
 
         if (encounteredLittleGuyStatPackages.Count > 0)
 		{
-            if (Random.Range(0f, 1f) < 0.5f)
+            if (Random.Range(0f, 1f) < 0.8f)
 			{
                 littleGuy.info.StatPackage = encounteredLittleGuyStatPackages[Random.Range(0, encounteredLittleGuyStatPackages.Count)];
 
                 float diceRoll = Random.Range(0f, 1f);
 
-                if (diceRoll - littleGuy.info.MetaStats.Stubborness * 0.2f > 0.4f)
+                if (diceRoll - littleGuy.info.MetaStats.Stubborness * 0.2f > 0.3f)
 				{
-                    int levelUps = Random.Range(1, 4);
+                    int levelUps = Random.Range(2, 5);
 
                     for (int i = 0; i < levelUps; i++)
 					{

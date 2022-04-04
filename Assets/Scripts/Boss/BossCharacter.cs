@@ -93,9 +93,9 @@ public class BossCharacter : MonoBehaviour
     }
 
     public void RestrictControls()
-	{
+    {
         restrictControls = true;
-	}
+    }
 
     public IEnumerator WaitForAnim(string animName)
     {
@@ -113,15 +113,15 @@ public class BossCharacter : MonoBehaviour
     }
 
     public void EnableControls()
-	{
+    {
         restrictControls = false;
         lockInPlace = false;
-	}
+    }
 
     public void LockInPlace()
-	{
+    {
         lockInPlace = true;
-	}
+    }
 
     public void UnlockPlace()
     {
@@ -182,9 +182,9 @@ public class BossCharacter : MonoBehaviour
             movementInput = context.ReadValue<Vector2>();
         }
         else
-		{
+        {
             movementInput = Vector2.zero;
-		}
+        }
     }
 
     public void Input_PrimaryAttack(InputAction.CallbackContext context)
@@ -192,9 +192,9 @@ public class BossCharacter : MonoBehaviour
         if (!restrictControls && context.ReadValue<float>() > 0.5f)
         {
             if (primaryAttack != null)
-			{
+            {
                 StartCoroutine(primaryAttack.PerformAttack(this));
-			}
+            }
         }
     }
 
@@ -248,11 +248,22 @@ public class BossCharacter : MonoBehaviour
     }
 
     public void TakeDamage(float damage)
-	{
+    {
         // TODO: Animation
 
         hp -= damage;
 
-        // TODO: check for death
+        if (hp < 0)
+            Die();
+    }
+
+    public void Die()
+	{
+        // TODO: Play animation
+
+        LockInPlace();
+        RestrictControls();
+
+        BattleManager.instance.bossDeathBanner.Show();
 	}
 }

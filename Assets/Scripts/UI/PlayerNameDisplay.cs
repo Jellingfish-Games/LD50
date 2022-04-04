@@ -41,10 +41,10 @@ public class PlayerNameDisplay : MonoBehaviour
         text.text = "";
         levelText.text = "";
 
-        StartCoroutine(DisplayAnimation(chars, info.BattleStats.Levelups + 1));
+        StartCoroutine(DisplayAnimation(chars, info.Class.ToString(), info.BattleStats.Levelups + 1));
 	}
 
-    private IEnumerator DisplayAnimation(string info, int level)
+    private IEnumerator DisplayAnimation(string info, string guyClass, int level)
 	{
         text.DOColor(Color.white, 0.3f);
         foreach (Image image in images)
@@ -58,7 +58,7 @@ public class PlayerNameDisplay : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
 		}
         levelText.DOColor(Color.white, 0.2f);
-        string lvl = $"lvl. {level}";
+        string lvl = $"{guyClass} lvl. {level}";
 
         foreach (var c in lvl)
 		{
@@ -72,6 +72,11 @@ public class PlayerNameDisplay : MonoBehaviour
         levelText.DOColor(transparent, 0.8f);
         foreach (Image image in images)
             image.DOColor(transparent, 0.3f);
+
+        yield return new WaitForSeconds(0.8f);
+        text.text = "";
+        levelText.text = "";
+        yield return null;
     }
 
     // Update is called once per frame
