@@ -16,6 +16,6 @@ public class LittleGuyAttackHitbox : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		other.gameObject.GetComponent<BossCharacter>()?.TakeDamage(attacker.BattleStats.Damage * damageScale);
+		other.gameObject.GetComponent<BossCharacter>()?.TakeDamage(attacker.BattleStats.Damage * damageScale, attacker);
 	}
 }

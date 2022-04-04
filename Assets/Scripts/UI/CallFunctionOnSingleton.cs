@@ -12,4 +12,8 @@ public class CallFunctionOnSingleton : MonoBehaviour
     {
         GlobalManager.instance.StartMultiplayer();
     }
+    public void GiveUp()
+    {
+        GlobalManager.instance.GiveUp();
+    }
 }
