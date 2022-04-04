@@ -27,9 +27,10 @@ public class SwirlAttack : BossAttack
         self.UpdateDirection(target.x < self.transform.position.x);
 
         self.state = BossCharacter.BossState.Windup;
-
+        SFX.BossRoar.Play();
         yield return self.WaitForAnim("Boss_Cast");
         yield return new WaitForSeconds(windupTime);
+
 
         self.state = BossCharacter.BossState.Attack;
         Vector3 delta = target - self.transform.position;

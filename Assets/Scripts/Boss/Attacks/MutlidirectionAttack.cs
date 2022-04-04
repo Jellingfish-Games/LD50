@@ -28,7 +28,7 @@ public class MutlidirectionAttack : BossAttack
 
         self.state = BossCharacter.BossState.Windup;
 
-
+        SFX.BossRoar.Play();
         yield return self.WaitForAnim("Boss_Cast");
         yield return new WaitForSeconds(windupTime);
         SFX.BossFire.Play();
@@ -64,6 +64,7 @@ public class MutlidirectionAttack : BossAttack
         }
 
         yield return self.WaitForAnim("Boss_Roar");
+
 
         //yield return new WaitForSeconds(backswingTime);
         if (BattleManager.state == BattleManager.BattleState.Battle) self.UnlockPlace();
