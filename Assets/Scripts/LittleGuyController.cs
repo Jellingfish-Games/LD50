@@ -12,6 +12,7 @@ public class LittleGuyController : MonoBehaviour
 
     public LittleGuyAI ai;
     Animator animator;
+    private bool entering;
 
     public LittleGuyInformation info => information;
 
@@ -69,6 +70,31 @@ public class LittleGuyController : MonoBehaviour
         BattleManager.instance.SpawnLittleGuyHealthBar(this);
     }
 
+    public IEnumerator ShortEnterCoroutine()
+    {
+        //navMeshAgent.enabled = false;
+        var animator = GetComponentInChildren<Animator>();
+        animator.Play("Guy_Run");
+        yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition2.position, 2).SetEase(Ease.Linear).WaitForCompletion();
+        animator.Play("Guy_Intro");
+        yield return new WaitForSeconds(0.8f);
+        BattleManager.instance.nameDisplay.StartDisplayAnimation(info);
+
+        //yield return new WaitForSeconds(2f);
+        //TITLE NAME OF GUY
+        BattleManager.instance.LittleGuyQuote(this, information.comeBackQuotes);
+        yield return new WaitForSeconds(1f);
+        animator.Play("Guy_Run");
+        yield return transform.DOMove(BattleManager.instance.littleGuySpawnPosition3.position, 1).SetEase(Ease.Linear).WaitForCompletion();
+        animator.Play("Guy_Idle");
+        yield return new WaitForSeconds(.5f);
+        //yield return new WaitForSeconds(4f);
+        //yield return MoveToDirection(-transform.forward * 8);
+        //yield return MoveToDirection(BattleManager.instance.littleGuySpawnPosition2.position);
+        StartAI();
+        BattleManager.instance.SpawnLittleGuyHealthBar(this);
+    }
+
     public void StartAI()
     {
         ai.StartAIRoutine();
@@ -101,6 +127,11 @@ public class LittleGuyController : MonoBehaviour
         {
             return;
         }
+
+        if (entering)
+		{
+            return;
+		}
 
         information.BattleStats.HP -= damage;
 

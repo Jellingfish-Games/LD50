@@ -33,18 +33,27 @@ public class CameraManager : MonoBehaviour
 
     IEnumerator CustsceneCoroutine()
     {
-        BattleManager.instance.player.RestrictControls();
-        BattleManager.instance.player.LockInPlace();
         var guy = BattleManager.instance.SpawnLittleGuy();
-        vc.LookAt = guy.transform;
-        vc.Follow = doorFollow;
-        yield return guy.EnterCoroutine();
-        //yield return new WaitForSeconds(4);
-        BattleManager.instance.player.EnableControls();
-        BattleManager.instance.player.UnlockPlace();
-        vc.LookAt = targetGroup.transform;
-        vc.Follow = targetGroup.transform;
-        BattleManager.SwitchToNewState(BattleManager.BattleState.Battle);
+
+        if (!BattleManager.instance.encounteredLittleGuyStatPackages.Contains(guy.info.StatPackage))
+		{
+            BattleManager.instance.player.RestrictControls();
+            BattleManager.instance.player.LockInPlace();
+            vc.LookAt = guy.transform;
+            vc.Follow = doorFollow;
+            yield return guy.EnterCoroutine();
+            //yield return new WaitForSeconds(4);
+            BattleManager.instance.player.EnableControls();
+            BattleManager.instance.player.UnlockPlace();
+            vc.LookAt = targetGroup.transform;
+            vc.Follow = targetGroup.transform;
+            BattleManager.SwitchToNewState(BattleManager.BattleState.Battle);
+        }
+        else
+		{
+            yield return guy.ShortEnterCoroutine();
+            BattleManager.SwitchToNewState(BattleManager.BattleState.Battle);
+        }
     }
 
     public void Shake(float duration, float amplitude = 1)

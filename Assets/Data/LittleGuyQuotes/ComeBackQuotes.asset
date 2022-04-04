@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2bee01c8af8c84bbf1dfaaef7fda28, type: 3}
+  m_Name: ComeBackQuotes
+  m_EditorClassIdentifier: 
+  quotes:
+  - quote: This is the one.
+    relativeChance: 1
+  - quote: I have come back, stronger than before
+    relativeChance: 1
+  - quote: The level grind ought to make this easier
+    relativeChance: 1
+  - quote: I hate you, {3}
+    relativeChance: 1
+  - quote: '{0} never gives up!'
+    relativeChance: 1
+  - quote: I wouldn't be a {2} if i gave up now.
+    relativeChance: 1
+  - quote: Thanks devs for that respawn point there.
+    relativeChance: 1
+  - quote: '{3}, you''re going down.'
+    relativeChance: 1

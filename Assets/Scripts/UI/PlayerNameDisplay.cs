@@ -12,6 +12,11 @@ public class PlayerNameDisplay : MonoBehaviour
 
     Color transparent = new Color(1f, 1f, 1f, 0f);
 
+    List<LittleGuyInformation> nameQueue = new List<LittleGuyInformation> ();
+
+    Coroutine mainCoroutine;
+
+
     void Start()
     {
         text = transform.Find("MainLine").Find("Text").GetComponent<Text>();
@@ -28,34 +33,59 @@ public class PlayerNameDisplay : MonoBehaviour
 
         foreach (Image image in images)
             image.color = transparent;
+
+        StartCoroutine(MainCoroutine());
     }
 
     public void StartDisplayAnimation(LittleGuyInformation info)
 	{
-        string chars = info.FullName;
-        text.color = transparent;
-        levelText.color = transparent;
-        foreach (Image image in images)
-            image.color = transparent;
+        nameQueue.Add(info);
+    }
 
-        text.text = "";
-        levelText.text = "";
+    private IEnumerator MainCoroutine()
+	{
+        while (true)
+		{
+            if (nameQueue.Count > 0)
+			{
+                LittleGuyInformation info = nameQueue[0];
+                nameQueue.Remove(info);
 
-        StartCoroutine(DisplayAnimation(chars, info.Class.ToString(), info.BattleStats.Levelups + 1));
+                string chars = info.FullName;
+                text.color = transparent;
+                levelText.color = transparent;
+                foreach (Image image in images)
+                    image.color = transparent;
+
+                text.text = "";
+                levelText.text = "";
+
+
+                yield return DisplayAnimation(chars, info.Class.ToString(), info.BattleStats.Levelups + 1, nameQueue.Count > 1);
+            }
+            yield return null;
+		}
 	}
 
-    private IEnumerator DisplayAnimation(string info, string guyClass, int level)
+    private IEnumerator DisplayAnimation(string info, string guyClass, int level, bool quick)
 	{
-        text.DOColor(Color.white, 0.3f);
+        text.DOColor(Color.white, quick ? 0.2f : 0.3f);
         foreach (Image image in images)
-            image.DOColor(Color.white, 0.3f);
+            image.DOColor(Color.white, quick ? 0.2f : 0.3f);
 
         yield return new WaitForSeconds(0.1f);
 
-        foreach (var c in info)
+        int letterCount = quick ? 3 : 1;
+
+        for (int i = 0; i < info.Length; i++)
 		{
-            text.text += c;
-            yield return new WaitForSeconds(0.05f);
+            text.text += info[i];
+            letterCount--;
+
+            if (letterCount == 0)
+                yield return new WaitForSeconds(quick ? 0f : 0.05f);
+
+            letterCount = quick ? 3 : 1;
 		}
         levelText.DOColor(Color.white, 0.2f);
         string lvl = $"{guyClass} lvl. {level}";
@@ -66,14 +96,14 @@ public class PlayerNameDisplay : MonoBehaviour
             yield return new WaitForSeconds(0.02f);
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(quick ? 0.8f : 2f);
 
-        text.DOColor(transparent, 0.8f);
-        levelText.DOColor(transparent, 0.8f);
+        text.DOColor(transparent, quick ? 0.4f : 0.8f);
+        levelText.DOColor(transparent, quick ? 0.4f : 0.8f);
         foreach (Image image in images)
-            image.DOColor(transparent, 0.3f);
+            image.DOColor(transparent, quick ? 0.2f : 0.3f);
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(quick ? 0.4f : 0.8f);
         text.text = "";
         levelText.text = "";
         yield return null;

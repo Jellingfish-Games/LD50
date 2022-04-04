@@ -115,6 +115,7 @@ public class LittleGuyInformation : MonoBehaviour
 	public LittleGuyBattleStats BattleStats => StatPackage.BattleStats;
 	public LittleGuyMetaStats MetaStats => StatPackage.MetaStats;
 	public LittleGuyQuotes enterQuotes;
+	public LittleGuyQuotes comeBackQuotes;
 	public LittleGuyQuotes hurtQuotes;
 	public LittleGuyQuotes victoryQuotes;
 

@@ -115,7 +115,7 @@ MonoBehaviour:
   littleGuyHealthBarPrefab: {fileID: 3116799429004743481, guid: 98850fde617c8b34da4366fb18331760, type: 3}
   littleGuyHealthBarRoot: {fileID: 4877902742331052755}
   speechBubblePrefab: {fileID: 4567810986784599214, guid: cf9dcdcbcffe929418f18bc5a1b1892b, type: 3}
-  littleGuyQuoteRoot: {fileID: 4686779942700147956}
+  littleGuyQuoteRoot: {fileID: 4694736056017250435}
   attackSelectionGroup: {fileID: 383536313429202183}
   mainUIGroup: {fileID: 6472184471375114232}
   blackFadeGroup: {fileID: 1224377654516741962}
@@ -675,9 +675,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8620403002759286484, guid: 8712139d12a10764297ee69b89214e89, type: 3}
   m_PrefabInstance: {fileID: 3939272386788293172}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &4686779942700147956 stripped
+--- !u!224 &4694736056017250435 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8620403003579702976, guid: 8712139d12a10764297ee69b89214e89, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8614285256660685495, guid: 8712139d12a10764297ee69b89214e89, type: 3}
   m_PrefabInstance: {fileID: 3939272386788293172}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &3142117527299177169 stripped

@@ -433,8 +433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0c454cd337321429a3f5ba135e5052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameMode: 0
   enterQuotes: {fileID: 11400000, guid: 83ff2e2a9dda1664db467fa35beced7b, type: 2}
+  comeBackQuotes: {fileID: 11400000, guid: 785274d4dc7a3a24bb1409f69c40fe76, type: 2}
   hurtQuotes: {fileID: 11400000, guid: a10a79965f4271548a68a1b324f96f05, type: 2}
   victoryQuotes: {fileID: 11400000, guid: b0148a7e6287db4488e66fc01f5f0b1e, type: 2}
 --- !u!114 &44991230089814171
