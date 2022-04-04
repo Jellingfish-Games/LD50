@@ -68,6 +68,8 @@ public class LittleGuyAI : MonoBehaviour
 
     public LittleGuyAttackHitbox wizardProjectile;
 
+    private bool canScream = true;
+
     void Awake()
     {
         currentPath = new NavMeshPath();
@@ -510,7 +512,12 @@ public class LittleGuyAI : MonoBehaviour
 
             animator.Play("Guy_Hurt", -1, 0f);
 
-            SFX.GuyGetHit.Play();
+            if (canScream)
+            {
+                SFX.GuyGetHit.Play();
+
+                StartCoroutine(HitSoundCooldown());
+            }
         }
     }
 
@@ -703,4 +710,13 @@ public class LittleGuyAI : MonoBehaviour
 
         knockBack += direction;
     }
+
+    IEnumerator HitSoundCooldown()
+	{
+        canScream = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        canScream = true;
+	}
 }
