@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MutlidirectionAttack
   m_EditorClassIdentifier: 
   attackName: Ring of Fire
-  description: Summons a ring of spinning flames around you.
+  description: Summon a ring of spinning flames around you.
   icon: {fileID: -6483763877999006000, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
   sweetspotDamage: 0
   sourspotDamage: 0
@@ -21,5 +21,8 @@ MonoBehaviour:
   windupTime: 0
   backswingTime: 0
   attackHitboxes: {fileID: 5958819487396663072, guid: 292f4b495b9664c45bf4371b25cfd120, type: 3}
+  Range: 1
+  Power: 4
+  Speed: 4
   fireBall: {fileID: 2528376611061421085, guid: 487da772b58032b4c99056b7b7f7badc, type: 3}
   spinner: {fileID: 5045383164060187369, guid: 91a9a56cdb6818940bafccfb6c9cf5a1, type: 3}

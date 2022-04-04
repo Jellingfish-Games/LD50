@@ -45,7 +45,7 @@ public class FireballAttack2 : BossAttack
             fireball.transform.position = self.transform.position + Vector3.up * .5f;
             fireball.velocity = fireball.transform.forward * 8f;
 
-            fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .25f;
+            fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .35f;
         }
 
 

@@ -42,6 +42,7 @@ public class BattleManager : MonoBehaviour
     public LayerMask groundMask;
 
     public BossCharacter player;
+    private LittleGuyInformation killer;
 
     public LittleGuyHealthBar littleGuyHealthBarPrefab;
     public Transform littleGuyHealthBarRoot;
@@ -83,6 +84,8 @@ public class BattleManager : MonoBehaviour
     private int numLittleGuysKilled;
 
     public List<LittleGuyController> littleGuys = new List<LittleGuyController>();
+
+    private List<LittleGuyInformation> killedLittleGuys = new List<LittleGuyInformation>();
 
     public List<LittleGuyStatPackage> encounteredLittleGuyStatPackages = new List<LittleGuyStatPackage>();
 
@@ -135,8 +138,15 @@ public class BattleManager : MonoBehaviour
     public void LittleGuyDie(LittleGuyController controller)
     {
         littleGuys.Remove(controller);
+        killedLittleGuys.Add(controller.info);
         CameraManager.i.targetGroup.RemoveMember(controller.transform);
         numLittleGuysKilled++;
+    }
+
+    public void BossDie(LittleGuyInformation killer)
+    {
+        this.killer = killer;
+        SwitchToNewState(BattleState.Loss);
     }
 
     // For the "multiplayer" game mode
@@ -353,8 +363,10 @@ public class BattleManager : MonoBehaviour
                 yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
                 instance.StartCoroutine(instance.attackDisplayGroup.Show(0.5f));
                 instance.targets.Clear();
-                foreach (var attackElem in instance.attacks.attacks)
+                var shuffledSpells = instance.attacks.attacks.OrderBy(i => Random.Range(0f, 1f)).ToList();
+                for (int i = 0; i< 4;i++)
                 {
+                    var attackElem = shuffledSpells[i];
                     if (attackElem.Unlocked())
                     {
                         BossAttackUIElement uiInst = Instantiate(instance.attackElement, instance.attackSelectionGridRoot);
@@ -363,6 +375,16 @@ public class BattleManager : MonoBehaviour
                         instance.targets.Add(uiInst);
                     }
                 }
+                //foreach (var attackElem in instance.attacks.attacks)
+                //{
+                //    if (attackElem.Unlocked())
+                //    {
+                //        BossAttackUIElement uiInst = Instantiate(instance.attackElement, instance.attackSelectionGridRoot);
+                //        uiInst.SetAttack(attackElem.attack);
+                //        uiInst.SetActive(false);
+                //        instance.targets.Add(uiInst);
+                //    }
+                //}
                 yield return instance.attackSelectionGroup.Show(0.5f);
                 instance.primaryAttackSlot.SetButtonActive(true);
                 instance.secondaryAttackSlot.SetButtonActive(true);
@@ -380,7 +402,6 @@ public class BattleManager : MonoBehaviour
                 break;
             case BattleState.Victory:
                 instance.StartCoroutine(instance.victoryGroup.Show(0.5f));
-                instance.StartCoroutine(instance.youDiedMenu.DoSequence(false));
                 yield return new WaitForSeconds(2);
                 yield return instance.victoryGroup.Hide(0.5f);
                 yield return new WaitForSeconds(1);
@@ -389,11 +410,7 @@ public class BattleManager : MonoBehaviour
                 break;
             case BattleState.Loss:
                 instance.StartCoroutine(instance.victoryGroup.Show(0.5f));
-                instance.StartCoroutine(instance.youDiedMenu.DoSequence(true));
-                yield return new WaitForSeconds(2);
-                yield return instance.blackFadeGroup.Show(0.5f);
-                yield return new WaitForSeconds(1);
-                GlobalManager.instance.LoadMainMenu();
+                yield return instance.youDiedMenu.DoSequence(instance.killer, instance.killedLittleGuys);
                 break;
             case BattleState.PhaseTransition:
                 Time.timeScale = 0;

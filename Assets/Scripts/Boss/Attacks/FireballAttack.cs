@@ -37,7 +37,7 @@ public class FireballAttack : BossAttack
         var setDirection = target - self.transform.position;
         fireball.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-setDirection.z, setDirection.x) * Mathf.Rad2Deg, Vector3.up);
 
-        fireball.transform.localScale = new Vector3(6, 6, 5);
+        fireball.transform.localScale = new Vector3(4, 4, 4);
         fireball.transform.position = self.transform.position + Vector3.up * .5f;
         fireball.velocity = delta;
 

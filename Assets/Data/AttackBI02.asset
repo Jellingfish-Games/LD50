@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a604088599f3648ba02be5f181ed88, type: 3}
+  m_Name: AttackBI02
+  m_EditorClassIdentifier: 
+  attackName: Judgement Axe
+  description: Quick and dominant melee attack.
+  icon: {fileID: -3534630438972784031, guid: 0e9541be0f0713e429cbca4b2b46393d, type: 3}
+  sweetspotDamage: 0
+  sourspotDamage: 0
+  animationClips: []
+  windupTime: 0
+  backswingTime: 0
+  attackHitboxes: {fileID: 5958819487396663072, guid: 292f4b495b9664c45bf4371b25cfd120, type: 3}
+  Range: 2
+  Power: 4
+  Speed: 2
+  fireBall: {fileID: 174528133149252180, guid: beb721352da5f27499705ba432d75d79, type: 3}
+  spinner: {fileID: 5045383164060187369, guid: 91a9a56cdb6818940bafccfb6c9cf5a1, type: 3}

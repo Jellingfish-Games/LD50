@@ -21,4 +21,7 @@ MonoBehaviour:
   windupTime: 0.1
   backswingTime: 0
   attackHitboxes: {fileID: 5958819487396663072, guid: 292f4b495b9664c45bf4371b25cfd120, type: 3}
+  Range: 1
+  Power: 5
+  Speed: 3
   fireBall: {fileID: 8495704444119524507, guid: 064f866adddd810438b9f5decdc54746, type: 3}
