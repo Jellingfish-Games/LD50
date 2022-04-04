@@ -95,7 +95,10 @@ public class BossAttackUIElement : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void SetActive(bool active)
     {
-        activeImg.gameObject.SetActive(active);
+        if (active != activeImg.gameObject.activeSelf)
+        {
+            activeImg.gameObject.SetActive(active);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

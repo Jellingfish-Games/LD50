@@ -280,11 +280,13 @@ public class BattleManager : MonoBehaviour
         if (instance.primaryAttackSlot.attack == null && instance.secondaryAttackSlot.attack != attack)
         {
             instance.primaryAttackSlot.SetAttack(attack);
+            SFX.UIConfirm.Play();
 
             UpdateButtonActiveStates();
         } else if (instance.secondaryAttackSlot.attack == null && instance.primaryAttackSlot.attack != attack)
         {
             instance.secondaryAttackSlot.SetAttack(attack);
+            SFX.UIConfirm.Play();
 
             UpdateButtonActiveStates();
         } else
@@ -330,12 +332,14 @@ public class BattleManager : MonoBehaviour
         if (instance.secondaryAttackSlot.attack == attack)
         {
             instance.secondaryAttackSlot.SetAttack(null);
+            SFX.UIConfirm.Play();
             UpdateButtonActiveStates();
 
         } 
         else if (instance.primaryAttackSlot.attack == attack)
         {
             instance.primaryAttackSlot.SetAttack(null);
+            SFX.UIConfirm.Play();
 
             UpdateButtonActiveStates();
         }
