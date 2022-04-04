@@ -103,6 +103,8 @@ public class LittleGuyAI : MonoBehaviour
 
     private IEnumerator ThinkingFunction()
     {
+        if (aiState == LittleGuyState.Dead) yield break;
+
         if (opponent == null)
         {
             opponent = BattleManager.instance.player;
@@ -509,6 +511,8 @@ public class LittleGuyAI : MonoBehaviour
 
     public void Warn(Vector3 where)
 	{
+        if (aiState == LittleGuyState.Dead) return;
+
         danger = true;
 
         dangerPoint = where;
@@ -522,11 +526,10 @@ public class LittleGuyAI : MonoBehaviour
 
     public void Die()
     {
+        aiState = LittleGuyState.Dead;
         InterruptAIRoutine();
 
         animationState = LittleGuyAnimationState.Death;
-
-        aiState = LittleGuyState.Dead;
 
         animator.Play("Guy_Death", -1, 0f);
 
