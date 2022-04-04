@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public enum SFX
 {
@@ -41,8 +42,10 @@ public enum SFX
 
 public enum BGM
 {
+    None = -1,
     BossIntro,
-    BossLoop
+    BossLoop,
+    MainMenu
 }
 
 
@@ -52,6 +55,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource MusicSource;
 
     public AudioDefinition data;
+
+    public AudioMixerGroup musicGroup;
+    public AudioMixerGroup filteredMusicGroup;
 
     private static AudioManager instance;
     // Start is called before the first frame update
@@ -100,9 +106,15 @@ public class AudioManager : MonoBehaviour
     {
         ChangeMusic(instance.data.GetMusic(introClip), instance.data.GetMusic(loopingClip));
     }
+
+    public static void SetLowpassFilter(bool active)
+    {
+        instance.MusicSource.outputAudioMixerGroup = active ? instance.filteredMusicGroup : instance.musicGroup;
+    }
+
     public static async void ChangeMusic(Music introClip, Music loopingClip)
     {
-        if ((introClip != null && introClip.clip != instance.MusicSource.clip) && loopingClip.clip != instance.MusicSource.clip)
+        if (((introClip != null && introClip.clip != instance.MusicSource.clip) || introClip == null) && loopingClip.clip != instance.MusicSource.clip)
         {
             if (introClip != null)
             {

@@ -397,6 +397,7 @@ public class BattleManager : MonoBehaviour
                 break;
             case BattleState.PhaseTransition:
                 Time.timeScale = 0;
+                AudioManager.SetLowpassFilter(true);
                 instance.player.RestrictControls();
                 yield return instance.semitransparentBlackFadeGroup.Show(0.5f);
                 instance.GenerateAttackChoices();
@@ -424,6 +425,7 @@ public class BattleManager : MonoBehaviour
             case BattleState.PhaseTransition:
                 instance.StartCoroutine(instance.attackReplacementGroup.Hide(0.5f));
                 yield return instance.semitransparentBlackFadeGroup.Hide(0.5f);
+                AudioManager.SetLowpassFilter(false);
                 Time.timeScale = 1;
                 instance.player.EnableControls();
                 break;
