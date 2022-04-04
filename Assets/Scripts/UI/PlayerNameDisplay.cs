@@ -48,6 +48,9 @@ public class PlayerNameDisplay : MonoBehaviour
 		{
             if (nameQueue.Count > 0)
 			{
+                text.text = "";
+                levelText.text = "";
+
                 LittleGuyInformation info = nameQueue[0];
                 nameQueue.Remove(info);
 
@@ -56,10 +59,6 @@ public class PlayerNameDisplay : MonoBehaviour
                 levelText.color = transparent;
                 foreach (Image image in images)
                     image.color = transparent;
-
-                text.text = "";
-                levelText.text = "";
-
 
                 yield return DisplayAnimation(chars, info.Class.ToString(), info.BattleStats.Levelups + 1, nameQueue.Count > 1);
             }
@@ -70,8 +69,8 @@ public class PlayerNameDisplay : MonoBehaviour
     private IEnumerator DisplayAnimation(string info, string guyClass, int level, bool quick)
 	{
         text.DOColor(Color.white, quick ? 0.2f : 0.3f);
-        foreach (Image image in images)
-            image.DOColor(Color.white, quick ? 0.2f : 0.3f);
+        text.text = "";
+        levelText.text = "";
 
         yield return new WaitForSeconds(0.1f);
 
@@ -79,6 +78,12 @@ public class PlayerNameDisplay : MonoBehaviour
 
         for (int i = 0; i < info.Length; i++)
 		{
+            if (i == 1)
+            {
+                foreach (Image image in images)
+                    image.DOColor(Color.white, quick ? 0.2f : 0.3f);
+            }
+
             text.text += info[i];
             letterCount--;
 
@@ -107,11 +112,5 @@ public class PlayerNameDisplay : MonoBehaviour
         text.text = "";
         levelText.text = "";
         yield return null;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

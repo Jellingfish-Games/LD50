@@ -158,7 +158,14 @@ public class LittleGuyInformation : MonoBehaviour
 			"Tro",
 			"Ghum",
 			"Ker",
-			"Oro"
+			"Oro",
+			"Bin",
+			"Go",
+			"Yo",
+			"No",
+			"Du",
+			"Shi",
+			"Ja"
 		};
 
 		string[] nameEnds = {
@@ -174,6 +181,13 @@ public class LittleGuyInformation : MonoBehaviour
 			"rup",
 			"ragh",
 			"thur",
+			"gus",
+			"bby",
+			"kin",
+			"mis",
+			"ck",
+			"bu",
+			"ger"
 		};
 
 		string[] postfixes =

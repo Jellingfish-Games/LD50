@@ -63,6 +63,7 @@ public class LittleGuyAI : MonoBehaviour
 
     private Vector3 knockBack;
 
+    private bool canDrinkPotion = true;
 
     void Awake()
     {
@@ -179,6 +180,13 @@ public class LittleGuyAI : MonoBehaviour
                 {
                     diceRoll += 0.25f;
                 }
+
+                float drinkThreshold = information.BattleStats.MaxHP * (0.3f + cautiousness * 0.2f);
+
+                if (canDrinkPotion && information.BattleStats.HP < drinkThreshold && Random.Range(0f, 1f) + cautiousness * 0.2f > 0.7f)
+				{
+                    yield return DrinkPotion();
+				}
 
                 bool wantsToMove = diceRoll + 0.15f * aggressiveness > 0.25f;
 
@@ -372,7 +380,17 @@ public class LittleGuyAI : MonoBehaviour
         yield return null;
 	}
 
+    IEnumerator DrinkPotion()
+	{
+        animator.Play("Guy_Potion", -1, 0f);
 
+        animationState = LittleGuyAnimationState.Potion;
+
+        yield return new WaitUntil(() => animationState != LittleGuyAnimationState.Potion);
+
+        canDrinkPotion = false;
+        yield return null;
+	}
 
     IEnumerator DefaultLoop()
     {
@@ -503,6 +521,12 @@ public class LittleGuyAI : MonoBehaviour
 
         knockBack *= 0.96f;
 
+        if (aiState != LittleGuyState.Dead && aiState != LittleGuyState.Staggered)
+		{
+            information.BattleStats.HP = Mathf.Min(information.BattleStats.MaxHP, information.BattleStats.HP + information.BattleStats.HealingPerSecond * Time.deltaTime);
+
+        }
+
         UpdateAnimations();
     }
 
@@ -525,6 +549,11 @@ public class LittleGuyAI : MonoBehaviour
 		}
         else if (name == "Bomb")
 		{
+            animationState = LittleGuyAnimationState.Idle;
+            animator.Play("Guy_Idle");
+        }
+        else if (name == "Potion")
+        {
             animationState = LittleGuyAnimationState.Idle;
             animator.Play("Guy_Idle");
         }
@@ -552,11 +581,15 @@ public class LittleGuyAI : MonoBehaviour
 		{
             ThrowBombProjectile();
 		}
+        else if (message == "DrinkPotion")
+		{
+            information.BattleStats.HP = Mathf.Min(information.BattleStats.MaxHP, information.BattleStats.HP + information.BattleStats.MaxHP / 2);
+		}
     }
     public void UpdateAnimations()
-	{
+    {
         switch (aiState)
-		{
+        {
             case LittleGuyState.Dead:
                 break;
             case LittleGuyState.Staggered:
@@ -565,9 +598,13 @@ public class LittleGuyAI : MonoBehaviour
                 break;
             default:
                 if (animationState == LittleGuyAnimationState.Roll)
-				{
+                {
                     // nothing
-				}
+                }
+                else if (animationState == LittleGuyAnimationState.Potion)
+                {
+                    //nothing
+                }
                 else if (animationState != LittleGuyAnimationState.Run && navMeshAgent.velocity.magnitude > 0.01f)
                 {
                     animationState = LittleGuyAnimationState.Run;
@@ -580,8 +617,8 @@ public class LittleGuyAI : MonoBehaviour
                 }
 
                 break;
-		}
-	}
+        }
+    }
 
     public void ApplyKnockback(Vector3 direction)
     {
