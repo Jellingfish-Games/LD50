@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: AttackOverview
   m_EditorClassIdentifier: 
   attacks:
-  - attack: {fileID: 11400000, guid: 56318eaa01a48d54fb9ce464e4a9b5a4, type: 2}
+  - attack: {fileID: 11400000, guid: 6862e6f5a93a2b149934e4067fb1d56f, type: 2}
     runsToUnlock: 0
     minimumPlayerKillsToUnlock: 0
     minimumHighScoreToUnlock: 0
-  - attack: {fileID: 11400000, guid: 6862e6f5a93a2b149934e4067fb1d56f, type: 2}
+  - attack: {fileID: 11400000, guid: 240184c4f10307c43a9d26053840c275, type: 2}
     runsToUnlock: 0
     minimumPlayerKillsToUnlock: 0
     minimumHighScoreToUnlock: 0

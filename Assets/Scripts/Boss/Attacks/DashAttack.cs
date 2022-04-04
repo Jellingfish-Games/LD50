@@ -46,51 +46,5 @@ public class DashAttack : BossAttack
 
         self.state = BossCharacter.BossState.Idle;
         self.EnableControls();
-
-        //       play dash anim here
-        //      yield return new WaitForSeconds(windupTime);
-
-        //      RaycastHit info;
-
-        //      self.state = BossCharacter.BossState.Attack;
-
-        //      Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info, 100, BattleManager.instance.groundMask);
-
-        //      Vector3 dashTarget = info.point;
-
-        //      dashTarget.y = 0;
-
-        //      Vector3 delta = dashTarget - self.transform.position;
-        //      delta.y = 0;
-
-        //      delta = delta.normalized * 40f;
-
-        //      self.UnlockPlace();
-
-        //      hitboxList.SetCurrentHitbox(0);
-
-        //      self.velocity = delta;
-
-        //      yield return new WaitForSeconds(0.03f);
-
-        //       play stop anim here
-
-        //      self.state = BossCharacter.BossState.Backswing;
-
-        //      float timeLeft = backswingTime;
-
-        //      while (timeLeft > 0f)
-        //{
-        //          self.velocity *= 0.95f;
-
-        //          timeLeft -= Time.fixedDeltaTime;
-        //          yield return new WaitForFixedUpdate();
-        //}
-
-        //      Destroy(attackHitboxes);
-
-        //      self.state = BossCharacter.BossState.Moving;
-
-        // self.EnableControls();
     }
 }
