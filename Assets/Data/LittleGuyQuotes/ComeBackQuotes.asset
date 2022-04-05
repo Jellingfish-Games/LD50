@@ -29,3 +29,13 @@ MonoBehaviour:
     relativeChance: 1
   - quote: '{3}, you''re going down.'
     relativeChance: 1
+  - quote: Is this it?
+    relativeChance: 1
+  - quote: There will be bloodshed.
+    relativeChance: 1
+  - quote: Whoops.
+    relativeChance: 1
+  - quote: Ok, I got it this time.
+    relativeChance: 1
+  - quote: Absolutely terrible loot so far.
+    relativeChance: 1

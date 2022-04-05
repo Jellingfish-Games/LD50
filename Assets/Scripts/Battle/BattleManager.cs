@@ -95,6 +95,8 @@ public class BattleManager : MonoBehaviour
     public int timeWhenMultipleGuysComeIn = 5;
     public int timeWhenChanceIncreases = 10;
 
+    private int sameGuyRepeats = 0;
+
     void Awake()
     {
         instance = this;
@@ -196,13 +198,13 @@ public class BattleManager : MonoBehaviour
 
         if (encounteredLittleGuyStatPackages.Count > 0)
 		{
-            if (Random.Range(0f, 1f) < 0.5f)
+            if (Random.Range(0f, 1f) - Mathf.Clamp(3f - 3f / sameGuyRepeats, 0f, 1f) * 0.2f < 0.5f)
 			{
                 littleGuy.info.StatPackage = encounteredLittleGuyStatPackages[Random.Range(0, encounteredLittleGuyStatPackages.Count)];
 
                 float diceRoll = Random.Range(0f, 1f);
 
-                if (true)//diceRoll - littleGuy.info.MetaStats.Stubborness * 0.2f > 0.3f)
+                if (diceRoll - littleGuy.info.MetaStats.Stubborness * 0.1f > 0.3f)
 				{
                     int levelUps = Random.Range(2, 5);
 
@@ -211,9 +213,13 @@ public class BattleManager : MonoBehaviour
                         littleGuy.info.LevelUp();
 					}
 				}
+
+                sameGuyRepeats += 1;
 			}
             else
 			{
+                sameGuyRepeats = 0;
+
                 if (Random.Range(0f, 1f) < 0.8f)
 				{
                     int level = encounteredLittleGuyStatPackages.Max(s => s.BattleStats.Levelups) / 2;

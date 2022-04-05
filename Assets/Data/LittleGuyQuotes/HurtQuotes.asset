@@ -27,3 +27,13 @@ MonoBehaviour:
     relativeChance: 1
   - quote: The scaling in this game makes NO sense
     relativeChance: 1
+  - quote: NO WAY?!
+    relativeChance: 1
+  - quote: HOW?
+    relativeChance: 1
+  - quote: I'm not malding.
+    relativeChance: 0.5
+  - quote: I might be underleveled...
+    relativeChance: 0.5
+  - quote: That hurt.
+    relativeChance: 0.5
