@@ -48,7 +48,7 @@ public class LittleGuySpeechBubble : MonoBehaviour
 		{
 			speechText.text += chars[i];
 
-			if (i % 2 == 0) SFX.GuyTalking.Play(0.1f);
+			if (i % 2 == 0) SFX.GuyTalking.Play(0.75f);
 
 			yield return new WaitForSeconds(0.035f);
 		}
