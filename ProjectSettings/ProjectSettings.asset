@@ -16,7 +16,7 @@ PlayerSettings:
   productName: Mr. Final Boss
   defaultCursor: {fileID: 2800000, guid: 63420d720b353fe409232a703477d87d, type: 3}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0.7764706, g: 0.30588236, b: 0.83137256, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
@@ -138,6 +138,7 @@ PlayerSettings:
     Others: 1
   bundleVersion: 0.1
   preloadedAssets:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -275,7 +276,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 4c83f89ee1e1962408da7a6e080b9eb8, type: 3}
+      m_Icon: {fileID: 2800000, guid: 871749dcd1608e94b9322b321125debb, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
