@@ -150,6 +150,7 @@ public class BattleManager : MonoBehaviour
         this.killer = killer;
         AudioManager.ChangeMusic(null);
         SFX.BossDie.Play();
+        SFX.BossWins.Play();
         littleGuys.ForEach(guy => guy.ai.Celebrate());
         SwitchToNewState(BattleState.Loss);
     }
