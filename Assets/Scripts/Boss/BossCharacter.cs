@@ -41,6 +41,8 @@ public class BossCharacter : MonoBehaviour
 
     public int currentPhase = 1;
 
+    private Coroutine attackCoroutine;
+
     void Awake()
     {
         modifiedProperties = baseProperties.properties;
@@ -200,7 +202,7 @@ public class BossCharacter : MonoBehaviour
         {
             if (primaryAttack != null)
             {
-                StartCoroutine(primaryAttack.PerformAttack(this));
+                attackCoroutine = StartCoroutine(primaryAttack.PerformAttack(this));
             }
         }
     }
@@ -211,7 +213,7 @@ public class BossCharacter : MonoBehaviour
         {
             if (secondaryAttack != null)
             {
-                StartCoroutine(secondaryAttack.PerformAttack(this));
+                attackCoroutine = StartCoroutine(secondaryAttack.PerformAttack(this));
             }
         }
     }
@@ -233,6 +235,8 @@ public class BossCharacter : MonoBehaviour
         //        }
         //        break;
         //}
+
+        if (state == BossState.Dead) return;
 
         if (state == BossState.Idle && !animator.GetCurrentAnimatorStateInfo(0).IsName("Boss_Hurt") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Boss_Dead"))
         {
@@ -314,6 +318,14 @@ public class BossCharacter : MonoBehaviour
     {
         LockInPlace();
         RestrictControls();
+
+        StopCoroutine(attackCoroutine);
+
+        foreach (var c in GetComponentsInChildren<BossAttackHitboxList>())
+		{
+            c.SetCurrentHitbox(-1);
+            Destroy(c.gameObject);
+		}
 
         state = BossState.Dead;
 
