@@ -28,6 +28,8 @@ public class DashAttack : BossAttack
         yield return new WaitForSeconds(windupTime);
 
 
+        SFX.BossRoar.Play();
+
         self.state = BossCharacter.BossState.Attack;
 
         hitboxList.setDirection = Vector3.zero;
