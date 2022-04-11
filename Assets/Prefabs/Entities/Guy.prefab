@@ -422,6 +422,7 @@ MonoBehaviour:
   bombObject: {fileID: 6528884611589898010, guid: 0687b85fb508188459dc1b84b14b55ee, type: 3}
   throwTransform: {fileID: 4423248100114145585}
   wizardProjectile: {fileID: 7819464369911985956, guid: 5dd6488ffafc10049815be94f02af1d5, type: 3}
+  blood: {fileID: 3447011855160488834, guid: 330b56b3b3701174895ddf8461e037ed, type: 3}
 --- !u!114 &5386827388452218088
 MonoBehaviour:
   m_ObjectHideFlags: 0

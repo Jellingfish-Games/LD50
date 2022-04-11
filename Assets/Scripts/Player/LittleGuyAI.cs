@@ -70,6 +70,8 @@ public class LittleGuyAI : MonoBehaviour
 
     private bool canScream = true;
 
+    public GameObject blood;
+
     void Awake()
     {
         currentPath = new NavMeshPath();
@@ -674,6 +676,10 @@ public class LittleGuyAI : MonoBehaviour
 		{
             SFX.GuyPotionDrink.Play();
             information.BattleStats.HP = Mathf.Min(information.BattleStats.MaxHP, information.BattleStats.HP + information.BattleStats.MaxHP / 2);
+		}
+        else if (message == "SpawnBlood")
+		{
+            Instantiate(blood, transform.position, Quaternion.identity);
 		}
     }
     public void UpdateAnimations()
