@@ -16,7 +16,7 @@ public class AttackBI01 : BossAttack
         self.LockInPlace();
 
         RaycastHit info;
-        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info, 100, BattleManager.instance.groundMask);
+        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info, 400, BattleManager.instance.groundMask);
         Vector3 target = info.point;
         target.y = 0;
 
@@ -45,7 +45,7 @@ public class AttackBI01 : BossAttack
 
         fireball.transform.position = target;
 
-        fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = 1f;
+        fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = 2f;
 
         yield return new WaitForSeconds(.02f);
 

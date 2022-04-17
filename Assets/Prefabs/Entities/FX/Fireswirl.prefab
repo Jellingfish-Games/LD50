@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageMultiplier: 1
-  knockBackStrength: 0
+  knockBackStrength: 8
   playOnHit: 0
   soundOnHit: 38
 --- !u!54 &1252912889320694132

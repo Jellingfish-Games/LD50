@@ -266,7 +266,7 @@ public class LittleGuyInformation : MonoBehaviour
 	{
 		StatPackage.BattleStats = new LittleGuyBattleStats()
 		{
-			MaxHP = Random.Range(600, 1001),
+			MaxHP = StatPackage.Class == LittleGuyClass.Warrior ? Random.Range(700, 1001) : Random.Range(600, 801),
 			HealingPerSecond = 0,
 			Aggressiveness = Random.Range(0f, 1f),
 			Awareness = Random.Range(0f, 1f),

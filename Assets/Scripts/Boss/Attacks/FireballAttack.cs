@@ -44,7 +44,7 @@ public class FireballAttack : BossAttack
         fireball.transform.position = self.transform.position + Vector3.up * .5f;
         fireball.velocity = delta;
 
-        fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = 2.5f;
+        fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = 1.75f;
 
         CameraManager.i.Shake(.5f, 1);
 

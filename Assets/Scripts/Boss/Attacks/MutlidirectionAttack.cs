@@ -49,11 +49,11 @@ public class MutlidirectionAttack : BossAttack
             var setDirection = target - self.transform.position;
             //fireball.transform.localRotation = Quaternion.AngleAxis(Mathf.Atan2(-setDirection.z, setDirection.x) * Mathf.Rad2Deg + 90 + i * 10, Vector3.up);
 
-            fireball.transform.localPosition = (new Vector3(Mathf.Sin(Mathf.Deg2Rad * i * 45), 0, Mathf.Cos(Mathf.Deg2Rad * i * 45))).normalized * 2.5f;
+            fireball.transform.localPosition = (new Vector3(Mathf.Sin(Mathf.Deg2Rad * i * 45), 0, Mathf.Cos(Mathf.Deg2Rad * i * 45))).normalized * 2.25f;
 
             //fireball.velocity = (new Vector3(Mathf.Sin(Mathf.Deg2Rad * i * 45), 0, Mathf.Cos(Mathf.Deg2Rad * i * 45))).normalized * 4f;
 
-            fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .3f;
+            fireball.GetComponentInChildren<BossAttackHitbox>().damageMultiplier = .2f;
 
             fireball.GetComponentInChildren<Autokill>().killOnPillarContact = false;
 
@@ -66,7 +66,7 @@ public class MutlidirectionAttack : BossAttack
         yield return self.WaitForAnim("Boss_Roar");
 
 
-        //yield return new WaitForSeconds(backswingTime);
+        yield return new WaitForSeconds(backswingTime);
         if (BattleManager.state == BattleManager.BattleState.Battle) self.UnlockPlace();
 
         Destroy(attackHitboxes);

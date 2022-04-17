@@ -199,7 +199,7 @@ public class BattleManager : MonoBehaviour
 
         if (encounteredLittleGuyStatPackages.Count > 0)
 		{
-            if (Random.Range(0f, 1f) < 0.5f + (sameGuyRepeats / 5f) * 0.5f)
+            if (Random.Range(0f, 1f) < 0.5f + (sameGuyRepeats / 3f) * 0.5f)
 			{
                 littleGuy.info.StatPackage = encounteredLittleGuyStatPackages[Random.Range(0, encounteredLittleGuyStatPackages.Count)];
 

@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b46deb66bc2436b41aec954afb161d90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 1
+  damageMultiplier: 0.5
   knockBackStrength: 0
   playOnHit: 1
   soundOnHit: 38
